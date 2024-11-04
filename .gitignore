@@ -1,0 +1,6 @@
+*.log
+.env
+vendor/
+node_modules/
+codescan.txt
+.DS_Store

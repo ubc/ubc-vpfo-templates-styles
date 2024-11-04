@@ -1,0 +1,138 @@
+// Bootstrap setup files needed for breakpoint mixin purposes
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// drop shadow treatment
+@mixin vpfo-box-shadow {
+	box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 33, 69, 0.10);
+}
+
+// typography weights
+
+@mixin weight-700 {
+	font-weight: 700;
+}
+
+@mixin weight-600 {
+	font-weight: 600;
+}
+
+@mixin weight-500 {
+	font-weight: 500;
+}
+
+@mixin weight-400 {
+	font-weight: 400;
+}
+
+// typography styles
+
+@mixin h1 {
+	font-size: px2rem(36);
+	line-height: px2rem(42);
+}
+
+@mixin h2 {
+	font-size: px2rem(30);
+	line-height: px2rem(36);
+}
+
+@mixin h3 {
+	font-size: px2rem(24);
+	line-height: px2rem(30);
+}
+
+@mixin h4 {
+	font-size: px2rem(18);
+	line-height: px2rem(26);
+}
+
+@mixin h5 {
+	font-size: px2rem(16);
+	line-height: px2rem(24);
+}
+
+@mixin h6 {
+	font-size: px2rem(14);
+	line-height: px2rem(22);
+}
+
+@mixin p1 {
+	font-size: px2rem(16);
+	line-height: px2rem(24);
+}
+
+@mixin p2 {
+	font-size: px2rem(14);
+	line-height: px2rem(22);
+}
+
+// buttons
+@mixin btn {
+	all: unset;
+	font-family: $font-whitney;
+	cursor: pointer;
+	display: inline-block;
+	padding: px2rem(14) px2rem(16);
+	border: 1px solid transparent;
+	@include weight-500;
+	font-size: px2rem(14);
+	line-height: 1;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+
+	&:active {
+		box-shadow: 0px 0.25rem 0.125rem 0px rgba(0, 0, 0, 0.25) inset;
+	}
+}
+
+@mixin btn-primary {
+	background: $ubc-blue;
+	color: $utility-white;
+
+	&:hover, &:focus, &:focus-within, &:active {
+		background: $ubc-brand-blue;
+	}
+
+	&:focus, &:focus-within {
+		box-shadow: 0 0 0 3px $utility-white, 0 0 0 5px $ubc-blue;
+		outline: none;
+	}
+
+	&.disabled, &[disabled] {
+		background: $utility-grey-inactive;
+		border-color: $ubc-grey-medium;
+		text-transform: none;
+		@include weight-700;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+}
+
+@mixin btn-secondary {
+	background: $utility-white;
+	color: $ubc-blue;
+	border-color: $ubc-blue;
+
+	&:hover, &:focus, &:focus-within, &:active {
+		background: $learning-spaces-blue-light;
+	}
+
+	&:focus, &:focus-within {
+		box-shadow: 0 0 0 3px $utility-white, 0 0 0 6px $ubc-blue;
+		outline: none;
+	}
+}
+
+@mixin btn-external {
+	display: flex;
+	align-items: center;
+	
+	&::after {
+		font-family: $font-fontawesome;
+		content: '\f08e';
+		margin-left: px2rem(8);
+	}
+}

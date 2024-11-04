@@ -1,0 +1,159 @@
+// resets
+a {
+	text-decoration: none;
+}
+
+// global pre-content components
+.alert-banner {
+	background: $ubc-brand-blue;
+	color: $utility-white;
+	font-size: px2rem(18);
+	line-height: px2rem(30);
+	@include weight-400;
+	
+	.alert-banner-inner {
+		gap: 1rem 0.75rem;
+
+		&::before {
+			font-family: $font-fontawesome;
+			content: '\f05a';
+			@include weight-700;
+		}
+	}
+}
+
+// global buttons
+a.btn, button.btn {
+	@include btn;
+}
+
+a.btn-primary, button.btn-primary {
+	@include btn-primary;
+}
+
+a.btn-secondary, button.btn-secondary {
+	@include btn-secondary;
+}
+
+// block buttons
+.wp-block-button {
+	all: unset;
+
+	&.btn {
+		a {
+			@include btn;
+		}
+
+		&.btn-external a {
+			@include btn-external;
+		}
+	}
+
+	&.btn-primary a {
+		@include btn-primary;
+	}
+
+	&.btn-secondary a {
+		@include btn-secondary;
+	}
+}
+
+// typography
+
+.page-content {
+	p {
+		margin: px2rem(24) 0;
+		@include p2;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&.p1 {
+			@include p1;
+		}
+	}
+	
+	ul, ol {
+		padding: unset;
+		padding-left: px2rem(24);
+		margin: px2rem(24) 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		li {
+			@include p2;
+		}
+	}
+
+	a {
+		color: $ubc-brand-blue;
+	}
+
+	.wp-block-heading {
+		font-family: $font-whitney;
+		margin: px2rem(24) 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	h1 {
+		@include h1;
+		@include weight-600;
+
+		&.page-title {
+			@include weight-700;
+		}
+	}
+
+	h2 {
+		@include h2;
+		@include weight-600;
+	}
+
+	h3 {
+		@include h3;
+		@include weight-600;
+	}
+
+	h4 {
+		@include h4;
+		@include weight-600;
+	}
+
+	h5 {
+		@include h5;
+		@include weight-700;
+		text-transform: uppercase
+	}
+
+	h6 {
+		@include h6;
+		@include weight-700;
+		text-transform: uppercase;
+	}
+
+	.p1 {
+		@include p1;
+	}
+
+	.p2 {
+		@include p2;
+	}
+}

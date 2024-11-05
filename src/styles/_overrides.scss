@@ -13,8 +13,12 @@ body {
 	}
 }
 
-.row-fluid [class*="span"] {
-	min-height: unset;
+.row-fluid {
+	width: auto;
+
+	[class*="span"] {
+		min-height: unset;
+	}
 }
 
 .full-width {

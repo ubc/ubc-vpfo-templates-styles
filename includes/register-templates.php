@@ -2,7 +2,7 @@
 
 function vpfo_register_page_templates( $templates ) {
 	// Add custom templates to the list
-	$templates['vpfo-page.php'] = 'VPFO Default Page';
+	$templates['vpfo-page.php']         = 'VPFO Default Page';
 	$templates['vpfo-page-sidenav.php'] = 'VPFO Sidenav Page';
 	return $templates;
 }
@@ -17,7 +17,7 @@ function vpfo_load_custom_template( $template ) {
 
 		// Define an array of custom templates with their file paths
 		$custom_templates = array(
-			'vpfo-page.php' => plugin_dir_path( __DIR__ ) . 'templates/vpfo-page.php',
+			'vpfo-page.php'         => plugin_dir_path( __DIR__ ) . 'templates/vpfo-page.php',
 			'vpfo-page-sidenav.php' => plugin_dir_path( __DIR__ ) . 'templates/vpfo-page-sidenav.php',
 		);
 

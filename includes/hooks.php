@@ -3,7 +3,7 @@
 // set up the default VPFO template as the starting page template for new pages
 function vpfo_set_default_template_on_new_page( $post_id, $post, $update ) {
 	// Only proceed if it's a page, it's not an update (new page), and it's in the admin area
-	if ( $post->post_type === 'page' && !$update && is_admin() ) {
+	if ( 'page' === $post->post_type && ! $update && is_admin() ) {
 		$default_template = 'vpfo-page.php'; // Replace with your custom template slug
 
 		// Check if the page has a template assigned; if not, set the default template

@@ -27,5 +27,15 @@ function ubc_vpfo_templates_styles_enqueue_styles_scripts() {
 		array(), // Dependencies
 		'6.6.0'
 	);
+
+	if ( 'vpfo-page-sidenav.php' === get_page_template_slug() ) {
+		wp_enqueue_script(
+			'vpfo-sidenav-js',
+			plugin_dir_url( __DIR__ ) . 'js/sidenav.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'ubc_vpfo_templates_styles_enqueue_styles_scripts' );

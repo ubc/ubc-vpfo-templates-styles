@@ -1,0 +1,224 @@
+.sidenav {
+	// get rid of default clf styles
+	&.accordion {
+		background-color: unset;
+		border: unset;
+		box-shadow: unset;
+		margin: unset;
+	}
+
+	@import "~accordion-js/dist/accordion";
+
+	color: $ubc-blue;
+
+	.ac {
+		margin: unset;
+		border: unset;
+
+		.ac-trigger {
+			width: auto;
+			padding: unset;
+			
+
+			&::after {
+				font-family: $font-fontawesome;
+				content: '\f078';
+				color: $ubc-blue !important;
+			}
+		}
+
+		&.is-active > .ac-header .ac-trigger::after {
+			content: '\f077';
+		}
+		
+		.ac-panel {
+			height: 0;
+		}
+		
+		&.js-enabled.is-active .ac-panel, [data-open-default="true"] .ac-panel {
+			height: auto;
+		}
+	}
+
+	&.sidenav-sticky-mobile {
+		@include vpfo-box-shadow;
+
+		.ac {
+			background-color: $utility-light-grey;
+
+			.ac-header {
+				font-size: px2rem(14);
+				@include weight-600;
+				line-height: px2rem(22);
+				padding: px2rem(8) px2rem(8) px2rem(8) px2rem(16);
+				border-bottom: 1px solid $ubc-grey-medium-light;
+
+				.top-level-view-link {
+					@include weight-400;
+					color: $ubc-brand-blue;
+				}
+			}
+
+			.ac-trigger {
+				width: px2rem(37);
+
+				&::after {
+					font-size: px2rem(12);
+					right: 0;
+				}
+			}
+
+			.ac-panel {
+				background-color: $utility-white;
+
+				.accordion, .no-accordion {
+					border-bottom: 1px solid $ubc-grey-medium-light;
+				}
+			}
+
+			.no-accordion {
+				padding: px2rem(8) px2rem(8) px2rem(8) px2rem(24);
+			}
+
+			.ac {
+				background-color: $utility-white;
+
+				.ac-header {
+					border-bottom: unset;
+					padding-left: px2rem(24);
+					@include weight-400;
+
+					&.active-page {
+						background-color: $ubc-brand-blue;
+						color: $utility-white;
+
+						.ac-trigger::after {
+							color: $utility-white !important;
+						}
+					}
+				}
+
+				.ac-panel {
+					ul {
+						margin: unset;
+						padding: unset;
+						list-style-type: none;
+
+						li {
+							padding: px2rem(8) px2rem(8) px2rem(8) px2rem(32);
+							border-top: 1px solid $ubc-grey-medium-light;
+
+							&.active-page {
+								background: $ubc-brand-blue;
+								color: $utility-white;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&.sidenav-sticky-desktop {
+		top: px2rem(16);
+
+		.top-level-link {
+			font-size: px2rem(16);
+			@include weight-600;
+			text-transform: uppercase;
+			margin-bottom: px2rem(12);
+
+			a {
+				text-transform: none;
+				@include weight-500;
+				font-size: px2rem(14);
+			}
+		}
+
+		.accordion {
+			border-bottom: 1px solid $utility-light-grey;
+		}
+
+		.ac {
+			.ac-header {
+				padding: px2rem(5) 0 px2rem(5) px2rem(8);
+
+				a {
+					color: $ubc-blue;
+				}
+
+				&:hover {
+					background-color: $learning-spaces-blue-light;
+				}
+
+				&.active-page {
+					background-color: $ubc-brand-blue;
+					color: $utility-white;
+
+					.ac-trigger::after {
+						color: $utility-white !important;
+					}
+
+					a {
+						color: $utility-white;
+					}
+				}
+			}
+
+			.ac-trigger::after {
+				font-size: px2rem(16);
+				right: px2rem(8);
+			}
+
+			.ac-panel {
+				ul {
+					margin: unset;
+					padding: unset;
+					list-style-type: none;
+
+					li {
+						padding: px2rem(5) 0 px2rem(5) px2rem(16);
+						border-top: 1px solid $utility-light-grey;
+
+						a {
+							color: $ubc-blue;
+						}
+
+						&:hover {
+							background-color: $learning-spaces-blue-light;
+						}
+
+						&.active-page {
+							background: $ubc-brand-blue;
+
+							a {
+								color: $utility-white;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.no-accordion {
+			padding: px2rem(5) 0 px2rem(5) px2rem(8);
+			border-bottom: 1px solid $utility-light-grey;
+
+			a {
+				color: $ubc-blue;
+			}
+
+			&:hover {
+				background-color: $learning-spaces-blue-light;
+			}
+
+			&.active-page {
+				background-color: $ubc-brand-blue;
+
+				a {
+					color: $utility-white;
+				}
+			}
+		}
+	}
+}

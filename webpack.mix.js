@@ -5,7 +5,7 @@ let url = 'https://vpfo.ubccms.test';
 
 mix
 	.disableSuccessNotifications()
-	//.js( 'src/js/bootstrap.js', 'js/bootstrap.js' )
+	.js( 'src/js/sidenav.js', 'js/sidenav.js' )
 	.sass(
 		'src/style.scss',
 		'style.css',

@@ -1,5 +1,5 @@
 <?php
-/* Template Name: VPFO Page */
+/* Template Name: VPFO Default Page */
 
 // use the custom override header instead of the default clf header
 vpfo_get_custom_header( 'vpfo' );

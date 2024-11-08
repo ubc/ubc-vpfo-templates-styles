@@ -19,6 +19,7 @@
         "sass-loader": "^12.6.0"
     },
     "dependencies": {
-        "@popperjs/core": "^2.11.8"
+        "@popperjs/core": "^2.11.8",
+        "accordion-js": "^3.3.4"
     }
 }

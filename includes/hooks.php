@@ -8,7 +8,9 @@ function vpfo_set_default_template_on_new_page( $post_id, $post, $update ) {
 
 		// Check if the page has a template assigned; if not, set the default template
 		if ( get_post_meta( $post_id, '_wp_page_template', true ) === '' ) {
-			update_post_meta( $post_id, '_wp_page_template', $default_template );
+			$post_id_sanitized = absint( $post_id );
+			$default_template_sanitized  = esc_html( $default_template );
+			update_post_meta( $post_id_sanitized, '_wp_page_template', $default_template_sanitized );
 		}
 	}
 }
@@ -71,13 +73,17 @@ function vpfo_save_alert_meta( $post_id ) {
 		return;
 	}
 
+	// sanitize post id for db insertion
+	$post_id_sanitized = absint( $post_id );
+
 	// Save the 'display alert' checkbox value
-	$display_alert = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
-	update_post_meta( $post_id, '_vpfo_display_alert', $display_alert );
+	$display_alert           = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
+	$display_alert_sanitized = esc_html( $display_alert );
+	update_post_meta( $post_id_sanitized, '_vpfo_display_alert', $display_alert_sanitized );
 
 	// Save the alert message textarea value
 	if ( isset( $_POST['vpfo_alert_message'] ) ) {
-		update_post_meta( $post_id, '_vpfo_alert_message', sanitize_textarea_field( $_POST['vpfo_alert_message'] ) );
+		update_post_meta( $post_id_sanitized, '_vpfo_alert_message', sanitize_textarea_field( $_POST['vpfo_alert_message'] ) );
 	}
 }
 add_action( 'save_post', 'vpfo_save_alert_meta' );

@@ -1,0 +1,114 @@
+// Create colors array for generating background and opacity classes
+$variable-colors: 
+	(ubc-blue, $ubc-blue),
+	(ubc-brand-blue, $ubc-brand-blue),
+	(ubc-grey-brand, $ubc-grey-brand),
+	(ubc-grey-medium-dark, $ubc-grey-medium-dark),
+	(ubc-grey-medium, $ubc-grey-medium),
+	(ubc-grey-medium-light, $ubc-grey-medium-light),
+	(learning-spaces-blue-medium-dark, $learning-spaces-blue-medium-dark),
+	(learning-spaces-blue-medium, $learning-spaces-blue-medium),
+	(learning-spaces-blue-medium-light, $learning-spaces-blue-medium-light),
+	(learning-spaces-blue-light, $learning-spaces-blue-light),
+	(utility-white, $utility-white),
+	(utility-black, $utility-black),
+	(utility-dark-grey, $utility-dark-grey),
+	(utility-light-grey, $utility-light-grey),
+	(utility-grey-inactive, $utility-grey-inactive),
+	(utility-green, $utility-green),
+	(utility-red, $utility-red),
+	(utility-yellow, $utility-yellow);
+
+// Generate utility color, background, and opacity classes
+@each $variable-color-name, $variable-color in $variable-colors {
+	//generate colour & opacity classes
+	.#{$variable-color-name} {
+		color: $variable-color!important;
+	}
+	//generate background & background opacity classes
+	.#{$variable-color-name}-bg {
+		background-color: $variable-color!important;
+		&-95 {
+			background-color: rgba($variable-color, 0.95)!important;
+		}
+		&-90 {
+			background-color: rgba($variable-color, 0.9)!important;
+		}
+		&-85 {
+			background-color: rgba($variable-color, 0.85)!important;
+		}
+		&-80 {
+			background-color: rgba($variable-color, 0.8)!important;
+		}
+		&-75 {
+			background-color: rgba($variable-color, 0.75)!important;
+		}
+		&-70 {
+			background-color: rgba($variable-color, 0.7)!important;
+		}
+		&-65 {
+			background-color: rgba($variable-color, 0.65)!important;
+		}
+		&-60 {
+			background-color: rgba($variable-color, 0.6)!important;
+		}
+		&-55 {
+			background-color: rgba($variable-color, 0.55)!important;
+		}
+		&-50 {
+			background-color: rgba($variable-color, 0.5)!important;
+		}
+		&-45 {
+			background-color: rgba($variable-color, 0.45)!important;
+		}
+		&-40 {
+			background-color: rgba($variable-color, 0.4)!important;
+		}
+		&-35 {
+			background-color: rgba($variable-color, 0.35)!important;
+		}
+		&-30 {
+			background-color: rgba($variable-color, 0.3)!important;
+		}
+		&-25 {
+			background-color: rgba($variable-color, 0.25)!important;
+		}
+		&-20 {
+			background-color: rgba($variable-color, 0.2)!important;
+		}
+		&-15 {
+			background-color: rgba($variable-color, 0.15)!important;
+		}
+		&-10 {
+			background-color: rgba($variable-color, 0.1)!important;
+		}
+		&-5 {
+			background-color: rgba($variable-color, 0.05)!important;
+		}
+	}
+}
+
+// Strip unit
+@function strip-unit( $number ) {
+	@if type-of( $number ) == "number" and not unitless( $number ) {
+		@return $number / ( $number * 0 + 1 );
+	}
+
+	@return $number;
+}
+
+// Convert PX to rem
+@function px2rem( $pixel-value, $base-font-size: 16 ) {
+	@return 1 / strip-unit( $base-font-size ) * strip-unit( $pixel-value ) * 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -68,6 +68,12 @@
 	line-height: px2rem(22);
 }
 
+@mixin bold-600 {
+	strong {
+		font-weight: 600;
+	}
+}
+
 // buttons
 @mixin btn {
 	all: unset;

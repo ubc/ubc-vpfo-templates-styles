@@ -1,0 +1,10 @@
+blockquote, .wp-block-quote {
+	padding: 0 px2rem(16) 0 px2rem(32);
+	border-left: px2rem(8) solid $utility-yellow;
+	margin: px2rem(48) 0;
+
+	p {
+		@include p1;
+		@include weight-400;
+	}
+}

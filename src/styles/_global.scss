@@ -115,7 +115,8 @@ a.btn-secondary, button.btn-secondary {
 
 	h1 {
 		@include h1;
-		@include weight-600;
+		@include weight-500;
+		@include bold-600;
 
 		&.page-title {
 			@include weight-700;
@@ -124,17 +125,20 @@ a.btn-secondary, button.btn-secondary {
 
 	h2 {
 		@include h2;
-		@include weight-600;
+		@include weight-500;
+		@include bold-600;
 	}
 
 	h3 {
 		@include h3;
-		@include weight-600;
+		@include weight-500;
+		@include bold-600;
 	}
 
 	h4 {
 		@include h4;
-		@include weight-600;
+		@include weight-500;
+		@include bold-600;
 	}
 
 	h5 {

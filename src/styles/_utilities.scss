@@ -101,14 +101,3 @@ $variable-colors:
 @function px2rem( $pixel-value, $base-font-size: 16 ) {
 	@return 1 / strip-unit( $base-font-size ) * strip-unit( $pixel-value ) * 1rem;
 }
-
-
-
-
-
-
-
-
-
-
-

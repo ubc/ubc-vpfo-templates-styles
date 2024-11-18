@@ -8,8 +8,8 @@ function vpfo_set_default_template_on_new_page( $post_id, $post, $update ) {
 
 		// Check if the page has a template assigned; if not, set the default template
 		if ( get_post_meta( $post_id, '_wp_page_template', true ) === '' ) {
-			$post_id_sanitized = absint( $post_id );
-			$default_template_sanitized  = esc_html( $default_template );
+			$post_id_sanitized          = absint( $post_id );
+			$default_template_sanitized = esc_html( $default_template );
 			update_post_meta( $post_id_sanitized, '_wp_page_template', $default_template_sanitized );
 		}
 	}

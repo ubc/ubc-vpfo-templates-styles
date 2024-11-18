@@ -1,6 +1,11 @@
 // resets
 a {
 	text-decoration: none;
+
+	&:hover, &:focus {
+		outline: none;
+		text-decoration: underline;
+	}
 }
 
 // global pre-content components
@@ -55,6 +60,10 @@ a.btn-secondary, button.btn-secondary {
 
 	&.btn-secondary a {
 		@include btn-secondary;
+	}
+
+	&.aligncenter {
+		width: unset !important;
 	}
 }
 
@@ -113,7 +122,7 @@ a.btn-secondary, button.btn-secondary {
 		}
 	}
 
-	h1 {
+	h1, .h1 {
 		@include h1;
 		@include weight-500;
 		@include bold-600;
@@ -123,31 +132,31 @@ a.btn-secondary, button.btn-secondary {
 		}
 	}
 
-	h2 {
+	h2, .h2 {
 		@include h2;
 		@include weight-500;
 		@include bold-600;
 	}
 
-	h3 {
+	h3, .h3 {
 		@include h3;
 		@include weight-500;
 		@include bold-600;
 	}
 
-	h4 {
+	h4, .h4 {
 		@include h4;
 		@include weight-500;
 		@include bold-600;
 	}
 
-	h5 {
+	h5, .h5 {
 		@include h5;
 		@include weight-700;
 		text-transform: uppercase
 	}
 
-	h6 {
+	h6, .h6 {
 		@include h6;
 		@include weight-700;
 		text-transform: uppercase;
@@ -159,5 +168,20 @@ a.btn-secondary, button.btn-secondary {
 
 	.p2 {
 		@include p2;
+	}
+}
+
+// pattern slice pre-footer
+.pattern-slice-bottom {
+	background-image: url('images/svg/vpfo-pattern-slice.svg');
+	background-repeat: repeat-x;
+	background-position: center left;
+	height: px2rem(160);
+	width: 100%;
+
+	.pattern-slice-gradient {
+		bottom: 0;
+		left: 0;
+		background: linear-gradient(to bottom, $utility-white 0%, $utility-white 25%, transparent 100%);
 	}
 }

@@ -119,4 +119,7 @@ endif;
 </div>
 
 <?php
+// include the pattern slide graphic accent partial
+require plugin_dir_path( __DIR__ ) . 'partials/templates/pattern-slice-bottom.php';
+
 get_footer();

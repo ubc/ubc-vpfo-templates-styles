@@ -129,7 +129,7 @@ body {
 	line-height: 1;
 }
 
-.page-template-default #container > .expand {
+.page-template:not(.page-template-vpfo-page, .page-template-vpfo-page-sidenav) #container > .expand, .page-template-default #container > .expand, .blog #container > .expand {
 	padding-left: px2rem(12);
 	padding-right: px2rem(12);
 

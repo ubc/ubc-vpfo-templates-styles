@@ -353,7 +353,6 @@ blockquote, .wp-block-quote {
 
 	.featured-contact-links {
 		gap: px2rem(8) px2rem(12);
-		flex-wrap: wrap;
 
 		a {
 			@include weight-700;

@@ -6,6 +6,14 @@ a {
 		outline: none;
 		text-decoration: underline;
 	}
+
+	&[target="_blank"] {
+		&::after {
+			content: '\f08e';
+			font-family: $font-fontawesome;
+			margin-left: 0.25rem;
+		}
+	}
 }
 
 // global pre-content components
@@ -47,10 +55,6 @@ a.btn-secondary, button.btn-secondary {
 	&.btn {
 		a {
 			@include btn;
-		}
-
-		&.btn-external a {
-			@include btn-external;
 		}
 	}
 

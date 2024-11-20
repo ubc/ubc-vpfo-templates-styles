@@ -387,3 +387,22 @@ blockquote, .wp-block-quote {
 		}
 	}
 }
+
+// ubc card block
+
+.uagb-cta__content {
+	.uagb-cta__block-link {
+		@include btn;
+		@include btn-primary;
+		color: $utility-white !important;
+		background-color: $ubc-blue !important;
+
+		&:hover, &:focus, &:focus-within, &:active {
+			background-color: $ubc-brand-blue !important;
+		}
+	
+		&.disabled, &[disabled] {
+			background-color: $utility-grey-inactive !important;
+		}
+	}
+}

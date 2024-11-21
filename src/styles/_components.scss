@@ -781,6 +781,28 @@ blockquote, .wp-block-quote {
 				padding: 0 px2rem(16);
 			}
 		}
+
+		&.table-striped {
+			tbody {
+				tr {
+					&:nth-child(odd) {
+						background-color: $utility-white;
+
+						td, th {
+							background-color: $utility-white;
+						}
+					}
+	
+					&:nth-child(even) {
+						background-color: $utility-light-grey;
+
+						td, th {
+							background-color: $utility-light-grey;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	&.min-width-col {

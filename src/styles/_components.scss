@@ -643,6 +643,7 @@ blockquote, .wp-block-quote {
 			vertical-align: top;
 			padding: px2rem(32) px2rem(16);
 			color: $ubc-blue;
+			@include weight-500;
 		}
 
 		thead {
@@ -651,7 +652,6 @@ blockquote, .wp-block-quote {
 			
 			th {
 				color: $utility-white;
-				@include weight-500;
 				line-height: px2rem(30);
 				text-transform: uppercase;
 				padding: 0 px2rem(16);
@@ -672,7 +672,6 @@ blockquote, .wp-block-quote {
 			border: 1px solid $ubc-grey-medium-light;
 
 			td {
-				@include weight-500;
 				line-height: px2rem(30);
 				text-transform: uppercase;
 				padding: 0 px2rem(16);
@@ -742,6 +741,7 @@ blockquote, .wp-block-quote {
 			vertical-align: top;
 			padding: px2rem(32) px2rem(16);
 			color: $ubc-blue;
+			@include weight-500;
 
 			&[style*="border-top-color"], &[style*="border-bottom-color"], &[style*="border-left-color"], &[style*="border-right-color"] {
 				border-color: $ubc-grey-medium-light !important;
@@ -754,7 +754,6 @@ blockquote, .wp-block-quote {
 			
 			th {
 				color: $utility-white;
-				@include weight-500;
 				line-height: px2rem(30);
 				text-transform: uppercase;
 				padding: 0 px2rem(16);
@@ -775,7 +774,6 @@ blockquote, .wp-block-quote {
 			border: 1px solid $ubc-grey-medium-light;
 
 			td {
-				@include weight-500;
 				line-height: px2rem(30);
 				text-transform: uppercase;
 				padding: 0 px2rem(16);

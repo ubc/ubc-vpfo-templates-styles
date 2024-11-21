@@ -442,6 +442,8 @@ blockquote, .wp-block-quote {
 // image cards
 
 .image-cards {
+	margin: px2rem(32) 0;
+
 	.is-layout-flex {
 		gap: px2rem(32) px2rem(24);
 
@@ -572,6 +574,51 @@ blockquote, .wp-block-quote {
 						transition: padding-left 0.15s ease-in-out;
 					}
 				}
+			}
+		}
+	}
+}
+
+// stat boxes
+
+.stat-boxes {
+	margin: px2rem(32) 0;
+
+	.is-layout-flex {
+		gap: px2rem(32) px2rem(24);
+
+		@include media-breakpoint-up(xl) {
+			gap: px2rem(32);
+		}
+	}
+
+	.stat-box {
+		padding: px2rem(16);
+
+		.wp-block-heading {
+			@include weight-700;
+			margin: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: px2rem(12);
+			line-height: px2rem(30);
+
+			i {
+				font-size: px2rem(16);
+			}
+		}
+
+		p {
+			margin: px2rem(16) 0;
+			line-height: px2rem(30);
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
 			}
 		}
 	}

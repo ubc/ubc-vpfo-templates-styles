@@ -210,38 +210,57 @@ blockquote, .wp-block-quote {
 .featured-resources {
 	margin: px2rem(32) 0;
 
+	.is-layout-flex {
+		gap: px2rem(32) px2rem(24);
+		
+		@include media-breakpoint-up(xl) {
+			gap: px2rem(32);
+		}
+	}
+
 	.resource-card {
 		@include vpfo-box-shadow;
 		border: 1px solid $learning-spaces-blue-light;
 		border-left: px2rem(16) solid $learning-spaces-blue-light;
 		color: $ubc-blue;
 		transition: border-color 0.15s ease-in-out;
+		position: relative;
+
+		&::before {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background-image: url('images/svg/vpfo-pattern.svg');
+			background-position: left center;
+			content: '';
+		}
 
 		&:hover, &:focus-within {
 			border-color: $learning-spaces-blue-medium-dark;
 			transition: border-color 0.15s ease-in-out;
 		}
 
-		.pattern-slice {
-			width: 100%;
-			height: 100%;
-			background-image: url('images/svg/vpfo-pattern.svg');
-			background-position: left center;
-		}
-
-		.gradient-overlay {
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(90deg, #fff 0, #fff 55%, transparent);
-		}
-
 		.resource-card-inner {
 			margin: 0;
 			padding: px2rem(16) px2rem(16) px2rem(40) px2rem(16);
+			position: relative;
+
+			&::before {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background: linear-gradient(90deg, #fff 0, #fff 55%, transparent);
+				content: '';
+			}
 
 			.resource-type {
 				@include weight-500;
 				margin: 0 0 px2rem(8) 0;
+				position: relative;
 			}
 
 			.wp-block-heading {
@@ -249,10 +268,12 @@ blockquote, .wp-block-quote {
 				margin: 0;
 				font-size: px2rem(18);
 				line-height: px2rem(30);
+				position: relative;
 			}
 
 			p {
 				margin: px2rem(8) 0;
+				position: relative;
 
 				&:first-child {
 					margin-top: 0;
@@ -312,47 +333,58 @@ blockquote, .wp-block-quote {
 .featured-contact {
 	@include vpfo-box-shadow;
 	border-top: px2rem(16) solid $ubc-brand-blue;
-	padding: px2rem(16) px2rem(16) px2rem(32) px2rem(16);
 	margin: px2rem(32) 0;
+	position: relative;
 
-	@include media-breakpoint-up(md) {
-		border-top: unset;
-		border-left: px2rem(16) solid $ubc-brand-blue;
-	}
-
-	.pattern-slice {
+	&::before {
+		position: absolute;
 		width: 100%;
 		height: 100%;
 		background-image: url('images/svg/vpfo-pattern-bursts.svg');
 		background-position: right bottom;
 		top: 0;
 		left: 0;
+		content: '';
 	}
 
-	.gradient-overlay {
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, #fff 0, #fff 55%, transparent);
-		top: 0;
-		left: 0;
-		margin: 0;
+	@include media-breakpoint-up(md) {
+		border-top: unset;
+		border-left: px2rem(16) solid $ubc-brand-blue;
+	}
 
-		@include media-breakpoint-up(sm) {
-			background: linear-gradient(90deg, #fff 0, #fff 75%, transparent);
+	.featured-contact-inner {
+		padding: px2rem(16) px2rem(16) px2rem(32) px2rem(16);
+		position: relative;
+
+		&::before {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, #fff 0, #fff 55%, transparent);
+			top: 0;
+			left: 0;
+			content: '';
+
+			@include media-breakpoint-up(sm) {
+				background: linear-gradient(90deg, #fff 0, #fff 75%, transparent);
+			}
 		}
 	}
 
 	h2.h3 {
 		margin: 0 0 px2rem(8) 0;
 		@include weight-700;
+		position: relative;
 	}
 
 	h3.h6 {
 		margin: 0;
+		position: relative;
 	}
 
 	.featured-contact-links {
 		gap: px2rem(8) px2rem(12);
+		position: relative;
 
 		a {
 			@include weight-700;
@@ -403,6 +435,144 @@ blockquote, .wp-block-quote {
 	
 		&.disabled, &[disabled] {
 			background-color: $utility-grey-inactive !important;
+		}
+	}
+}
+
+// image cards
+
+.image-cards {
+	.is-layout-flex {
+		gap: px2rem(32) px2rem(24);
+
+		@include media-breakpoint-up(xl) {
+			gap: px2rem(32);
+		}
+	}
+
+	.image-card {
+		@include vpfo-box-shadow;
+		border-top: px2rem(16) solid $learning-spaces-blue-light;
+		transition: border-color 0.15s ease-in-out;
+		position: relative;
+
+		&:hover, &:focus-within {
+			border-top: px2rem(16) solid $learning-spaces-blue-medium-dark;
+			transition: border-color 0.15s ease-in-out;
+		}
+
+		.image-card-image {
+			position: relative;
+
+			&::after {
+				position: absolute;
+				width: 45%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background-image: url('images/svg/vpfo-image-card-pattern.svg');
+				background-position: top left;
+				background-repeat: no-repeat;
+				background-size: cover;
+				content: '';
+				opacity: 0.5;
+			}
+		}
+
+		.wp-block-image {
+			margin: 0;
+			width: 100%;
+			aspect-ratio: 3 / 2;
+			position: relative;
+
+			&::after {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				background: linear-gradient(270deg, rgba($ubc-blue, 0) 50%, rgba($ubc-blue, 0.5) 100%);
+				background-size: cover;
+				background-repeat: no-repeat;
+				content: '';
+			}
+			
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				position: relative;
+			}
+		}
+
+		.image-card-inner {
+			margin: 0;
+			padding: px2rem(16) px2rem(16) px2rem(48);
+
+			.wp-block-heading {
+				@include weight-600;
+				margin: 0;
+			}
+
+			p {
+				margin: px2rem(8) 0;
+
+				&:first-child {
+					margin-top: 0;
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.view-link {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			margin: 0;
+			box-shadow: inset 0 0 0 1px transparent;
+			transition: box-shadow 0.15s ease-in-out;
+
+			&:hover, &:focus-within {
+				box-shadow: inset 0 0 0 1px $learning-spaces-blue-medium-dark;
+				transition: box-shadow 0.15s ease-in-out;
+			}
+
+			a {
+				color: $ubc-brand-blue;
+				text-decoration: none;
+				text-transform: uppercase;
+				@include weight-700;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				bottom: 0;
+				left: 0;
+				display: flex;
+				align-items: end;
+				padding-left: px2rem(16);
+				padding-bottom: px2rem(16);
+
+				&::after {
+					content: '\f054';
+					font-family: $font-fontawesome;
+					padding-left: px2rem(8);
+					transition: padding-left 0.15s ease-in-out;
+				}
+
+				&:hover, &:focus {
+					outline: none;
+					
+					&::after {
+						padding-left: px2rem(12);
+						transition: padding-left 0.15s ease-in-out;
+					}
+				}
+			}
 		}
 	}
 }

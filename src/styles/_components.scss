@@ -825,3 +825,29 @@ blockquote, .wp-block-quote {
 		}
 	}
 }
+
+// columns
+
+.wp-block-columns {
+	gap: px2rem(32) px2rem(24);
+
+	@include media-breakpoint-up(xl) {
+		gap: px2rem(32);
+	}
+}
+
+.vpfo-columns {
+	margin: px2rem(32) 0;
+
+	.wp-block-column > * {
+		margin: px2rem(32) 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

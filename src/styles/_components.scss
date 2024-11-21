@@ -630,11 +630,6 @@ blockquote, .wp-block-quote {
 	margin: px2rem(32) 0;
 	width: 100%;
 	overflow-x: scroll;
-	border-right: 1px solid $utility-light-grey;
-
-	@include media-breakpoint-up(sm) {
-		border-right: unset;
-	}
 
 	table {
 		overflow: unset;
@@ -690,6 +685,12 @@ blockquote, .wp-block-quote {
 	}
 
 	&.min-width-col {
+		border-right: 1px solid $utility-light-grey;
+
+		@include media-breakpoint-up(sm) {
+			border-right: unset;
+		}
+
 		table {
 			td, th {
 				min-width: px2rem(160);
@@ -714,6 +715,91 @@ blockquote, .wp-block-quote {
 
 				&:nth-child(even) {
 					background-color: $utility-light-grey;
+				}
+			}
+		}
+	}
+}
+
+.advanced-table {
+	margin: px2rem(32) 0;
+	width: 100%;
+	overflow-x: scroll;
+
+	table.wp-block-ubc-advanced-table-block {
+		overflow: unset;
+		word-break: unset;
+		display: table;
+
+		width: auto;
+		max-width: unset;
+
+		&[style*="table-layout:fixed"] {
+			width: 100%;
+		}
+
+		td, th {
+			vertical-align: top;
+			padding: px2rem(32) px2rem(16);
+			color: $ubc-blue;
+
+			&[style*="border-top-color"], &[style*="border-bottom-color"], &[style*="border-left-color"], &[style*="border-right-color"] {
+				border-color: $ubc-grey-medium-light !important;
+			}
+		}
+
+		thead {
+			background-color: $ubc-blue;
+			border: 1px solid $ubc-blue;
+			
+			th {
+				color: $utility-white;
+				@include weight-500;
+				line-height: px2rem(30);
+				text-transform: uppercase;
+				padding: 0 px2rem(16);
+			}
+		}
+
+		tbody {
+			border: 1px solid $ubc-grey-medium-light;
+			border-top: none;
+
+			tr:not(:last-child) {
+				border-bottom: 1px solid $ubc-grey-medium-light;
+			}
+		}
+
+		tfoot {
+			background-color: $ubc-grey-medium-light;
+			border: 1px solid $ubc-grey-medium-light;
+
+			td {
+				@include weight-500;
+				line-height: px2rem(30);
+				text-transform: uppercase;
+				padding: 0 px2rem(16);
+			}
+		}
+	}
+
+	&.min-width-col {
+		border-right: 1px solid $utility-light-grey;
+
+		@include media-breakpoint-up(sm) {
+			border-right: unset;
+		}
+
+		table.wp-block-ubc-advanced-table-block {
+			td, th {
+				min-width: px2rem(160);
+			}
+
+			&[style*="table-layout:fixed"] {
+				table-layout: auto !important;
+
+				@include media-breakpoint-up(lg) {
+					table-layout: fixed !important;
 				}
 			}
 		}

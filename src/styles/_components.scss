@@ -55,7 +55,8 @@ blockquote, .wp-block-quote {
 
 		p {
 			margin: 0;
-			@include weight-500;
+			font-size: px2rem(18);
+			line-height: px2rem(26);
 		}
 
 		.wp-block-buttons {

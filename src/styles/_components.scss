@@ -69,6 +69,12 @@ blockquote, .wp-block-quote {
 		.wp-block-media-text__content {
 			background-image: url('images/svg/vpfo-pattern-85.svg');
 		}
+
+		&.no-pattern {
+			.wp-block-media-text__content {
+				background-image: none;
+			}
+		}
 	}
 
 	&.ubc-blue-bg {
@@ -80,6 +86,12 @@ blockquote, .wp-block-quote {
 
 		.wp-block-media-text__content {
 			background-image: url('images/svg/vpfo-pattern-blue-85.svg');
+		}
+
+		&.no-pattern {
+			.wp-block-media-text__content {
+				background-image: none;
+			}
 		}
 	}
 }

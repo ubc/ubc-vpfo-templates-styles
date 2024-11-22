@@ -114,6 +114,10 @@ blockquote, .wp-block-quote {
 	&.ubc-blue-bg {
 		background-image: url('images/svg/vpfo-pattern-blue-85.svg');
 
+		&.no-pattern {
+			background-image: none;
+		}
+
 		&.dual-buttons-cta {
 			.btn-primary a {
 				border-color: $utility-white;
@@ -124,6 +128,10 @@ blockquote, .wp-block-quote {
 	&.utility-white-bg {
 		@include vpfo-box-shadow;
 		background-image: url('images/svg/vpfo-pattern-85.svg');
+
+		&.no-pattern {
+			background-image: none;
+		}
 	}
 
 	.wp-block-heading {

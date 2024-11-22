@@ -162,8 +162,9 @@ blockquote, .wp-block-quote {
 		}
 
 		.c-accordion__title {
-			background: $utility-light-grey;
+			background-color: $utility-light-grey;
 			padding: px2rem(16) px2rem(40) px2rem(16) px2rem(16);
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
 
 			&::after {
 				right: px2rem(12);
@@ -172,6 +173,18 @@ blockquote, .wp-block-quote {
 				content: '\f078';
 				font-size: px2rem(16);
 				@include weight-700;
+				transition: color 0.15s ease-in-out;
+			}
+
+			&:hover, &:focus, &:focus-within, &:active {
+				background-color: $ubc-brand-blue;
+				color: $utility-white;
+				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+
+				&::after {
+					color: $utility-white;
+					transition: color 0.15s ease-in-out;
+				}
 			}
 		}
 
@@ -193,7 +206,7 @@ blockquote, .wp-block-quote {
 
 		&.is-open {
 			.c-accordion__title {
-				background: $ubc-brand-blue;
+				background-color: $ubc-brand-blue;
 				color: $utility-white;
 
 				&::after {

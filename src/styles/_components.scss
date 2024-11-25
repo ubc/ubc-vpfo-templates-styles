@@ -497,6 +497,10 @@ blockquote, .wp-block-quote {
 			transition: border-color 0.15s ease-in-out;
 		}
 
+		@media (min-width: 782px) {
+			height: 100%;
+		}
+
 		.image-card-image {
 			position: relative;
 

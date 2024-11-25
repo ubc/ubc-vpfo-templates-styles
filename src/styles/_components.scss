@@ -1025,7 +1025,7 @@ blockquote, .wp-block-quote {
 						}
 					}
 
-					@media (min-width: 781px) {
+					@media (min-width: 782px) {
 						padding-left: calc(25% + px2rem(16));
 					}
 
@@ -1099,7 +1099,7 @@ blockquote, .wp-block-quote {
 			.wp-block-post-template {
 				.wp-block-post {
 					.wp-block-read-more {
-						@include media-breakpoint-up(lg) {
+						@media (min-width: 782px) {
 							padding-left: px2rem(16);
 						}
 					}

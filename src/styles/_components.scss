@@ -1043,6 +1043,7 @@ blockquote, .wp-block-quote {
 		text-transform: uppercase;
 		gap: px2rem(8);
 		line-height: 1;
+		margin-top: px2rem(32);
 
 		.wp-block-query-pagination-previous, .wp-block-query-pagination-next {
 			text-decoration: none;

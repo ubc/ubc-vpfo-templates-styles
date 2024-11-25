@@ -885,3 +885,226 @@ blockquote, .wp-block-quote {
 		}
 	}
 }
+
+// post listing
+
+.post-listing {
+	margin: px2rem(32) 0;
+
+	.intro {
+		.wp-block-heading, p {
+			margin: px2rem(16) 0;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		p {
+			@include p1;
+		}
+	}
+
+	.post-listing-posts {
+		margin: 0;
+
+		&:not(:first-child) {
+			margin-top: px2rem(32);
+		}
+
+		.wp-block-post-template {
+			padding: 0;
+
+			.wp-block-post {
+				@include vpfo-box-shadow;
+				border: 1px solid $learning-spaces-blue-light;
+				margin: unset;
+				position: relative;
+				transition: border-color 0.15s ease-in-out;
+				
+				&:not(:last-child) {
+					margin-bottom: px2rem(16);
+				}
+
+				&:hover, &:focus-within {
+					border-color: $learning-spaces-blue-medium-dark;
+					transition: border-color 0.15s ease-in-out;
+				}
+
+				.wp-block-columns {
+					gap: 0;
+					margin: 0;
+
+					.featured-image-col {
+						.wp-block-post-featured-image {
+							height: 100%;
+							img {
+								width: 100%;
+								height: 100%;
+								object-fit: cover;
+							}
+						}
+
+						@include media-breakpoint-up(lg) {
+							flex-basis: px2rem(235) !important;
+						}
+					}
+
+					.post-excerpt-col {
+						padding: px2rem(16);
+						color: $ubc-blue;
+
+						@include media-breakpoint-up(lg) {
+							flex-basis: calc(100% - px2rem(235)) !important;
+						}
+					}
+				}
+
+				.wp-block-post-date {
+					font-size: px2rem(12);
+					line-height: px2rem(20);
+					@include weight-700;
+					text-transform: uppercase;
+				}
+
+				.wp-block-post-title {
+					font-family: unset;
+					@include h4;
+					@include weight-600;
+					line-height: px2rem(30);
+					margin: 0 0 px2rem(8);
+				}
+
+				.wp-block-post-excerpt {
+					margin: 0;
+					bottom: 0;
+					right: 0;
+					padding-bottom: px2rem(24);
+
+					.wp-block-post-excerpt__excerpt {
+						margin-bottom: px2rem(8);
+					}
+
+					.wp-block-post-excerpt__more-text {
+						margin-top: px2rem(8);
+					}
+				}
+
+				.wp-block-read-more {
+					position: absolute;
+					bottom: 0;
+					right: 0;
+					width: 100%;
+					height: 100%;
+					padding-left: px2rem(16);
+					padding-bottom: px2rem(16);
+					display: flex;
+					align-items: end;
+					@include weight-600;
+					text-transform: uppercase;
+					text-decoration: none;
+
+					&::after {
+						content: '\f054';
+						font-family: $font-fontawesome;
+						font-size: px2rem(14);
+						padding-left: px2rem(8);
+						transition: padding-left 0.15s ease-in-out;
+					}
+
+					&:hover, &:focus {
+						outline: none;
+						
+						&::after {
+							padding-left: px2rem(12);
+							transition: padding-left 0.15s ease-in-out;
+						}
+					}
+
+					@media (min-width: 781px) {
+						padding-left: calc(25% + px2rem(16));
+					}
+
+					@include media-breakpoint-up(lg) {
+						padding-left: calc(px2rem(235) + px2rem(16));
+					}
+				}
+			}
+		}
+	}
+
+	.wp-block-query-pagination {
+		color: $ubc-blue;
+		@include weight-500;
+		text-transform: uppercase;
+		gap: px2rem(8);
+		line-height: 1;
+
+		.wp-block-query-pagination-previous, .wp-block-query-pagination-next {
+			text-decoration: none;
+			padding: px2rem(8) px2rem(0);
+			color: $ubc-blue;
+
+			&:hover, &:focus {
+				outline: none;
+				color: $ubc-brand-blue;
+			}
+		}
+
+		.wp-block-query-pagination-previous {
+			&::before {
+				content: '\f053';
+				font-family: $font-fontawesome;
+				padding-right: px2rem(8);
+			}
+		}
+
+		.wp-block-query-pagination-next {
+			&::after {
+				content: '\f054';
+				font-family: $font-fontawesome;
+				padding-left: px2rem(8);
+			}
+		}
+
+		.page-numbers {
+			display: inline-block;
+			padding: px2rem(8) px2rem(12);
+			color: $ubc-blue;
+			text-decoration: none;
+
+			&:hover, &:focus {
+				outline: none;
+				color: $ubc-brand-blue;
+			}
+
+			&.current {
+				@include weight-700;
+				background-color: $ubc-brand-blue;
+				color: $utility-white;
+			}
+		}
+	}
+
+	&.no-image {
+		.post-listing-post {
+			padding: px2rem(16);
+		}
+
+		.post-listing-posts {
+			.wp-block-post-template {
+				.wp-block-post {
+					.wp-block-read-more {
+						@include media-breakpoint-up(lg) {
+							padding-left: px2rem(16);
+						}
+					}
+				}
+			}
+		}
+	}
+}

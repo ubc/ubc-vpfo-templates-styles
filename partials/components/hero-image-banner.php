@@ -1,5 +1,5 @@
 <?php
-$display_hero = get_post_meta( get_the_ID(), '_vpfo_display_hero', true ) ?? '0';
+$display_hero   = get_post_meta( get_the_ID(), '_vpfo_display_hero', true ) ?? '0';
 $featured_image = get_the_post_thumbnail( get_the_ID(), 'full' ) ?? null;
 
 if ( '1' === $display_hero && $featured_image ) {

@@ -7,6 +7,9 @@ vpfo_get_custom_header( 'vpfo' );
 // include an alert banner if one is set, conditional checks are in the partial
 require plugin_dir_path( __DIR__ ) . 'partials/components/alert-banner.php';
 
+// include a hero image banner if its display is set and page has a featured image, conditional checks are in the partial
+require plugin_dir_path( __DIR__ ) . 'partials/components/hero-image-banner.php';
+
 // check if this page has children
 $children = get_pages(
 	array(

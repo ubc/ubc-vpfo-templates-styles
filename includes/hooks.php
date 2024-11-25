@@ -24,7 +24,7 @@ function vpfo_add_alert_meta_box() {
 		if ( $post && ( get_page_template_slug( $post->ID ) === 'vpfo-page.php' || get_page_template_slug( $post->ID ) === 'vpfo-page-sidenav.php' ) ) {
 			add_meta_box(
 				'vpfo_alert_meta_box',
-				'Alert Settings',
+				'Alert Banner',
 				'vpfo_render_alert_meta_box',
 				'page',
 				'side',
@@ -87,3 +87,66 @@ function vpfo_save_alert_meta( $post_id ) {
 	}
 }
 add_action( 'save_post', 'vpfo_save_alert_meta' );
+
+// Set up the hero banner options on the VPFO templates
+function vpfo_add_hero_meta_box() {
+	$screen = get_current_screen();
+	if ( $screen && 'page' === $screen->id ) {
+		global $post;
+		if ( $post && ( get_page_template_slug( $post->ID ) === 'vpfo-page.php' || get_page_template_slug( $post->ID ) === 'vpfo-page-sidenav.php' ) ) {
+			add_meta_box(
+				'vpfo_hero_meta_box',
+				'Hero Image Banner',
+				'vpfo_render_hero_meta_box',
+				'page',
+				'side',
+				'default'
+			);
+		}
+	}
+}
+add_action( 'add_meta_boxes', 'vpfo_add_hero_meta_box' );
+
+function vpfo_render_hero_meta_box( $post ) {
+	// Use nonce for verification
+	wp_nonce_field( 'vpfo_save_hero_meta', 'vpfo_hero_nonce' );
+
+	// Get current value (if any)
+	$display_hero = get_post_meta( $post->ID, '_vpfo_display_hero', true );
+
+	// Display the toggle checkbox
+	echo '<p>';
+	echo '<label for="vpfo_display_hero">';
+	echo '<input type="checkbox" id="vpfo_display_hero" name="vpfo_display_hero" value="1"' . checked( $display_hero, '1', false ) . '> Display Hero Image Banner';
+	echo '</label>';
+	echo '</p>';
+	echo '<p style="font-size:90%;font-style:italic">';
+	echo 'Please note that the Hero Image Banner will use this page\'s Featured Image and will only display if the page has a Featured image Set.';
+	echo '</p>';
+}
+
+function vpfo_save_hero_meta( $post_id ) {
+	// Check if nonce is set and valid
+	if ( ! isset( $_POST['vpfo_hero_nonce'] ) || ! wp_verify_nonce( $_POST['vpfo_hero_nonce'], 'vpfo_save_hero_meta' ) ) {
+		return;
+	}
+
+	// Check autosave
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	// Check user permissions
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// sanitize post id for db insertion
+	$post_id_sanitized = absint( $post_id );
+
+	// Save the 'display hero' checkbox value
+	$display_hero           = isset( $_POST['vpfo_display_hero'] ) ? '1' : '0';
+	$display_hero_sanitized = esc_html( $display_hero );
+	update_post_meta( $post_id_sanitized, '_vpfo_display_hero', $display_hero_sanitized );
+}
+add_action( 'save_post', 'vpfo_save_hero_meta' );

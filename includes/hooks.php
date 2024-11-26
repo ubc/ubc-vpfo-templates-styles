@@ -111,8 +111,10 @@ function vpfo_render_hero_meta_box( $post ) {
 	// Use nonce for verification
 	wp_nonce_field( 'vpfo_save_hero_meta', 'vpfo_hero_nonce' );
 
-	// Get current value (if any)
-	$display_hero = get_post_meta( $post->ID, '_vpfo_display_hero', true );
+	// Get current values (if any)
+	$display_hero      = get_post_meta( $post->ID, '_vpfo_display_hero', true );
+	$horizontal_anchor = get_post_meta( $post->ID, '_vpfo_horizontal_anchor', true ) ?? 'center';
+	$vertical_anchor   = get_post_meta( $post->ID, '_vpfo_vertical_anchor', true ) ?? 'center';
 
 	// Display the toggle checkbox
 	echo '<p>';
@@ -122,6 +124,26 @@ function vpfo_render_hero_meta_box( $post ) {
 	echo '</p>';
 	echo '<p style="font-size:90%;font-style:italic">';
 	echo 'Please note that the Hero Image Banner will use this page\'s Featured Image and will only display if the page has a Featured image Set.';
+	echo '</p>';
+
+	// Horizontal Anchor Point dropdown
+	echo '<p>';
+	echo '<label for="vpfo_horizontal_anchor"><strong>Horizontal Anchor Point:</strong></label><br>';
+	echo '<select id="vpfo_horizontal_anchor" name="vpfo_horizontal_anchor">';
+	echo '<option value="left"' . selected( $horizontal_anchor, 'left', false ) . '>Left</option>';
+	echo '<option value="center"' . selected( $horizontal_anchor, 'center', false ) . '>Center</option>';
+	echo '<option value="right"' . selected( $horizontal_anchor, 'right', false ) . '>Right</option>';
+	echo '</select>';
+	echo '</p>';
+
+	// Vertical Anchor Point dropdown
+	echo '<p>';
+	echo '<label for="vpfo_vertical_anchor"><strong>Vertical Anchor Point:</strong></label><br>';
+	echo '<select id="vpfo_vertical_anchor" name="vpfo_vertical_anchor">';
+	echo '<option value="top"' . selected( $vertical_anchor, 'top', false ) . '>Top</option>';
+	echo '<option value="center"' . selected( $vertical_anchor, 'center', false ) . '>Center</option>';
+	echo '<option value="bottom"' . selected( $vertical_anchor, 'bottom', false ) . '>Bottom</option>';
+	echo '</select>';
 	echo '</p>';
 }
 
@@ -145,8 +167,19 @@ function vpfo_save_hero_meta( $post_id ) {
 	$post_id_sanitized = absint( $post_id );
 
 	// Save the 'display hero' checkbox value
-	$display_hero           = isset( $_POST['vpfo_display_hero'] ) ? '1' : '0';
-	$display_hero_sanitized = esc_html( $display_hero );
-	update_post_meta( $post_id_sanitized, '_vpfo_display_hero', $display_hero_sanitized );
+	$display_hero = isset( $_POST['vpfo_display_hero'] ) ? '1' : '0';
+	update_post_meta( $post_id_sanitized, '_vpfo_display_hero', esc_html( $display_hero ) );
+
+	// Save the Horizontal Anchor Point dropdown value
+	if ( isset( $_POST['vpfo_horizontal_anchor'] ) ) {
+		$horizontal_anchor = sanitize_text_field( $_POST['vpfo_horizontal_anchor'] );
+		update_post_meta( $post_id_sanitized, '_vpfo_horizontal_anchor', $horizontal_anchor );
+	}
+
+	// Save the Vertical Anchor Point dropdown value
+	if ( isset( $_POST['vpfo_vertical_anchor'] ) ) {
+		$vertical_anchor = sanitize_text_field( $_POST['vpfo_vertical_anchor'] );
+		update_post_meta( $post_id_sanitized, '_vpfo_vertical_anchor', $vertical_anchor );
+	}
 }
 add_action( 'save_post', 'vpfo_save_hero_meta' );

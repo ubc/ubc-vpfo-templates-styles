@@ -16,3 +16,26 @@ document.querySelectorAll( '.accordion' ).forEach(
 		);
 	}
 );
+
+document.addEventListener(
+	'DOMContentLoaded',
+	() =>
+	{
+		const stickToTopElement = document.querySelector( '#ubc7-unit-menu' );
+		const sidenav           = document.querySelector( '.vpfo .sidenav.sidenav-sticky-desktop' );
+
+		if (stickToTopElement && sidenav) {
+			const checkAndAdjust = () => {
+				if ( stickToTopElement.classList.contains( 'stick-to-top' ) ) {
+					sidenav.style.top = '61px';
+				}
+			};
+
+			// Run once on load
+			checkAndAdjust();
+
+			// Run again after a short delay to catch delayed class application
+			setTimeout( checkAndAdjust, 100 );
+		}
+	}
+);

@@ -41,4 +41,10 @@ endif;
 // include the pattern slide graphic accent partial
 require plugin_dir_path( __DIR__ ) . 'partials/templates/pattern-slice-bottom.php';
 
-get_footer();
+$use_footer = get_post_meta( get_the_ID(), '_vpfo_footer_selection', true ) ?? 'vpfo-footer';
+
+if ( 'vpfo-footer' === $use_footer ) {
+	vpfo_get_custom_footer( 'vpfo' );
+} else {
+	get_footer();
+}

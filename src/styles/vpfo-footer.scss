@@ -1,0 +1,89 @@
+.vpfo-pre-footer {
+	padding: px2rem(32) 0;
+	border-top: 1px solid $utility-light-grey;
+
+	a {
+		color: $ubc-brand-blue;
+		text-decoration: none;
+	
+		&:hover, &:focus {
+			outline: none;
+			text-decoration: underline;
+		}
+	}
+	
+	.land-acknowledgement {
+		@include weight-500;
+	}
+	
+	.okan-campus-link {
+		@include weight-700;
+		font-size: px2rem(16);
+		margin-bottom: 0;
+
+		&:not(:first-child) {
+			margin-top: px2rem(16);
+		}
+	}
+	
+	.vpfo-message {
+		@include weight-600;
+	}
+	
+	.unit-links {
+		@include weight-600;
+		gap: px2rem(16);
+
+		&:not(:first-child) {
+			margin-top: px2rem(16);
+		}
+
+		.unit-link {
+			&:not(:last-child) {
+				padding-right: px2rem(16);
+				border-right: 1px solid $ubc-blue;
+			}
+		}
+	}
+
+	.ubc7-back-to-top {
+		padding: 0;
+
+		.container {
+			@include media-breakpoint-between(sm, lg) {
+				max-width: unset;
+			}
+			
+			@include media-breakpoint-up(lg) {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
+		a {
+			color: $learning-spaces-blue-medium-dark;
+			@include weight-700;
+			font-size: px2rem(16);
+			line-height: px2rem(24);
+		}
+
+		.ubc7-arrow {
+			all: unset;
+
+			&.up-arrow, &.up-arrow.grey {
+				all: unset;
+			}
+
+			&::before {
+				font-family: $font-fontawesome;
+				font-size: px2rem(16);
+				color: $ubc-blue;
+				content: '\f077';
+				display: inline-block;
+				width: px2rem(16);
+				height: px2rem(16);
+				margin-left: px2rem(8);
+			}
+		}
+	}
+}

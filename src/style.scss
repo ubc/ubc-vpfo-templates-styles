@@ -3,7 +3,7 @@
 @import 'styles/mixins';
 @import 'styles/overrides';
 
-.vpfo {
+.vpfo, .vpfo-pre-footer {
 	// Bootstrap base config
 	@import "~bootstrap/scss/functions";
 	@import "~bootstrap/scss/variables";
@@ -57,7 +57,11 @@
 
 	// Optional Bootstrap Utilities - - uncomment to activate
 	@import "~bootstrap/scss/utilities/api";
+}
 
-	// Plugin styles
+// Plugin styles
+.vpfo {
 	@import 'styles/index';
 }
+
+@import 'styles/vpfo-footer';

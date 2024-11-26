@@ -260,6 +260,10 @@ blockquote, .wp-block-quote {
 		transition: border-color 0.15s ease-in-out;
 		position: relative;
 
+		@media (min-width: 782px) {
+			height: 100%;
+		}
+
 		&::before {
 			position: absolute;
 			width: 100%;
@@ -280,6 +284,10 @@ blockquote, .wp-block-quote {
 			margin: 0;
 			padding: px2rem(16) px2rem(16) px2rem(40) px2rem(16);
 			position: relative;
+
+			@media (min-width: 782px) {
+				height: 100%;
+			}
 
 			&::before {
 				position: absolute;

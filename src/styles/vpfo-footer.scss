@@ -65,16 +65,8 @@
 			@include weight-700;
 			font-size: px2rem(16);
 			line-height: px2rem(24);
-		}
 
-		.ubc7-arrow {
-			all: unset;
-
-			&.up-arrow, &.up-arrow.grey {
-				all: unset;
-			}
-
-			&::before {
+			&::after {
 				font-family: $font-fontawesome;
 				font-size: px2rem(16);
 				color: $ubc-blue;
@@ -84,6 +76,10 @@
 				height: px2rem(16);
 				margin-left: px2rem(8);
 			}
+		}
+
+		.ubc7-arrow {
+			display: none;
 		}
 	}
 }

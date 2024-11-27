@@ -55,7 +55,7 @@ $unit_links   = get_option( 'vpfo_unit_links', array() );
 						<?php
 						if ( $vpfo_message ) {
 							?>
-							<div class="vpfo-message">
+							<div class="vpfo-message mt-5 mt-lg-0">
 								<?php echo wp_kses_post( $vpfo_message ); ?>
 							</div>
 							<?php

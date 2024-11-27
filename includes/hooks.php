@@ -264,13 +264,16 @@ function vpfo_footer_admin_menu() {
 add_action( 'admin_menu', 'vpfo_footer_admin_menu' );
 
 function vpfo_footer_settings_init() {
+	
 	// Register a new setting for the Land Acknowledgement
 	register_setting(
 		'vpfo_footer',
 		'vpfo_land_acknowledgement',
 		array(
 			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_textarea_field',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
 			'show_in_rest'      => true,
 		)
 	);
@@ -297,13 +300,15 @@ function vpfo_footer_settings_init() {
 		)
 	);
 
-	// Register a new setting for VPFO Message (WYSIWYG)
+	// Register a new setting for VPFO Message
 	register_setting(
 		'vpfo_footer',
 		'vpfo_message',
 		array(
 			'type'              => 'string',
-			'sanitize_callback' => 'wp_kses_post',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
 			'show_in_rest'      => true,
 		)
 	);
@@ -393,7 +398,15 @@ function vpfo_footer_section_callback() {
 // Field rendering callback for Land Acknowledgement
 function vpfo_land_acknowledgement_callback() {
 	$value = get_option( 'vpfo_land_acknowledgement', '' );
-	echo '<textarea name="vpfo_land_acknowledgement" rows="4" style="width: 100%;">' . esc_textarea( $value ) . '</textarea>';
+	wp_editor(
+		$value,
+		'vpfo_land_acknowledgement',
+		array(
+			'textarea_name' => 'vpfo_land_acknowledgement',
+			'textarea_rows' => 8,
+			'media_buttons' => false,
+		)
+	);
 }
 
 // Field rendering callback for Okan Campus Link URL
@@ -417,7 +430,7 @@ function vpfo_message_callback() {
 		array(
 			'textarea_name' => 'vpfo_message',
 			'textarea_rows' => 2,
-			'media_buttons' => true,
+			'media_buttons' => false,
 		)
 	);
 }

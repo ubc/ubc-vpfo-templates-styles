@@ -39,9 +39,9 @@ $unit_links   = get_option( 'vpfo_unit_links', array() );
 						<?php
 						if ( $land_acknowledgement ) {
 							?>
-							<p class="land-acknowledgement">
-								<?php echo esc_html( $land_acknowledgement ); ?>
-							</p>
+							<div class="land-acknowledgement">
+								<?php echo wp_kses_post( $land_acknowledgement ); ?>
+							</div>
 							<?php
 						}
 						?>

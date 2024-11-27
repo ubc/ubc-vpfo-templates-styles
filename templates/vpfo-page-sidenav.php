@@ -7,6 +7,9 @@ vpfo_get_custom_header( 'vpfo' );
 // include an alert banner if one is set, conditional checks are in the partial
 require plugin_dir_path( __DIR__ ) . 'partials/components/alert-banner.php';
 
+// include a hero image banner if its display is set and page has a featured image, conditional checks are in the partial
+require plugin_dir_path( __DIR__ ) . 'partials/components/hero-image-banner.php';
+
 // check if this page has children
 $children = get_pages(
 	array(
@@ -106,7 +109,15 @@ if ( have_posts() ) :
 				}
 				?>
 				<div class="<?php echo esc_html( $main_col_class ); ?>">
-					<h1 class="page-title mb-9"><?php the_title(); ?></h1>
+					<h1 class="page-title mb-9">
+						<?php
+						if ( is_front_page() ) {
+							esc_html_e( 'Welcome to UBC Finance', 'ubc-vpfo-templates-styles' );
+						} else {
+							the_title();
+						}
+						?>
+					</h1>
 					<?php the_content(); ?>
 				</div>
 			</div>
@@ -119,4 +130,7 @@ endif;
 </div>
 
 <?php
+// include the pattern slide graphic accent partial
+require plugin_dir_path( __DIR__ ) . 'partials/templates/pattern-slice-bottom.php';
+
 get_footer();

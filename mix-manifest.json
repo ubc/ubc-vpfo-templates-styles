@@ -1,4 +1,12 @@
 {
     "/js/sidenav.js": "/js/sidenav.js",
-    "/style.css": "/style.css"
+    "/style.css": "/style.css",
+    "/images/svg/vpfo-hero-image-banner-pattern.svg": "/images/svg/vpfo-hero-image-banner-pattern.svg",
+    "/images/svg/vpfo-image-card-pattern.svg": "/images/svg/vpfo-image-card-pattern.svg",
+    "/images/svg/vpfo-pattern-85.svg": "/images/svg/vpfo-pattern-85.svg",
+    "/images/svg/vpfo-pattern-blue-85.svg": "/images/svg/vpfo-pattern-blue-85.svg",
+    "/images/svg/vpfo-pattern-blue.svg": "/images/svg/vpfo-pattern-blue.svg",
+    "/images/svg/vpfo-pattern-bursts.svg": "/images/svg/vpfo-pattern-bursts.svg",
+    "/images/svg/vpfo-pattern-slice.svg": "/images/svg/vpfo-pattern-slice.svg",
+    "/images/svg/vpfo-pattern.svg": "/images/svg/vpfo-pattern.svg"
 }

@@ -3,7 +3,7 @@
         'name' => 'paperleaf-zgm/ubc-vpfo-spaces-pages',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b599a2226eeeb596d4a24368a8e51ea0dba3e95b',
+        'reference' => 'f61900403c1863211a7117dab3946269edaf8b25',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'paperleaf-zgm/ubc-vpfo-spaces-pages' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b599a2226eeeb596d4a24368a8e51ea0dba3e95b',
+            'reference' => 'f61900403c1863211a7117dab3946269edaf8b25',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

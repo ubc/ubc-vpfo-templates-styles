@@ -121,6 +121,7 @@
 
 	&.sidenav-sticky-desktop {
 		top: px2rem(16);
+		z-index: 1;
 
 		.top-level-link {
 			font-size: px2rem(16);

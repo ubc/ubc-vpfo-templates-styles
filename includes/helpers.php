@@ -15,3 +15,19 @@ function vpfo_get_custom_header( $name = '' ) {
 		get_template_part( 'header', $name );
 	}
 }
+
+function vpfo_get_custom_footer( $name = '' ) {
+	// Define the path to the footers directory in your plugin
+	$custom_footer_path = plugin_dir_path( __DIR__ ) . 'partials/footers/';
+
+	// Construct the exact file path based on the provided name
+	$footer_file = $custom_footer_path . 'footer-' . $name . '.php';
+
+	// Check if the specified custom footer file exists
+	if ( file_exists( $footer_file ) ) {
+		include $footer_file;
+	} else {
+		// Fall back to the theme’s default footer if the custom file is not found
+		get_template_part( 'footer', $name );
+	}
+}

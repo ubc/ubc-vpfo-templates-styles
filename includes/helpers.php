@@ -31,3 +31,28 @@ function vpfo_get_custom_footer( $name = '' ) {
 		get_template_part( 'footer', $name );
 	}
 }
+
+// numerical page navigtion
+
+function vpfo_numeric_pagination() {
+	// Only show pagination if there's more than one page
+	if ( $GLOBALS['wp_query']->max_num_pages <= 1 ) {
+		return;
+	}
+
+	$current_page = max( 1, get_query_var( 'paged' ) ); // Get the current page number
+	$total_pages  = $GLOBALS['wp_query']->max_num_pages; // Get the total number of pages
+
+	// Output the pagination
+	echo '<nav class="pagination" role="navigation">';
+	echo paginate_links( array(
+		'base'      => get_pagenum_link( 1 ) . '%_%',
+		'format'    => 'page/%#%/',
+		'current'   => $current_page,
+		'total'     => $total_pages,
+		'mid_size'  => 2,
+		'prev_text' => 'Previous',
+		'next_text' => 'Next',
+	) );
+	echo '</nav>';
+}

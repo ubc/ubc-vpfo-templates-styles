@@ -32,7 +32,7 @@ function vpfo_get_custom_footer( $name = '' ) {
 	}
 }
 
-// numerical page navigtion
+// numeric page navigtion
 
 function vpfo_numeric_pagination() {
 	// Only show pagination if there's more than one page
@@ -55,4 +55,14 @@ function vpfo_numeric_pagination() {
 		'next_text' => 'Next',
 	) );
 	echo '</nav>';
+}
+
+function get_vpfo_excerpt( $post_id = null, $word_limit = 55 ) {
+	// Get the excerpt or generate one from the content
+	$excerpt = get_the_excerpt( $post_id );
+
+	// Trim the excerpt to the desired word limit
+	$excerpt = wp_trim_words( $excerpt, $word_limit );
+
+	return $excerpt;
 }

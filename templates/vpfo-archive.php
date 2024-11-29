@@ -6,12 +6,15 @@ $post_type      = is_home() ? 'post' : $post_type;
 if ( 'post' === $post_type ) {
 	$archive_title = __( 'Announcements', 'ubc-vpfo-templates-styles' );
 	$intro         = get_option( 'vpfo_announcements_archive_intro', null );
+	$card          = 'archive-card-post';
 } elseif ( 'glossary-terms' === $post_type ) {
 	$archive_title = __( 'Glossary of Terms', 'ubc-vpfo-templates-styles' );
-	$intro         = get_option( 'vpfo_news_glossary_terms_intro', null );
+	$intro         = get_option( 'vpfo_glossary_terms_archive_intro', null );
+	$card          = 'archive-card-glossary-terms';
 } else {
 	$archive_title = $archive_object->labels->name . ' ' . __( 'Archive', 'ubc-vpfo-templates-styles' );
 	$intro         = get_option( 'vpfo_' . $post_type . '_archive_intro', null );
+	$card          = 'archive-card-' . $post_type;
 }
 
 // use the custom override header instead of the default clf header
@@ -37,9 +40,9 @@ vpfo_get_custom_header( 'vpfo' );
 <?php
 if ( have_posts() ) :
 	?>
-	<section class="archive">
+	<section class="archive mb-9">
 		<div class="row">
-			<div class="col-lg-4 col-xl-3 pe-lg-5">
+			<div class="col-lg-4 col-xl-3 pe-lg-5 mb-5 mb-lg-0">
 				<?php require plugin_dir_path( __DIR__ ) . 'partials/templates/archive-filter-form.php'; ?>
 			</div>
 
@@ -47,19 +50,7 @@ if ( have_posts() ) :
 			<?php
 			while ( have_posts() ) :
 				the_post();
-				?>
-				<article id="resources-card resources-<?php the_ID(); ?>">
-					<h3 class="h4">
-						<a href="<?php the_permalink(); ?>">
-							<?php the_title(); ?>
-						</a>
-					</h3>
-
-					<div class="entry-content">
-						<?php the_excerpt(); ?>
-					</div>
-				</article>
-				<?php
+				require plugin_dir_path( __DIR__ ) . 'partials/templates/' . $card . '.php';
 			endwhile;
 			vpfo_numeric_pagination();
 			?>

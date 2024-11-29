@@ -52,14 +52,15 @@ function resources_categories() {
 
 	$rewrite = array(
 		'slug'       => 'resources-categories',
-		'with_front' => false
+		'with_front' => false,
 	);
 
 
 	$args = array(
 	  'labels'            => $labels,
 	  'rewrite'           => $rewrite,
-	  'show_admin_column' => true
+	  'show_admin_column' => true,
+	  'hierarchical' => true,
 	);
 
 	register_taxonomy( 'resources-categories', 'resources', $args );
@@ -173,14 +174,15 @@ function glossary_categories() {
 
 	$rewrite = array(
 		'slug'       => 'glossary-categories',
-		'with_front' => false
+		'with_front' => false,
 	);
 
 
 	$args = array(
 	  'labels'            => $labels,
 	  'rewrite'           => $rewrite,
-	  'show_admin_column' => true
+	  'show_admin_column' => true,
+	  'hierarchical' => true,
 	);
 
 	register_taxonomy( 'glossary-categories', 'glossary-terms', $args );
@@ -213,3 +215,15 @@ function vpfo_cpt_templates( $template ) {
 	return $template;
 }
 add_filter( 'template_include', 'vpfo_cpt_templates' );
+
+function vpfo_order_glossary_terms_archive( $query ) {
+	// Ensure we are modifying the main query and it's not in the admin area
+	if ( ! is_admin() && $query->is_main_query() ) {
+		// Check if it's the archive page for the custom post type 'glossary-terms'
+		if ( is_post_type_archive( 'glossary-terms' ) ) {
+			$query->set( 'orderby', 'title' );
+			$query->set( 'order', 'ASC' );
+		}
+	}
+}
+add_action( 'pre_get_posts', 'vpfo_order_glossary_terms_archive' );

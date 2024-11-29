@@ -28,7 +28,13 @@ function resources_cpt() {
 		'has_archive'         => true,
 		'menu_icon'           => 'dashicons-archive',
 		'show_in_rest'        => true,
-		'supports'            => array('title', 'editor', 'excerpt', 'custom-fields', 'revisions'),
+		'supports'            => array(
+			'title',
+			'editor',
+			'excerpt',
+			'custom-fields',
+			'revisions',
+		),
 	);
 
 	register_post_type( 'resources', $args );
@@ -41,13 +47,13 @@ function resources_categories() {
 	$labels = array(
 		'name'          => 'Resources Categories',
 		'singular_name' => 'Resources Category',
-		'search_items'  =>  'Search Resources Categories',
+		'search_items'  => 'Search Resources Categories',
 		'all_items'     => 'All Resources Categories',
 		'edit_item'     => 'Edit Resources Category',
 		'update_item'   => 'Update Resources Category',
 		'add_new_item'  => 'Add New Resources Category',
 		'new_item_name' => 'New Resources Category Name',
-		'menu_name'     => 'Resources Categories'
+		'menu_name'     => 'Resources Categories',
 	);
 
 	$rewrite = array(
@@ -55,12 +61,11 @@ function resources_categories() {
 		'with_front' => false,
 	);
 
-
 	$args = array(
-	  'labels'            => $labels,
-	  'rewrite'           => $rewrite,
-	  'show_admin_column' => true,
-	  'hierarchical' => true,
+		'labels'            => $labels,
+		'rewrite'           => $rewrite,
+		'show_admin_column' => true,
+		'hierarchical'      => true,
 	);
 
 	register_taxonomy( 'resources-categories', 'resources', $args );
@@ -150,7 +155,11 @@ function glossary_terms_cpt() {
 		'show_in_nav_menus'   => false,
 		'has_archive'         => true,
 		'menu_icon'           => 'dashicons-book-alt',
-		'supports'            => array('title', 'editor', 'revisions'),
+		'supports'            => array(
+			'title',
+			'editor',
+			'revisions',
+		),
 	);
 
 	register_post_type( 'glossary-terms', $args );
@@ -169,7 +178,7 @@ function glossary_categories() {
 		'update_item'   => 'Update Glossary Category',
 		'add_new_item'  => 'Add New Glossary Category',
 		'new_item_name' => 'New Glossary Category Name',
-		'menu_name'     => 'Glossary Categories'
+		'menu_name'     => 'Glossary Categories',
 	);
 
 	$rewrite = array(
@@ -177,12 +186,11 @@ function glossary_categories() {
 		'with_front' => false,
 	);
 
-
 	$args = array(
-	  'labels'            => $labels,
-	  'rewrite'           => $rewrite,
-	  'show_admin_column' => true,
-	  'hierarchical' => true,
+		'labels'            => $labels,
+		'rewrite'           => $rewrite,
+		'show_admin_column' => true,
+		'hierarchical'      => true,
 	);
 
 	register_taxonomy( 'glossary-categories', 'glossary-terms', $args );
@@ -192,7 +200,7 @@ add_action( 'init', 'glossary_categories' );
 // redirect single glossary term pages to the archive
 function redirect_single_glossary_terms() {
 	if ( is_singular( 'glossary-terms' ) ) {
-		wp_redirect( get_post_type_archive_link( 'glossary-terms' ), 301 );
+		wp_safe_redirect( get_post_type_archive_link( 'glossary-terms' ), 301 );
 		exit;
 	}
 }

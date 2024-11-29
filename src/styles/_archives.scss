@@ -1,0 +1,333 @@
+.archive-intro {
+	h2 {
+		@include weight-400;
+	}
+
+	p {
+		font-size: px2rem(18);
+		line-height: px2rem(30);
+	}
+}
+
+.archive {
+	.archive-card {
+		border: 1px solid $learning-spaces-blue-light;
+		@include vpfo-box-shadow;
+
+		&:not(:last-child) {
+			margin-bottom: px2rem(16);
+
+			@include media-breakpoint-up(lg) {
+				margin-bottom: px2rem(32);
+			}
+		}
+
+		.post-content {
+			padding: px2rem(16);
+			color: $ubc-blue;
+
+			.date {
+				font-size: px2rem(12);
+				line-height: px2rem(20);
+				text-transform: uppercase;
+				@include weight-700;
+			}
+
+			.title {
+				@include h4;
+				@include weight-600;
+			}
+
+			.read-more {
+				color: $ubc-brand-blue;
+				text-transform: uppercase;
+				@include weight-700;
+				text-decoration: none;
+
+				&::after {
+					font-family: $font-fontawesome;
+					font-size: px2rem(16);
+					content: '\f054';
+					margin-left: px2rem(8);
+					transition: margin-left ease 0.15s;
+				}
+			}
+		}
+
+		.whole-card-link {
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+
+			a {
+				display: flex;
+				align-items: end;
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		&.has-featured-image {
+			.featured-image {
+				width: 100%;
+				aspect-ratio: 3 / 2;
+	
+				@include media-breakpoint-up(sm) {
+					width: 35%;
+				}
+	
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+
+			.post-content {
+				@include media-breakpoint-up(sm) {
+					width: 65%;
+				}
+			}
+
+			.read-more {
+				@include media-breakpoint-up(sm) {
+					a {
+						padding-left: calc(35% + px2rem(16));
+					}
+				}
+			}
+		}
+
+		&:hover, &:focus-within {
+			border-color: $learning-spaces-blue-medium-dark;
+
+			.read-more::after {
+				margin-left: px2rem(12);
+				transition: margin-left ease 0.15s;
+			}
+		}
+
+		&.archive-card-glossary-terms {
+			p {
+				margin: px2rem(24) 0;
+
+				&:first-child {
+					margin-top: 0;
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+
+	.pagination {
+		color: $ubc-blue;
+		@include weight-500;
+		text-transform: uppercase;
+		gap: px2rem(8);
+		line-height: 1;
+		margin-top: px2rem(32);
+
+		.page-numbers {
+			display: inline-block;
+			padding: px2rem(8) px2rem(12);
+			color: $ubc-blue;
+			text-decoration: none;
+
+			&:hover, &:focus {
+				outline: none;
+				color: $ubc-brand-blue;
+			}
+
+			&.current {
+				@include weight-700;
+				background-color: $ubc-brand-blue;
+				color: $utility-white;
+			}
+
+			&.prev, &.next {
+				text-decoration: none;
+				padding: px2rem(8) px2rem(0);
+				color: $ubc-blue;
+	
+				&:hover, &:focus {
+					outline: none;
+					color: $ubc-brand-blue;
+				}
+			}
+	
+			&.prev {
+				&::before {
+					content: '\f053';
+					font-family: $font-fontawesome;
+					padding-right: px2rem(8);
+				}
+			}
+	
+			&.next {
+				&::after {
+					content: '\f054';
+					font-family: $font-fontawesome;
+					padding-left: px2rem(8);
+				}
+			}
+		}
+	}
+
+	.archive-filters {
+		border-top: px2rem(8) solid $ubc-blue;
+		@include vpfo-box-shadow;
+		padding: px2rem(24) px2rem(16) px2rem(16);
+		color: $ubc-blue;
+		position: relative;
+
+		@include media-breakpoint-up(lg) {
+			position: sticky;
+			top: 0;
+		}
+
+		.pattern {
+			top: 0;
+			left: 0;
+			background-image: url('images/svg/vpfo-pattern-85.svg');
+		}
+
+		.gradient-overlay {
+			top: 0;
+			left: 0;
+			background: linear-gradient(90deg, #fff 0, #fff 60%, transparent);
+		}
+
+		.archive-filter-form {
+			.text-search {
+				label {
+					@include h6;
+					text-transform: uppercase;
+					@include weight-700;
+					margin-bottom: px2rem(16);
+				}
+
+				.search-input {
+					position: relative;
+					
+					input[type="search"] {
+						height: unset;
+						padding: px2rem(8) px2rem(24) px2rem(8) px2rem(8);
+						width: 100%;
+						display: block;
+						box-sizing: border-box;
+						border: 1px solid $ubc-blue;
+						color: $utility-dark-grey;
+					}
+
+					&::after {
+						position: absolute;
+						right: px2rem(8);
+						top: 50%;
+						transform: translateY(-50%);
+						font-family: $font-fontawesome;
+						font-size: px2rem(16);
+						content: '\f002';
+						width: px2rem(16);
+						height: px2rem(20);
+						color: $ubc-blue;
+						@include weight-700;
+					}
+				}
+			}
+
+			.cat-tax {
+				h3 {
+					@include h6;
+					text-transform: uppercase;
+					@include weight-700;
+					margin-bottom: px2rem(16);
+				}
+
+				label {
+					@include weight-600;
+				}
+
+				.cat-tax-select {
+					position: relative;
+					width: 100%;
+				
+					// Hide the native select
+					select {
+						display: none;
+					}
+				
+					// Styled container
+					.cat-tax-selected {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						padding: px2rem(8);
+						border: 1px solid $ubc-blue;
+						background: $utility-white;
+						cursor: pointer;
+				
+						.cat-tax-selected-items {
+							display: flex;
+							flex-wrap: wrap;
+							gap: px2rem(4);
+				
+							.selected-item {
+								background-color: $ubc-brand-blue;
+								color: $utility-white;
+								padding: px2rem(4);
+								line-height: 1;
+								@include weight-500;
+				
+								.remove {
+									margin-left: px2rem(2);
+									cursor: pointer;
+								}
+							}
+						}
+				
+						.arrow {
+							margin-left: auto;
+						}
+					}
+				
+					// Dropdown options
+					.cat-tax-options {
+						position: absolute;
+						top: calc(100% - 1px);
+						left: 0;
+						width: 100%;
+						border: 1px solid $ubc-blue;
+						background-color: $utility-white;
+						max-height: px2rem(160);
+						overflow-y: auto;
+						z-index: 1;
+						display: none; // Hidden by default
+						list-style-type: none;
+						margin: 0;
+						padding: 0;
+				
+						li {
+							padding: px2rem(6) px2rem(8);
+							cursor: pointer;
+				
+							&:hover {
+								background-color: $ubc-brand-blue;
+								color: $utility-white;
+							}
+						}
+					}
+				
+					// Show dropdown
+					&.open .cat-tax-options {
+						display: block;
+					}
+				}
+				
+			}
+		}
+	}
+}

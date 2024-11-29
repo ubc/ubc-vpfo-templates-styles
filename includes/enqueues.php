@@ -37,6 +37,16 @@ function ubc_vpfo_templates_styles_enqueue_styles_scripts() {
 			array( 'strategy' => 'defer' )
 		);
 	}
+
+	if ( is_home() || is_post_type_archive( 'resources' ) || is_post_type_archive( 'glossary-terms' ) ) {
+		wp_enqueue_script(
+			'vpfo-archive-multiselect',
+			plugin_dir_url( __DIR__ ) . 'js/archive-multiselect.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'ubc_vpfo_templates_styles_enqueue_styles_scripts' );
 

@@ -1,4 +1,4 @@
-<article id="<?php echo esc_html( $post_type ); ?>-card-<?php the_ID(); ?>" class="archive-card archive-card-glossary-terms position-relative">
+<article id="<?php echo esc_html( $archive_post_type ); ?>-card-<?php the_ID(); ?>" class="archive-card archive-card-glossary-terms position-relative">
 	<div class="post-content">
 		<h3 class="title">
 			<?php the_title(); ?>

@@ -44,16 +44,19 @@ function vpfo_numeric_pagination() {
 	$total_pages  = $GLOBALS['wp_query']->max_num_pages; // Get the total number of pages
 
 	// Output the pagination
+	$paginate_links = paginate_links(
+		array(
+			'base'      => get_pagenum_link( 1 ) . '%_%',
+			'format'    => 'page/%#%/',
+			'current'   => $current_page,
+			'total'     => $total_pages,
+			'mid_size'  => 2,
+			'prev_text' => 'Previous',
+			'next_text' => 'Next',
+		)
+	);
 	echo '<nav class="pagination" role="navigation">';
-	echo paginate_links( array(
-		'base'      => get_pagenum_link( 1 ) . '%_%',
-		'format'    => 'page/%#%/',
-		'current'   => $current_page,
-		'total'     => $total_pages,
-		'mid_size'  => 2,
-		'prev_text' => 'Previous',
-		'next_text' => 'Next',
-	) );
+	echo wp_kses_post( $paginate_links );
 	echo '</nav>';
 }
 

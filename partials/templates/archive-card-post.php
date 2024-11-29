@@ -3,13 +3,13 @@ $featured_image = get_the_post_thumbnail( get_the_ID(), 'large' ) ?? null;
 $card_classes   = $featured_image ? 'archive-card archive-card-post position-relative has-featured-image' : 'archive-card archive-card-post position-relative';
 ?>
 
-<article id="<?php echo esc_html( $post_type ); ?>-card-<?php the_ID(); ?>" class="<?php echo esc_html( $card_classes ); ?>">
+<article id="<?php echo esc_html( $archive_post_type ); ?>-card-<?php the_ID(); ?>" class="<?php echo esc_html( $card_classes ); ?>">
 	<div class="d-sm-flex">
 		<?php
 		if ( $featured_image ) {
 			?>
 			<div class="featured-image">
-				<?php echo $featured_image; ?>
+				<?php echo wp_kses_post( $featured_image ); ?>
 			</div>
 			<?php
 		}
@@ -17,7 +17,7 @@ $card_classes   = $featured_image ? 'archive-card archive-card-post position-rel
 
 		<div class="post-content d-sm-flex flex-sm-column justify-content-sm-center">
 			<div class="date mb-1">
-				<?php echo get_the_time( 'l, F j, Y' ); ?>
+				<?php echo esc_html( get_the_time( 'l, F j, Y' ) ); ?>
 			</div>
 
 			<h3 class="title">

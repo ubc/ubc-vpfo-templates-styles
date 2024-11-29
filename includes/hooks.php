@@ -210,7 +210,7 @@ function vpfo_render_footer_meta_box( $post ) {
 	// Get the current value (if any) or set the default to 'vpfo-footer'
 	$footer_selection = get_post_meta( $post->ID, '_vpfo_footer_selection', true );
 	if ( empty( $footer_selection ) ) {
-		$footer_selection = 'vpfo-footer'; // Set default value
+		$footer_selection = 'vpfo-footer';
 	}
 
 	// Display the radio buttons
@@ -228,22 +228,18 @@ function vpfo_render_footer_meta_box( $post ) {
 }
 
 function vpfo_save_footer_meta( $post_id ) {
-	// Check if nonce is set and valid
 	if ( ! isset( $_POST['vpfo_footer_nonce'] ) || ! wp_verify_nonce( $_POST['vpfo_footer_nonce'], 'vpfo_save_footer_meta' ) ) {
 		return;
 	}
 
-	// Check autosave
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
 
-	// Check user permissions
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return;
 	}
 
-	// Save the footer selection value
 	if ( isset( $_POST['vpfo_footer_selection'] ) ) {
 		$footer_selection_sanitized = sanitize_text_field( $_POST['vpfo_footer_selection'] );
 		update_post_meta( $post_id, '_vpfo_footer_selection', $footer_selection_sanitized );
@@ -254,17 +250,16 @@ add_action( 'save_post', 'vpfo_save_footer_meta' );
 // Create the VPFO Footer settings area under Appearance
 function vpfo_footer_admin_menu() {
 	add_theme_page(
-		'VPFO Footer',          // Page title
-		'VPFO Footer',          // Menu title
-		'manage_options',       // Capability
-		'vpfo-footer', // Menu slug
+		'VPFO Footer',              // Page title
+		'VPFO Footer',              // Menu title
+		'manage_options',           // Capability
+		'vpfo-footer',              // Menu slug
 		'vpfo_footer_settings_page' // Callback function
 	);
 }
 add_action( 'admin_menu', 'vpfo_footer_admin_menu' );
 
 function vpfo_footer_settings_init() {
-	
 	// Register a new setting for the Land Acknowledgement
 	register_setting(
 		'vpfo_footer',
@@ -479,19 +474,19 @@ function vpfo_footer_settings_page() {
 // Create Settings area for activating the VPFO Finance custom post types and taxonomies
 function vpfo_add_settings_page() {
 	add_options_page(
-		'VPFO Templates & Styles',  // Page title
-		'VPFO Templates & Styles',  // Menu title
-		'manage_options',           // Capability
-		'vpfo-templates-styles',    // Menu slug
-		'vpfo_render_settings_page' // Callback to render the settings page
+		'VPFO Templates & Styles',
+		'VPFO Templates & Styles',
+		'manage_options',
+		'vpfo-templates-styles',
+		'vpfo_render_settings_page',
 	);
 }
 add_action( 'admin_menu', 'vpfo_add_settings_page' );
 
 function vpfo_register_settings() {
 	register_setting(
-		'vpfo_templates_styles', // Option group
-		'vpfo_activate_finance_cpt', // Option name
+		'vpfo_templates_styles',
+		'vpfo_activate_finance_cpt',
 		array(
 			'type'              => 'boolean',
 			'description'       => 'Activate VPFO Finance custom post types and taxonomies',
@@ -566,13 +561,8 @@ function vpfo_render_settings_page() {
 		<h1>VPFO Templates & Styles</h1>
 		<form method="post" action="options.php">
 			<?php
-			// Output nonce, action, and option fields for the settings page
 			settings_fields( 'vpfo_templates_styles' );
-
-			// Render the settings section
 			do_settings_sections( 'vpfo_templates_styles' );
-
-			// Render the submit button
 			submit_button();
 			?>
 		</form>

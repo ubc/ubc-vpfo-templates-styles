@@ -1,4 +1,9 @@
-<article id="<?php echo esc_html( $post_type ); ?>-card-<?php the_ID(); ?>" class="archive-card archive-card-resources position-relative">
+<?php
+$alt_url  = get_post_meta( get_the_ID(), '_resource_url', true ) ?? null;
+$link_url = $alt_url ? $alt_url : get_the_permalink();
+?>
+
+<article id="<?php echo esc_html( $archive_post_type ); ?>-card-<?php the_ID(); ?>" class="archive-card archive-card-resources position-relative">
 	<div class="post-content">   
 		<h3 class="title">
 			<?php the_title(); ?>
@@ -14,7 +19,7 @@
 	</div>
 
 	<div class="whole-card-link position-absolute">
-		<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"></a>
+		<a href="<?php echo esc_url( $link_url ); ?>" title="<?php the_title(); ?>"></a>
 	</div>
 
 </article>

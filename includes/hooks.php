@@ -184,6 +184,64 @@ function vpfo_save_hero_meta( $post_id ) {
 }
 add_action( 'save_post', 'vpfo_save_hero_meta' );
 
+// set up the survey options on the VPFO templates
+function vpfo_add_survey_meta_box() {
+	$screen = get_current_screen();
+	if ( $screen && 'page' === $screen->id ) {
+		global $post;
+		if ( $post && ( get_page_template_slug( $post->ID ) === 'vpfo-page.php' || get_page_template_slug( $post->ID ) === 'vpfo-page-sidenav.php' ) ) {
+			add_meta_box(
+				'vpfo_survey_meta_box',
+				'Survey Feedback',
+				'vpfo_render_survey_meta_box',
+				'page',
+				'side',
+				'default'
+			);
+		}
+	}
+}
+add_action( 'add_meta_boxes', 'vpfo_add_survey_meta_box' );
+
+function vpfo_render_survey_meta_box( $post ) {
+	// Use nonce for verification
+	wp_nonce_field( 'vpfo_save_survey_meta', 'vpfo_survey_nonce' );
+
+	// Get current values (if any)
+	$display_survey = get_post_meta( $post->ID, '_vpfo_display_survey', true );
+
+	// Display the toggle checkbox
+	echo '<p>';
+	echo '<label for="vpfo_display_survey">';
+	echo '<input type="checkbox" id="vpfo_display_survey" name="vpfo_display_survey" value="1"' . checked( $display_survey, '1', false ) . '> Append Survey Feedback callout to the end of page content';
+	echo '</label>';
+	echo '</p>';
+}
+
+function vpfo_save_survey_meta( $post_id ) {
+	if ( ! isset( $_POST['vpfo_survey_nonce'] ) || ! wp_verify_nonce( $_POST['vpfo_survey_nonce'], 'vpfo_save_survey_meta' ) ) {
+		return;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	// Check user permissions
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// sanitize post id for db insertion
+	$post_id_sanitized = absint( $post_id );
+
+	// Save the 'display survey' checkbox value
+	$display_survey           = isset( $_POST['vpfo_display_survey'] ) ? '1' : '0';
+	$display_survey_sanitized = esc_html( $display_survey );
+	update_post_meta( $post_id_sanitized, '_vpfo_display_survey', $display_survey_sanitized );
+}
+add_action( 'save_post', 'vpfo_save_survey_meta' );
+
 // Set up the footer selection options on the VPFO templates
 function vpfo_add_footer_meta_box() {
 	$screen = get_current_screen();

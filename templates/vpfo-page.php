@@ -28,7 +28,12 @@ if ( have_posts() ) :
 				}
 				?>
 			</h1>
-			<?php the_content(); ?>
+			<?php
+			the_content();
+			
+			// include the survey feedback content if its display is set, conditional checks are in the partial
+			require plugin_dir_path( __DIR__ ) . 'partials/components/survey-feedback.php';
+			?>
 		</section>
 	
 		<?php

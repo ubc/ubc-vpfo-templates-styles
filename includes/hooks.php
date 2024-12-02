@@ -610,6 +610,50 @@ function vpfo_register_settings() {
 			'show_in_rest'      => true,
 		)
 	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_heading',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_text_field',
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_intro',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_text_field',
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_yes',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_no',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
 }
 add_action( 'admin_init', 'vpfo_register_settings' );
 
@@ -680,6 +724,38 @@ function vpfo_add_settings_field() {
 		'vpfo_glossary_terms_archive_intro',
 		'Glossary of Terms Archive Intro',
 		'vpfo_render_glossary_terms_archive_intro',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_heading',
+		'Survey Feedback Heading',
+		'vpfo_render_survey_heading',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_intro',
+		'Survey Feedback Intro',
+		'vpfo_render_survey_intro',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_yes',
+		'Survey Message (Yes)',
+		'vpfo_render_survey_yes',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_no',
+		'Survey Message (No)',
+		'vpfo_render_survey_no',
 		'vpfo_templates_styles',
 		'vpfo_templates_styles_section',
 	);
@@ -754,6 +830,42 @@ function vpfo_render_glossary_terms_archive_intro() {
 		array(
 			'textarea_name' => 'vpfo_glossary_terms_archive_intro',
 			'textarea_rows' => 8,
+			'media_buttons' => false,
+		)
+	);
+}
+
+function vpfo_render_survey_heading() {
+	$value = get_option( 'vpfo_survey_heading', '' );
+	echo '<input type="text" name="vpfo_survey_heading" value="' . esc_attr( $value ) . '" style="width: 100%;" />';
+}
+
+function vpfo_render_survey_intro() {
+	$value = get_option( 'vpfo_survey_intro', '' );
+	echo '<input type="text" name="vpfo_survey_intro" value="' . esc_attr( $value ) . '" style="width: 100%;" />';
+}
+
+function vpfo_render_survey_yes() {
+	$value = get_option( 'vpfo_survey_yes', '' );
+	wp_editor(
+		$value,
+		'vpfo_survey_yes',
+		array(
+			'textarea_name' => 'vpfo_survey_yes',
+			'textarea_rows' => 4,
+			'media_buttons' => false,
+		)
+	);
+}
+
+function vpfo_render_survey_no() {
+	$value = get_option( 'vpfo_survey_no', '' );
+	wp_editor(
+		$value,
+		'vpfo_survey_no',
+		array(
+			'textarea_name' => 'vpfo_survey_no',
+			'textarea_rows' => 4,
 			'media_buttons' => false,
 		)
 	);

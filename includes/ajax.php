@@ -24,7 +24,8 @@ function ubc_vpfo_render_archive_cards( $query ) {
 	$card_template = match ( $query->get( 'post_type' ) ) {
 		'resources'      => 'archive-card-resources',
 		'glossary-terms' => 'archive-card-glossary-terms',
-		'default'        => 'archive-card-post',
+		'post'           => 'archive-card-post',
+		default          => 'archive-card-post',
 	};
 
 	// Variable required in cards.

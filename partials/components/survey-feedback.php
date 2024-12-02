@@ -13,12 +13,14 @@ if ( ! $survey_intro ) {
 
 $survey_yes = get_option( 'vpfo_survey_yes', null );
 if ( ! $survey_yes ) {
-	$survey_yes = sprintf( __( '<p>Thanks for your repsonse! If you\'d like to share further feedback, please <a href="%s" target="_blank">take our survey</a>.</p>', 'ubc-vpfo-templates-styles' ), 'https://ubc.ca1.qualtrics.com/jfe/form/SV_9nPuRCzXI8gVtxI' );
+	// translators: %s is the survey link
+	$survey_yes = sprintf( '<p>' . __( 'Thanks for your repsonse! If you\'d like to share further feedback, please <a href="%s" target="_blank">take our survey</a>.', 'ubc-vpfo-templates-styles' ) . '</p>', 'https://ubc.ca1.qualtrics.com/jfe/form/SV_9nPuRCzXI8gVtxI' );
 }
 
 $survey_no = get_option( 'vpfo_survey_no', null );
 if ( ! $survey_no ) {
-	$survey_no = sprintf( __( '<p>Thanks for your repsonse! If you\'d like to share further feedback, please <a href="%s" target="_blank">take our survey</a>.</p>', 'ubc-vpfo-templates-styles' ), 'https://ubc.ca1.qualtrics.com/jfe/form/SV_9nPuRCzXI8gVtxI' );
+	// translators: %s is the survey link
+	$survey_no = sprintf( '<p>' . __( 'Thanks for your repsonse! If you\'d like to share further feedback, please <a href="%s" target="_blank">take our survey</a>.', 'ubc-vpfo-templates-styles' ) . '</p>', 'https://ubc.ca1.qualtrics.com/jfe/form/SV_9nPuRCzXI8gVtxI' );
 }
 
 if ( '1' === $display_survey ) {

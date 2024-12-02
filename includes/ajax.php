@@ -44,7 +44,8 @@ function ubc_vpfo_render_archive_cards( $query ) {
 function ubc_vpfo_get_archive_page_handler() {
 	// Verify nonce based on $_REQUEST['_nonce']
 	if ( ! wp_verify_nonce( $_REQUEST['_nonce'], 'vpfo_archive_nonce' ) ) {
-		wp_die( 'Invalid nonce' );
+		wp_send_json_error( 'Invalid nonce' );
+		exit;
 	}
 
 	$params = ubc_vpfo_sanitize_archive_ajax_params();

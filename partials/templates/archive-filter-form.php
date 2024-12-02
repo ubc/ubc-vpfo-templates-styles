@@ -13,9 +13,9 @@ if ( 'resources' === $archive_post_type ) {
 	<div class="pattern position-absolute w-100 h-100"></div>
 	<div class="gradient-overlay position-absolute w-100 h-100"></div>
 
-	<form id="<?php echo esc_html( $post_type . '-filters' ); ?>" class="archive-filter-form position-relative">
+	<form id="<?php echo esc_html( $archive_post_type . '-filters' ); ?>" class="archive-filter-form position-relative">
 
-		<input type="hidden" name="post_type" value="<?php echo esc_html( $post_type ); ?>">
+		<input type="hidden" name="post_type" value="<?php echo esc_html( $archive_post_type ); ?>">
 
 		<div class="text-search">
 			<label class="input-label d-block" for="<?php echo esc_html( $archive_post_type . '-search' ); ?>">

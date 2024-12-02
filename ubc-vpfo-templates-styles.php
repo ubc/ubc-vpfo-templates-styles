@@ -63,3 +63,9 @@ if ( get_option( 'vpfo_activate_finance_cpt', false ) ) {
  * Load plugin page templates
  */
 require plugin_dir_path( __FILE__ ) . 'includes/register-templates.php';
+
+/**
+ * Load AJAX handlers
+ */
+
+require plugin_dir_path( __FILE__ ) . 'includes/ajax.php';

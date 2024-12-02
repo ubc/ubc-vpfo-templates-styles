@@ -1,0 +1,41 @@
+.survey-feedback {
+	border: 1px solid $learning-spaces-blue-light;
+	
+	.survey-wrapper, .survey-buttons {
+		gap: px2rem(16);
+	}
+
+	#survey-yes, #survey-no {
+		&:focus {
+			background-color: $utility-light-grey;
+		}
+
+		&.clicked {
+			box-shadow: none;
+			background-color: $learning-spaces-blue-light;
+		}
+	}
+
+	.survey-action {
+		.survey-yes, .survey-no {
+			p {
+				@include p1;
+			}
+
+			a {
+				color: $ubc-blue;
+				text-decoration: underline;
+
+				&:hover, &:focus {
+					color: $ubc-brand-blue;
+				}
+			}
+
+			a[target="_blank"] {
+				&::after {
+					display: none;
+				}
+			}
+		}
+	}
+}

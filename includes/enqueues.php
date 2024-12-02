@@ -38,6 +38,16 @@ function ubc_vpfo_templates_styles_enqueue_styles_scripts() {
 		);
 	}
 
+	if ( 'vpfo-page.php' === get_page_template_slug() || 'vpfo-page-sidenav.php' === get_page_template_slug() ) {
+		wp_enqueue_script(
+			'vpfo-survey-feedback-js',
+			plugin_dir_url( __DIR__ ) . 'js/survey-feedback.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
+	}
+
 	if ( is_home() || is_post_type_archive( 'resources' ) || is_post_type_archive( 'glossary-terms' ) ) {
 		wp_enqueue_script(
 			'vpfo-archive-multiselect',

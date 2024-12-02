@@ -210,7 +210,7 @@ function vpfo_render_footer_meta_box( $post ) {
 	// Get the current value (if any) or set the default to 'vpfo-footer'
 	$footer_selection = get_post_meta( $post->ID, '_vpfo_footer_selection', true );
 	if ( empty( $footer_selection ) ) {
-		$footer_selection = 'vpfo-footer'; // Set default value
+		$footer_selection = 'vpfo-footer';
 	}
 
 	// Display the radio buttons
@@ -228,22 +228,18 @@ function vpfo_render_footer_meta_box( $post ) {
 }
 
 function vpfo_save_footer_meta( $post_id ) {
-	// Check if nonce is set and valid
 	if ( ! isset( $_POST['vpfo_footer_nonce'] ) || ! wp_verify_nonce( $_POST['vpfo_footer_nonce'], 'vpfo_save_footer_meta' ) ) {
 		return;
 	}
 
-	// Check autosave
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 		return;
 	}
 
-	// Check user permissions
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return;
 	}
 
-	// Save the footer selection value
 	if ( isset( $_POST['vpfo_footer_selection'] ) ) {
 		$footer_selection_sanitized = sanitize_text_field( $_POST['vpfo_footer_selection'] );
 		update_post_meta( $post_id, '_vpfo_footer_selection', $footer_selection_sanitized );
@@ -254,17 +250,16 @@ add_action( 'save_post', 'vpfo_save_footer_meta' );
 // Create the VPFO Footer settings area under Appearance
 function vpfo_footer_admin_menu() {
 	add_theme_page(
-		'VPFO Footer',          // Page title
-		'VPFO Footer',          // Menu title
-		'manage_options',       // Capability
-		'vpfo-footer', // Menu slug
+		'VPFO Footer',              // Page title
+		'VPFO Footer',              // Menu title
+		'manage_options',           // Capability
+		'vpfo-footer',              // Menu slug
 		'vpfo_footer_settings_page' // Callback function
 	);
 }
 add_action( 'admin_menu', 'vpfo_footer_admin_menu' );
 
 function vpfo_footer_settings_init() {
-	
 	// Register a new setting for the Land Acknowledgement
 	register_setting(
 		'vpfo_footer',
@@ -475,3 +470,269 @@ function vpfo_footer_settings_page() {
 	echo '</form>';
 	echo '</div>';
 }
+
+// Create Settings area for activating the VPFO Finance custom post types and taxonomies
+function vpfo_add_settings_page() {
+	add_options_page(
+		'VPFO Templates & Styles',
+		'VPFO Templates & Styles',
+		'manage_options',
+		'vpfo-templates-styles',
+		'vpfo_render_settings_page',
+	);
+}
+add_action( 'admin_menu', 'vpfo_add_settings_page' );
+
+function vpfo_register_settings() {
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_activate_finance_cpt',
+		array(
+			'type'              => 'boolean',
+			'description'       => 'Activate VPFO Finance custom post types and taxonomies',
+			'sanitize_callback' => 'rest_sanitize_boolean',
+			'default'           => false,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_posts_use_vpfo_archive',
+		array(
+			'type'              => 'boolean',
+			'description'       => 'For the posts (announcements) archive, use the VPFO template instead of the CLF default',
+			'sanitize_callback' => 'rest_sanitize_boolean',
+			'default'           => false,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_posts_use_vpfo_single',
+		array(
+			'type'              => 'boolean',
+			'description'       => 'For single posts (announcements), use the VPFO template instead of the CLF default',
+			'sanitize_callback' => 'rest_sanitize_boolean',
+			'default'           => false,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_announcements_archive_intro',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_resources_archive_intro',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_glossary_terms_archive_intro',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
+}
+add_action( 'admin_init', 'vpfo_register_settings' );
+
+function vpfo_render_settings_page() {
+	?>
+	<div class="wrap">
+		<h1>VPFO Templates & Styles</h1>
+		<form method="post" action="options.php">
+			<?php
+			settings_fields( 'vpfo_templates_styles' );
+			do_settings_sections( 'vpfo_templates_styles' );
+			submit_button();
+			?>
+		</form>
+	</div>
+	<?php
+}
+
+function vpfo_add_settings_field() {
+	add_settings_section(
+		'vpfo_templates_styles_section',
+		'Settings',
+		'vpfo_settings_section_description',
+		'vpfo_templates_styles',
+	);
+
+	add_settings_field(
+		'vpfo_activate_finance_cpt',
+		'Activate Custom Post Types',
+		'vpfo_render_finance_cpt_checkbox',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_posts_use_vpfo_single',
+		'Use VPFO Template for Single Posts (Announcements)',
+		'vpfo_render_use_vpfo_single_checkbox',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_posts_use_vpfo_archive',
+		'Use VPFO Template for Posts (Announcements) Archive',
+		'vpfo_render_use_vpfo_archive_checkbox',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_announcements_archive_intro',
+		'Announcements Archive Intro',
+		'vpfo_render_announcements_archive_intro',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_resources_archive_intro',
+		'Resources Archive Intro',
+		'vpfo_render_resources_archive_intro',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_glossary_terms_archive_intro',
+		'Glossary of Terms Archive Intro',
+		'vpfo_render_glossary_terms_archive_intro',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+}
+add_action( 'admin_init', 'vpfo_add_settings_field' );
+
+function vpfo_settings_section_description() {
+	echo '<p>Manage activation and display of custom post types (Resources and Glossary Terms) specific to the VPFO Finance unit, including archive display options.</p>';
+}
+
+function vpfo_render_finance_cpt_checkbox() {
+	$option = get_option( 'vpfo_activate_finance_cpt', false );
+	?>
+	<label>
+		<input type="checkbox" name="vpfo_activate_finance_cpt" value="1" <?php checked( $option, true ); ?>>
+		Activate custom post types (Resources and Glossary Terms) and their associated taxonomies.
+	</label>
+	<?php
+}
+
+function vpfo_render_use_vpfo_single_checkbox() {
+	$option = get_option( 'vpfo_posts_use_vpfo_single', false );
+	?>
+	<label>
+		<input type="checkbox" name="vpfo_posts_use_vpfo_single" value="1" <?php checked( $option, true ); ?>>
+		Use the VPFO template for single posts (announcements) instead of the default CLF template.
+	</label>
+	<?php
+}
+
+function vpfo_render_use_vpfo_archive_checkbox() {
+	$option = get_option( 'vpfo_posts_use_vpfo_archive', false );
+	?>
+	<label>
+		<input type="checkbox" name="vpfo_posts_use_vpfo_archive" value="1" <?php checked( $option, true ); ?>>
+		Use the VPFO template for posts (announcements) archive instead of the default CLF template.
+	</label>
+	<?php
+}
+
+function vpfo_render_announcements_archive_intro() {
+	$value = get_option( 'vpfo_announcements_archive_intro', '' );
+	wp_editor(
+		$value,
+		'vpfo_announcements_archive_intro',
+		array(
+			'textarea_name' => 'vpfo_announcements_archive_intro',
+			'textarea_rows' => 8,
+			'media_buttons' => false,
+		)
+	);
+}
+
+function vpfo_render_resources_archive_intro() {
+	$value = get_option( 'vpfo_resources_archive_intro', '' );
+	wp_editor(
+		$value,
+		'vpfo_resources_archive_intro',
+		array(
+			'textarea_name' => 'vpfo_resources_archive_intro',
+			'textarea_rows' => 8,
+			'media_buttons' => false,
+		)
+	);
+}
+
+function vpfo_render_glossary_terms_archive_intro() {
+	$value = get_option( 'vpfo_glossary_terms_archive_intro', '' );
+	wp_editor(
+		$value,
+		'vpfo_glossary_terms_archive_intro',
+		array(
+			'textarea_name' => 'vpfo_glossary_terms_archive_intro',
+			'textarea_rows' => 8,
+			'media_buttons' => false,
+		)
+	);
+}
+
+// use the VPFO single template for posts if this option is activated
+function vpfo_single_post_template( $template ) {
+	if ( is_singular( 'post' ) ) {
+		if ( get_option( 'vpfo_posts_use_vpfo_single', false ) ) {
+			// Path to your custom template in the plugin
+			$plugin_template = plugin_dir_path( __DIR__ ) . 'templates/vpfo-single.php';
+
+			// Check if the plugin template exists
+			if ( file_exists( $plugin_template ) ) {
+				return $plugin_template;
+			}
+		}
+	}
+
+	return $template; // Return the default template if conditions are not met
+}
+add_filter( 'template_include', 'vpfo_single_post_template' );
+
+// use the VPFO archive template for posts if this option is activated
+function vpfo_archive_post_template( $template ) {
+	if ( is_home() ) {
+		if ( get_option( 'vpfo_posts_use_vpfo_archive', false ) ) {
+			// Path to your custom template in the plugin
+			$plugin_template = plugin_dir_path( __DIR__ ) . 'templates/vpfo-archive.php';
+
+			// Check if the plugin template exists
+			if ( file_exists( $plugin_template ) ) {
+				return $plugin_template;
+			}
+		}
+	}
+
+	return $template; // Return the default template if conditions are not met
+}
+add_filter( 'template_include', 'vpfo_archive_post_template' );

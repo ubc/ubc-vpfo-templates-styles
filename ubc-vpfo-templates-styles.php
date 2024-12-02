@@ -53,6 +53,13 @@ require plugin_dir_path( __FILE__ ) . 'includes/hooks.php';
 require plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
 
 /**
+ * Load plugin post types and taxonomies, if activated
+ */
+if ( get_option( 'vpfo_activate_finance_cpt', false ) ) {
+	require plugin_dir_path( __FILE__ ) . 'includes/post-types.php';
+}
+
+/**
  * Load plugin page templates
  */
 require plugin_dir_path( __FILE__ ) . 'includes/register-templates.php';

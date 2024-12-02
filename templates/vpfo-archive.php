@@ -46,7 +46,7 @@ if ( have_posts() ) :
 				<?php require plugin_dir_path( __DIR__ ) . 'partials/templates/archive-filter-form.php'; ?>
 			</div>
 
-			<div class="col-lg-8 col-xl-9 ps-lg-5">
+			<div class="col-lg-8 col-xl-9 ps-lg-5 card-container">
 			<?php
 			while ( have_posts() ) :
 				the_post();

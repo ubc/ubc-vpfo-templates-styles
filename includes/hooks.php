@@ -184,6 +184,64 @@ function vpfo_save_hero_meta( $post_id ) {
 }
 add_action( 'save_post', 'vpfo_save_hero_meta' );
 
+// set up the survey options on the VPFO templates
+function vpfo_add_survey_meta_box() {
+	$screen = get_current_screen();
+	if ( $screen && 'page' === $screen->id ) {
+		global $post;
+		if ( $post && ( get_page_template_slug( $post->ID ) === 'vpfo-page.php' || get_page_template_slug( $post->ID ) === 'vpfo-page-sidenav.php' ) ) {
+			add_meta_box(
+				'vpfo_survey_meta_box',
+				'Survey Feedback',
+				'vpfo_render_survey_meta_box',
+				'page',
+				'side',
+				'default'
+			);
+		}
+	}
+}
+add_action( 'add_meta_boxes', 'vpfo_add_survey_meta_box' );
+
+function vpfo_render_survey_meta_box( $post ) {
+	// Use nonce for verification
+	wp_nonce_field( 'vpfo_save_survey_meta', 'vpfo_survey_nonce' );
+
+	// Get current values (if any)
+	$display_survey = get_post_meta( $post->ID, '_vpfo_display_survey', true );
+
+	// Display the toggle checkbox
+	echo '<p>';
+	echo '<label for="vpfo_display_survey">';
+	echo '<input type="checkbox" id="vpfo_display_survey" name="vpfo_display_survey" value="1"' . checked( $display_survey, '1', false ) . '> Append Survey Feedback callout to the end of page content';
+	echo '</label>';
+	echo '</p>';
+}
+
+function vpfo_save_survey_meta( $post_id ) {
+	if ( ! isset( $_POST['vpfo_survey_nonce'] ) || ! wp_verify_nonce( $_POST['vpfo_survey_nonce'], 'vpfo_save_survey_meta' ) ) {
+		return;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	// Check user permissions
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// sanitize post id for db insertion
+	$post_id_sanitized = absint( $post_id );
+
+	// Save the 'display survey' checkbox value
+	$display_survey           = isset( $_POST['vpfo_display_survey'] ) ? '1' : '0';
+	$display_survey_sanitized = esc_html( $display_survey );
+	update_post_meta( $post_id_sanitized, '_vpfo_display_survey', $display_survey_sanitized );
+}
+add_action( 'save_post', 'vpfo_save_survey_meta' );
+
 // Set up the footer selection options on the VPFO templates
 function vpfo_add_footer_meta_box() {
 	$screen = get_current_screen();
@@ -552,6 +610,50 @@ function vpfo_register_settings() {
 			'show_in_rest'      => true,
 		)
 	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_heading',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_text_field',
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_intro',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_text_field',
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_yes',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_survey_no',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
 }
 add_action( 'admin_init', 'vpfo_register_settings' );
 
@@ -622,6 +724,38 @@ function vpfo_add_settings_field() {
 		'vpfo_glossary_terms_archive_intro',
 		'Glossary of Terms Archive Intro',
 		'vpfo_render_glossary_terms_archive_intro',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_heading',
+		'Survey Feedback Heading',
+		'vpfo_render_survey_heading',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_intro',
+		'Survey Feedback Intro',
+		'vpfo_render_survey_intro',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_yes',
+		'Survey Message (Yes)',
+		'vpfo_render_survey_yes',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_survey_no',
+		'Survey Message (No)',
+		'vpfo_render_survey_no',
 		'vpfo_templates_styles',
 		'vpfo_templates_styles_section',
 	);
@@ -696,6 +830,42 @@ function vpfo_render_glossary_terms_archive_intro() {
 		array(
 			'textarea_name' => 'vpfo_glossary_terms_archive_intro',
 			'textarea_rows' => 8,
+			'media_buttons' => false,
+		)
+	);
+}
+
+function vpfo_render_survey_heading() {
+	$value = get_option( 'vpfo_survey_heading', '' );
+	echo '<input type="text" name="vpfo_survey_heading" value="' . esc_attr( $value ) . '" style="width: 100%;" />';
+}
+
+function vpfo_render_survey_intro() {
+	$value = get_option( 'vpfo_survey_intro', '' );
+	echo '<input type="text" name="vpfo_survey_intro" value="' . esc_attr( $value ) . '" style="width: 100%;" />';
+}
+
+function vpfo_render_survey_yes() {
+	$value = get_option( 'vpfo_survey_yes', '' );
+	wp_editor(
+		$value,
+		'vpfo_survey_yes',
+		array(
+			'textarea_name' => 'vpfo_survey_yes',
+			'textarea_rows' => 4,
+			'media_buttons' => false,
+		)
+	);
+}
+
+function vpfo_render_survey_no() {
+	$value = get_option( 'vpfo_survey_no', '' );
+	wp_editor(
+		$value,
+		'vpfo_survey_no',
+		array(
+			'textarea_name' => 'vpfo_survey_no',
+			'textarea_rows' => 4,
 			'media_buttons' => false,
 		)
 	);

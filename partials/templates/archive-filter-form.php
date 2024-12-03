@@ -14,6 +14,9 @@ if ( 'resources' === $archive_post_type ) {
 	<div class="gradient-overlay position-absolute w-100 h-100"></div>
 
 	<form id="<?php echo esc_html( $archive_post_type . '-filters' ); ?>" class="archive-filter-form position-relative">
+
+		<input type="hidden" name="post_type" value="<?php echo esc_html( $archive_post_type ); ?>">
+
 		<div class="text-search">
 			<label class="input-label d-block" for="<?php echo esc_html( $archive_post_type . '-search' ); ?>">
 				<?php esc_html_e( 'Search', 'ubc-vpfo-templates-styles' ); ?>

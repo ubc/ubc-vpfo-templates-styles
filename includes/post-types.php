@@ -155,7 +155,7 @@ function glossary_terms_cpt() {
 		'public'              => true,
 		'exclude_from_search' => false,
 		'publicly_queryable'  => true,
-		'show_in_nav_menus'   => false,
+		'show_in_nav_menus'   => true,
 		'has_archive'         => true,
 		'menu_icon'           => 'dashicons-book-alt',
 		'rewrite'             => array(

@@ -28,6 +28,9 @@ function resources_cpt() {
 		'has_archive'         => true,
 		'menu_icon'           => 'dashicons-archive',
 		'show_in_rest'        => true,
+		'rewrite'             => array(
+			'with_front' => false,
+		),
 		'supports'            => array(
 			'title',
 			'editor',
@@ -155,6 +158,9 @@ function glossary_terms_cpt() {
 		'show_in_nav_menus'   => false,
 		'has_archive'         => true,
 		'menu_icon'           => 'dashicons-book-alt',
+		'rewrite'             => array(
+			'with_front' => false,
+		),
 		'supports'            => array(
 			'title',
 			'editor',

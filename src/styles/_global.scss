@@ -105,9 +105,30 @@ a.btn-secondary, button.btn-secondary {
 	}
 }
 
-// typography
+// alignment classes
+
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignleft {
+	margin-right: px2rem(24);
+}
+
+.alignright {
+	margin-left: px2rem(24);
+}
+
+// typography & clearfix on floats
 
 .page-content {
+	&::after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+
 	p {
 		margin: px2rem(24) 0;
 		@include p2;

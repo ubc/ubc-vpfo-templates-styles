@@ -675,7 +675,7 @@ blockquote, .wp-block-quote {
 .wp-block-table {
 	margin: px2rem(32) 0;
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 
 	table {
 		overflow: unset;
@@ -687,7 +687,7 @@ blockquote, .wp-block-quote {
 
 		td, th {
 			vertical-align: top;
-			padding: px2rem(32) px2rem(16);
+			padding: px2rem(16);
 			color: $ubc-blue;
 			@include weight-500;
 		}
@@ -706,7 +706,6 @@ blockquote, .wp-block-quote {
 
 		tbody {
 			border: 1px solid $ubc-grey-medium-light;
-			border-top: none;
 
 			tr:not(:last-child) {
 				border-bottom: 1px solid $ubc-grey-medium-light;
@@ -726,6 +725,10 @@ blockquote, .wp-block-quote {
 
 		&.has-fixed-layout {
 			width: 100%;
+
+			td, th {
+				word-break: normal;
+			}
 		}
 	}
 
@@ -769,7 +772,7 @@ blockquote, .wp-block-quote {
 .advanced-table {
 	margin: px2rem(32) 0;
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 
 	table.wp-block-ubc-advanced-table-block {
 		overflow: unset;
@@ -785,7 +788,7 @@ blockquote, .wp-block-quote {
 
 		td, th {
 			vertical-align: top;
-			padding: px2rem(32) px2rem(16);
+			padding: px2rem(16);
 			color: $ubc-blue;
 			@include weight-500;
 
@@ -808,7 +811,6 @@ blockquote, .wp-block-quote {
 
 		tbody {
 			border: 1px solid $ubc-grey-medium-light;
-			border-top: none;
 
 			tr:not(:last-child) {
 				border-bottom: 1px solid $ubc-grey-medium-light;
@@ -1120,4 +1122,20 @@ blockquote, .wp-block-quote {
 			}
 		}
 	}
+}
+
+// image block
+.wp-block-image {
+	margin-top: px2rem(32);
+	margin-bottom: px2rem(32);
+}
+
+// video embeds
+.responsive-media {
+	overflow: unset;
+}
+
+.wp-block-embed, .ratio {
+	margin-top: px2rem(32);
+	margin-bottom: px2rem(32);
 }

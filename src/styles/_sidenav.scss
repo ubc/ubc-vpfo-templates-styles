@@ -11,6 +11,14 @@
 
 	color: $ubc-blue;
 
+	a {
+		color: $ubc-blue;
+
+		&:hover, &:focus {
+			text-decoration: none;
+		}
+	}
+
 	.ac {
 		margin: unset;
 		border: unset;
@@ -74,6 +82,12 @@
 				.accordion, .no-accordion {
 					border-bottom: 1px solid $ubc-grey-medium-light;
 				}
+
+				.ac-header, .no-accordion, ul li {
+					&:hover, &:focus-within {
+						background-color: $learning-spaces-blue-light;
+					}
+				}
 			}
 
 			.no-accordion {
@@ -91,6 +105,10 @@
 					&.active-page {
 						background-color: $ubc-brand-blue;
 						color: $utility-white;
+
+						a {
+							color: $utility-white;
+						}
 
 						.ac-trigger::after {
 							color: $utility-white !important;
@@ -111,6 +129,10 @@
 							&.active-page {
 								background: $ubc-brand-blue;
 								color: $utility-white;
+
+								a {
+									color: $utility-white;
+								}
 							}
 						}
 					}
@@ -130,6 +152,7 @@
 			margin-bottom: px2rem(12);
 
 			a {
+				color: $ubc-brand-blue;
 				text-transform: none;
 				@include weight-500;
 				font-size: px2rem(14);

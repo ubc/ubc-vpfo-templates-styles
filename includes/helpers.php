@@ -34,19 +34,24 @@ function vpfo_get_custom_footer( $name = '' ) {
 
 // numeric page navigtion
 
-function vpfo_numeric_pagination() {
+function vpfo_numeric_pagination( $query = null ) {
+
+	if ( null === $query ) {
+		$query = $GLOBALS['wp_query']; // Get the current query object
+	}
+
 	// Only show pagination if there's more than one page
-	if ( $GLOBALS['wp_query']->max_num_pages <= 1 ) {
+	if ( $query->max_num_pages <= 1 ) {
 		return;
 	}
 
-	$current_page = max( 1, get_query_var( 'paged' ) ); // Get the current page number
-	$total_pages  = $GLOBALS['wp_query']->max_num_pages; // Get the total number of pages
+	$current_page = max( 1, $query->get( 'paged' ) ); // Get the current page number
+	$total_pages  = $query->max_num_pages; // Get the total number of pages
 
 	// Output the pagination
 	$paginate_links = paginate_links(
 		array(
-			'base'      => get_pagenum_link( 1 ) . '%_%',
+			'base'      => get_post_type_archive_link( $query->get( 'post_type' ) ) . '%_%',
 			'format'    => 'page/%#%/',
 			'current'   => $current_page,
 			'total'     => $total_pages,

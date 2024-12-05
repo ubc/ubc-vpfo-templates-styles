@@ -119,10 +119,13 @@ body {
 						.btn {
 							background: $ubc-brand-blue;
 							color: $utility-white;
+							height: px2rem(45) !important;
 						}
 
 						.ubc7-arrow {
-							background-position: -1178px -227px !important;
+							background-position: -1178px -227px;
+							margin-top: 0;
+							vertical-align: text-top;
 						}
 
 						&:hover {

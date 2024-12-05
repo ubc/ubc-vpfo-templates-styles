@@ -85,10 +85,6 @@ body {
 		padding-bottom: px2rem(20);
 	}
 
-	#ubc7-unit-menu {
-		z-index: 2;
-	}
-
 	.navbar .btn-navbar, .btn {
 		margin: 0 px2rem(20) 0 0;
 		box-shadow: unset;
@@ -97,10 +93,48 @@ body {
 		width: unset;
 		height: unset;
 		padding: px2rem(14);
-
+	
 		.icon-bar {
 			width: px2rem(18);
 			height: px2rem(3);
+		}
+	}
+}
+
+#ubc7-unit-menu {
+	@media (min-width: 980px) {
+		z-index: 2;
+
+		&.navbar .nav {
+			float: unset;
+
+			.dropdown {
+				&.ubc-logins {
+					float: right;
+					
+					.btn-group {
+						background: $ubc-brand-blue;
+						color: $utility-white;
+
+						.btn {
+							background: $ubc-brand-blue;
+							color: $utility-white;
+						}
+
+						.ubc7-arrow {
+							background-position: -1178px -227px !important;
+						}
+
+						&:hover {
+							background: $ubc-blue;
+
+							.btn {
+								background: $ubc-blue;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -161,6 +195,7 @@ body {
 	padding: px2rem(16) 0;
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 
 	.divider {
 		font-size: 0;

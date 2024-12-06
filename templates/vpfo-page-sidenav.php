@@ -54,16 +54,20 @@ if ( $show_sidenav ) {
 	<div class="accordion sticky-top sidenav sidenav-sticky-mobile d-lg-none">
 		<div class="ac">
 			<div class="ac-header d-flex align-items-center">
-				<span class="flex-grow-1"><?php echo esc_html( $mobile_menu_toggle_title ); ?></span>
-				<a href="<?php echo esc_url( $mobile_menu_toggle_link ); ?>" rel="bookmark" title="<?php echo esc_html( $mobile_menu_toggle_title ); ?>" class="top-level-view-link
-				<?php
-				if ( $is_top_level ) {
-					echo ' d-none';
-				}
-				?>
-				">
-					<?php esc_html_e( 'View', 'ubc-vpfo-templates-styles' ); ?>
-				</a>
+				<span class="flex-grow-1">
+					<?php if ( ! $is_top_level ) {
+						?>
+						<a href="<?php echo esc_url( $mobile_menu_toggle_link ); ?>" rel="bookmark" title="<?php echo esc_html( $mobile_menu_toggle_title ); ?>">
+						<?php
+					}
+					echo esc_html( $mobile_menu_toggle_title ); 
+					if ( ! $is_top_level ) {
+						?>
+						</a>
+						<?php
+					}
+					?>
+				</span>
 				<button type="button" class="ac-trigger"></button>
 			</div>
 

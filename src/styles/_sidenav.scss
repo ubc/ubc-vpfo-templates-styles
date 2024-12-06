@@ -58,7 +58,7 @@
 				font-size: px2rem(14);
 				@include weight-600;
 				line-height: px2rem(22);
-				padding: px2rem(8) px2rem(8) px2rem(8) px2rem(16);
+				padding: 0 px2rem(8) 0 px2rem(16);
 				border-bottom: 1px solid $ubc-grey-medium-light;
 
 				.top-level-view-link {
@@ -69,10 +69,11 @@
 
 			.ac-trigger {
 				width: px2rem(37);
+				height: px2rem(41);
 
 				&::after {
-					font-size: px2rem(12);
-					right: 0;
+					font-size: px2rem(14);
+					right: px2rem(12);
 				}
 			}
 
@@ -85,7 +86,7 @@
 
 				.ac-header, .no-accordion, ul li {
 					&:hover, &:focus-within {
-						background-color: $learning-spaces-blue-light;
+						background-color: $utility-light-grey;
 					}
 				}
 			}
@@ -172,7 +173,7 @@
 				}
 
 				&:hover {
-					background-color: $learning-spaces-blue-light;
+					background-color: $utility-light-grey;
 				}
 
 				&.active-page {
@@ -203,13 +204,14 @@
 					li {
 						padding: px2rem(5) 0 px2rem(5) px2rem(16);
 						border-top: 1px solid $utility-light-grey;
+						margin: 0;
 
 						a {
 							color: $ubc-blue;
 						}
 
 						&:hover {
-							background-color: $learning-spaces-blue-light;
+							background-color: $utility-light-grey;
 						}
 
 						&.active-page {
@@ -233,7 +235,7 @@
 			}
 
 			&:hover {
-				background-color: $learning-spaces-blue-light;
+				background-color: $utility-light-grey;
 			}
 
 			&.active-page {

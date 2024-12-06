@@ -114,13 +114,7 @@ if ( have_posts() ) :
 				?>
 				<div class="<?php echo esc_html( $main_col_class ); ?>">
 					<h1 class="page-title mb-9">
-						<?php
-						if ( is_front_page() ) {
-							esc_html_e( 'Welcome to UBC Finance', 'ubc-vpfo-templates-styles' );
-						} else {
-							the_title();
-						}
-						?>
+						<?php the_title(); ?>
 					</h1>
 					<?php
 					the_content();

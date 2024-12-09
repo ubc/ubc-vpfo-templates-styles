@@ -186,7 +186,7 @@
 
 		@include media-breakpoint-up(lg) {
 			position: sticky;
-			top: 0;
+			top: px2rem(16);
 		}
 
 		.pattern {

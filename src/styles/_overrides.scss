@@ -120,6 +120,10 @@ body {
 							background: $ubc-brand-blue;
 							color: $utility-white;
 							height: px2rem(40) !important;
+
+							@media (min-width: 1200px) {
+								height: px2rem(45) !important;
+							}
 						}
 
 						.ubc7-arrow {

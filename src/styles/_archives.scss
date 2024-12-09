@@ -269,6 +269,11 @@
 						border: 1px solid $ubc-blue;
 						background: $utility-white;
 						cursor: pointer;
+
+						&:focus-visible {
+							outline: 0;
+							box-shadow: inset 0 1px 1px rgba($utility-black, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+						}
 				
 						.cat-tax-selected-items {
 							display: flex;
@@ -281,6 +286,12 @@
 								padding: px2rem(4);
 								line-height: 1;
 								@include weight-500;
+
+								&:focus-visible {
+									outline: 0;
+									background-color: $learning-spaces-blue-light;
+									color: $ubc-blue;
+								}
 				
 								.remove {
 									margin-left: px2rem(2);
@@ -317,6 +328,12 @@
 							&:hover {
 								background-color: $ubc-brand-blue;
 								color: $utility-white;
+							}
+
+							&:focus {
+								background-color: $ubc-brand-blue;
+								color: $utility-white;
+								outline: none;
 							}
 						}
 					}

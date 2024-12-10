@@ -11,7 +11,7 @@ a {
 		&::after {
 			content: '\f08e';
 			font-family: $font-fontawesome;
-			margin-left: 0.25rem;
+			margin: 0 px2rem(4);
 		}
 	}
 }
@@ -105,9 +105,30 @@ a.btn-secondary, button.btn-secondary {
 	}
 }
 
-// typography
+// alignment classes
+
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignleft {
+	margin-right: px2rem(24);
+}
+
+.alignright {
+	margin-left: px2rem(24);
+}
+
+// typography & clearfix on floats
 
 .page-content {
+	&::after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+
 	p {
 		margin: px2rem(24) 0;
 		@include p2;
@@ -140,6 +161,23 @@ a.btn-secondary, button.btn-secondary {
 
 		li {
 			@include p2;
+			margin: px2rem(4) 0;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		ul, ol {
+			margin: px2rem(4) 0;
+
+			&:first-child, &:last-child {
+				margin: px2rem(4) 0;
+			}
 		}
 	}
 

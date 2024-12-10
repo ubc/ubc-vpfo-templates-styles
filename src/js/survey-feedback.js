@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-	const surveyIntro = document.querySelector('.survey-intro');
 	const surveyAction = document.querySelector('.survey-action');
 	const surveyYes = document.getElementById('survey-yes');
 	const surveyNo = document.getElementById('survey-no');
@@ -8,11 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Helper function to toggle classes
 	const toggleClasses = (addClassElement, removeClassElement, targetContent, otherContent) => {
-		// Hide the survey intro
-		if (surveyIntro) {
-			surveyIntro.classList.add('d-none');
-		}
-
 		// Show the appropriate survey content
 		if (targetContent) {
 			targetContent.classList.remove('d-none');

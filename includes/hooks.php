@@ -623,16 +623,6 @@ function vpfo_register_settings() {
 
 	register_setting(
 		'vpfo_templates_styles',
-		'vpfo_survey_intro',
-		array(
-			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_text_field',
-			'show_in_rest'      => true,
-		)
-	);
-
-	register_setting(
-		'vpfo_templates_styles',
 		'vpfo_survey_yes',
 		array(
 			'type'              => 'string',
@@ -660,7 +650,7 @@ add_action( 'admin_init', 'vpfo_register_settings' );
 function vpfo_render_settings_page() {
 	?>
 	<div class="wrap">
-		<h1>VPFO Templates & Styles</h1>
+		<h1>VPFO Templates &amp; Styles</h1>
 		<form method="post" action="options.php">
 			<?php
 			settings_fields( 'vpfo_templates_styles' );
@@ -732,14 +722,6 @@ function vpfo_add_settings_field() {
 		'vpfo_survey_heading',
 		'Survey Feedback Heading',
 		'vpfo_render_survey_heading',
-		'vpfo_templates_styles',
-		'vpfo_templates_styles_section',
-	);
-
-	add_settings_field(
-		'vpfo_survey_intro',
-		'Survey Feedback Intro',
-		'vpfo_render_survey_intro',
 		'vpfo_templates_styles',
 		'vpfo_templates_styles_section',
 	);
@@ -838,11 +820,6 @@ function vpfo_render_glossary_terms_archive_intro() {
 function vpfo_render_survey_heading() {
 	$value = get_option( 'vpfo_survey_heading', '' );
 	echo '<input type="text" name="vpfo_survey_heading" value="' . esc_attr( $value ) . '" style="width: 100%;" />';
-}
-
-function vpfo_render_survey_intro() {
-	$value = get_option( 'vpfo_survey_intro', '' );
-	echo '<input type="text" name="vpfo_survey_intro" value="' . esc_attr( $value ) . '" style="width: 100%;" />';
 }
 
 function vpfo_render_survey_yes() {

@@ -3,6 +3,7 @@
 $parent_id    = get_post_field( 'post_parent', $post->ID );
 $parent_title = get_the_title( $parent_id );
 $parent_url   = get_permalink( $parent_id );
+$parent_slug  = get_post_field( 'post_name', $parent_id );
 
 $siblings = get_pages(
 	array(
@@ -19,6 +20,7 @@ if ( $is_grandchild ) {
 	$grandparent_id    = get_post_field( 'post_parent', $parent_id );
 	$grandparent_title = get_the_title( $grandparent_id );
 	$grandparent_url   = get_permalink( $grandparent_id );
+	$grandparent_slug  = get_post_field( 'post_name', $grandparent_id );
 
 	$parent_siblings = get_pages(
 		array(
@@ -30,6 +32,8 @@ if ( $is_grandchild ) {
 
 	$has_parent_siblings = ! empty( $parent_siblings ) && count( $parent_siblings ) > 0;
 }
+
+$glossary_archive_link = get_post_type_archive_link( 'glossary-terms' );
 ?>
 
 <div class="top-level-link d-none d-lg-flex align-items-lg-center justify-content-lg-between">
@@ -157,6 +161,16 @@ if ( $is_grandchild ) {
 					<?php
 				}
 			}
+
+			if ( 'doing-business-with-ubc' === $grandparent_slug ) {
+				?>
+				<div class="no-accordion">
+					<a href="<?php echo esc_url( $glossary_archive_link ); ?>" rel="bookmark" title="<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>">
+						<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>
+					</a>
+				</div>
+				<?php
+			}
 			?>
 		</div>
 		<?php
@@ -236,6 +250,16 @@ if ( $is_grandchild ) {
 				</div>
 				<?php
 			}
+		}
+
+		if ( 'doing-business-with-ubc' === $parent_slug ) {
+			?>
+			<div class="no-accordion">
+				<a href="<?php echo esc_url( $glossary_archive_link ); ?>" rel="bookmark" title="<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>">
+					<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>
+				</a>
+			</div>
+			<?php
 		}
 		?>
 	</div>

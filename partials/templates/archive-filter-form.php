@@ -60,8 +60,14 @@ if ( 'resources' === $archive_post_type ) {
 		</div>
 
 		<div class="submit-button mt-7">
-			<button type="submit" class="btn btn-secondary">
+			<button type="submit" class="btn btn-primary">
 				<?php esc_html_e( 'Submit Filters', 'ubc-vpfo-templates-styles' ); ?>
+			</button>
+		</div>
+
+		<div class="clear-button mt-5">
+			<button type="reset" class="btn btn-secondary">
+				<?php esc_html_e( 'Clear Filters', 'ubc-vpfo-templates-styles' ); ?>
 			</button>
 		</div>
 

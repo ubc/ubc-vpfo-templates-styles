@@ -73,17 +73,26 @@ function vpfo_save_alert_meta( $post_id ) {
 		return;
 	}
 
-	// sanitize post id for db insertion
-	$post_id_sanitized = absint( $post_id );
-
 	// Save the 'display alert' checkbox value
-	$display_alert           = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
-	$display_alert_sanitized = esc_html( $display_alert );
-	update_post_meta( $post_id_sanitized, '_vpfo_display_alert', $display_alert_sanitized );
+	$display_alert = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
+	update_post_meta( $post_id, '_vpfo_display_alert', $display_alert );
 
 	// Save the alert message textarea value
 	if ( isset( $_POST['vpfo_alert_message'] ) ) {
-		update_post_meta( $post_id_sanitized, '_vpfo_alert_message', sanitize_textarea_field( $_POST['vpfo_alert_message'] ) );
+		// Allow basic HTML tags like <a>, <strong>, <em>, etc.
+		$allowed_html  = array(
+			'a'      => array(
+				'href'   => array(),
+				'title'  => array(),
+				'target' => array(),
+			),
+			'strong' => array(),
+			'em'     => array(),
+			'p'      => array(),
+			'br'     => array(),
+		);
+		$alert_message = wp_kses( $_POST['vpfo_alert_message'], $allowed_html );
+		update_post_meta( $post_id, '_vpfo_alert_message', $alert_message );
 	}
 }
 add_action( 'save_post', 'vpfo_save_alert_meta' );

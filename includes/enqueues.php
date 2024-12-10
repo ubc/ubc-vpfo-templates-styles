@@ -46,6 +46,14 @@ function ubc_vpfo_templates_styles_enqueue_styles_scripts() {
 			'1.0',
 			array( 'strategy' => 'defer' )
 		);
+
+		wp_enqueue_script(
+			'vpfo-cross-post-listing-js',
+			plugin_dir_url( __DIR__ ) . 'js/cross-post-listing.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
 	}
 
 	if ( is_home() || is_post_type_archive( 'resources' ) || is_post_type_archive( 'glossary-terms' ) ) {

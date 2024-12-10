@@ -87,10 +87,28 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
+  // Handle submit button.
   $form.submit(async (e) => {
     e.preventDefault();
 
-    const params = getFilterParams(e.target);
+    const params = getFilterParams($form[0]);
+    const res = await getArchivePage(params);
+    handleNewPage(res);
+  });
+
+  // Handle reset button.
+  $form.find('button[type="reset"]').click(async (e) => {
+    e.preventDefault();
+
+    $form.find('input[name="post_type"]');
+
+    // Reset actual form inputs.
+    $form[0].reset();
+
+    // Remove fake html representation of select.
+    $form.find('.cat-tax-selected-items').html('');
+
+    const params = getFilterParams($form[0]);
     const res = await getArchivePage(params);
     handleNewPage(res);
   });

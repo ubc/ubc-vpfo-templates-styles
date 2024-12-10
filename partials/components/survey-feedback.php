@@ -6,11 +6,6 @@ if ( ! $survey_heading ) {
 	$survey_heading = __( 'Did you find what you were looking for?', 'ubc-vpfo-templates-styles' );
 }
 
-$survey_intro = get_option( 'vpfo_survey_intro', null );
-if ( ! $survey_intro ) {
-	$survey_intro = __( 'Your response will redirect you to our feedback survey.', 'ubc-vpfo-templates-styles' );
-}
-
 $survey_yes = get_option( 'vpfo_survey_yes', null );
 if ( ! $survey_yes ) {
 	// translators: %s is the survey link
@@ -29,7 +24,6 @@ if ( '1' === $display_survey ) {
 		<div class="survey-wrapper d-flex flex-column flex-md-row align-items-center justify-content-center">
 			<div class="survey-intro-wrapper text-center text-md-start">
 				<h3 class="h4 survey-heading m-0"><?php echo esc_html( $survey_heading ); ?></h3>
-				<p class="survey-intro mt-3"><?php echo esc_html( $survey_intro ); ?></p>
 			</div>
 			<div class="survey-buttons d-flex align-items-center">
 				<button class="btn btn-secondary" id="survey-yes"><?php esc_html_e( 'Yes', 'ubc-vpfo-templates-styles' ); ?></button>

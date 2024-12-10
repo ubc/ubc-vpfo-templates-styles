@@ -57,3 +57,10 @@ $container-max-widths: map-merge(
 		"xxl": 1170px
 	)
 );
+
+$aspect-ratios: map-merge(
+	$aspect-ratios,
+	(
+		"600x385": calc(385 / 600 * 100%)
+	)
+);

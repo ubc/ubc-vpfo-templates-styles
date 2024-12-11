@@ -251,6 +251,80 @@ function vpfo_save_survey_meta( $post_id ) {
 }
 add_action( 'save_post', 'vpfo_save_survey_meta' );
 
+// Set up ability to append archive links to the sidenav on sidenav template pages
+function vpfo_add_archive_links_meta_box() {
+	// Check if the custom post types are activated
+	if ( ! get_option( 'vpfo_activate_finance_cpt', false ) ) {
+		return; // Exit if the post type are not activated
+	}
+
+	$screen = get_current_screen();
+	if ( $screen && 'page' === $screen->id ) {
+		global $post;
+		if ( $post && get_page_template_slug( $post->ID ) === 'vpfo-page-sidenav.php' ) {
+			add_meta_box(
+				'vpfo_archive_links_meta_box',
+				'Archive Links in Sidenav',
+				'vpfo_render_archive_links_meta_box',
+				'page',
+				'side',
+				'default'
+			);
+		}
+	}
+}
+add_action( 'add_meta_boxes', 'vpfo_add_archive_links_meta_box' );
+
+function vpfo_render_archive_links_meta_box( $post ) {
+	// Use nonce for verification
+	wp_nonce_field( 'vpfo_save_archive_links_meta', 'vpfo_archive_links_nonce' );
+
+	// Get current values (if any)
+	$archive_links = get_post_meta( $post->ID, '_vpfo_archive_links', true );
+	$archive_links = is_array( $archive_links ) ? $archive_links : array();
+
+	// Display checkboxes
+	echo '<p>';
+	echo '<label>';
+	echo '<input type="checkbox" name="vpfo_archive_links[]" value="resources"' . checked( in_array( 'resources', $archive_links, true ), true, false ) . '> Resources';
+	echo '</label>';
+	echo '</p>';
+
+	echo '<p>';
+	echo '<label>';
+	echo '<input type="checkbox" name="vpfo_archive_links[]" value="glossary-terms"' . checked( in_array( 'glossary-terms', $archive_links, true ), true, false ) . '> Glossary of Terms';
+	echo '</label>';
+	echo '</p>';
+}
+
+function vpfo_save_archive_links_meta( $post_id ) {
+	// Check if nonce is set and valid
+	if ( ! isset( $_POST['vpfo_archive_links_nonce'] ) || ! wp_verify_nonce( $_POST['vpfo_archive_links_nonce'], 'vpfo_save_archive_links_meta' ) ) {
+		return;
+	}
+
+	// Check autosave
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	// Check user permissions
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// Sanitize post ID for db insertion
+	$post_id_sanitized = absint( $post_id );
+
+	// Save the archive links as an array
+	$archive_links = isset( $_POST['vpfo_archive_links'] ) && is_array( $_POST['vpfo_archive_links'] )
+		? array_map( 'sanitize_text_field', $_POST['vpfo_archive_links'] )
+		: array();
+
+	update_post_meta( $post_id_sanitized, '_vpfo_archive_links', $archive_links );
+}
+add_action( 'save_post', 'vpfo_save_archive_links_meta' );
+
 // Set up the footer selection options on the VPFO templates
 function vpfo_add_footer_meta_box() {
 	$screen = get_current_screen();

@@ -256,6 +256,14 @@ a.btn-secondary, button.btn-secondary {
 	.p2 {
 		@include p2;
 	}
+
+	.lede {
+		font-size: px2rem(27);
+		line-height: px2rem(32);
+		@include weight-400;
+		@include bold-600;
+		font-style: italic;
+	}
 }
 
 // pattern slice pre-footer

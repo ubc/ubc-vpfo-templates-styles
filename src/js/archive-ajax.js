@@ -5,7 +5,7 @@ function getArchivePage(params) {
     params: params
   }
 
-  return $.ajax({
+  return jQuery.ajax({
     url: archive_ajax_params.ajax_url,
     type: 'POST',
     data: data,
@@ -13,7 +13,7 @@ function getArchivePage(params) {
 }
 
 function getFilterParams(form) {
-  const $form = $(form);
+  const $form = jQuery(form);
 
   return {
     'post_type': $form.find('input[name="post_type"]').val(),
@@ -24,7 +24,7 @@ function getFilterParams(form) {
 }
 
 function handleScrollToTop(form) {
-  const $form = $(form);
+  const $form = jQuery(form);
   const $archive = $form.closest('.archive');
 
   if ( $archive ) {
@@ -36,12 +36,12 @@ function handleScrollToTop(form) {
 }
 
 function initPagination(form) {
-  const $form = $(form);
+  const $form = jQuery(form);
   // console.log($form, $form.closest('.archive'), $form.closest('.archive').find('.pagination a'));
 
   $form.closest('.archive').find('.pagination a').click(async (e) => {
     // Get the href of the clicked pagination link
-    const href = $(e.target).attr('href');
+    const href = jQuery(e.target).attr('href');
 
     // Extract the page number using a regular expression
     const pageMatch = href.match(/\/page\/(\d+)/);
@@ -65,11 +65,11 @@ function initPagination(form) {
 
 function handleNewPage(res) {
   if ( res.success ) {
-    $('.card-container').html(res.data.results);
-    $('.card-container').append(res.data.pagination);
+    jQuery('.card-container').html(res.data.results);
+    jQuery('.card-container').append(res.data.pagination);
 
     // Initial pagination handler setup.
-    $form = $('.archive-filter-form');
+    $form = jQuery('.archive-filter-form');
     if ( $form ) {
       initPagination($form[0]);
 
@@ -81,7 +81,7 @@ function handleNewPage(res) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  $form = $('.archive-filter-form');
+  $form = jQuery('.archive-filter-form');
 
   if ( $form.length === 0 ) {
     return;

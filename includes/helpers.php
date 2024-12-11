@@ -48,10 +48,12 @@ function vpfo_numeric_pagination( $query = null ) {
 	$current_page = max( 1, $query->get( 'paged' ) ); // Get the current page number
 	$total_pages  = $query->max_num_pages; // Get the total number of pages
 
+	$post_type = $query->get( 'post_type' ) ? $query->get( 'post_type' ) : 'post'; // Get the post type
+
 	// Output the pagination
 	$paginate_links = paginate_links(
 		array(
-			'base'      => get_post_type_archive_link( $query->get( 'post_type' ) ) . '%_%',
+			'base'      => get_post_type_archive_link( $post_type ) . '%_%',
 			'format'    => 'page/%#%/',
 			'current'   => $current_page,
 			'total'     => $total_pages,

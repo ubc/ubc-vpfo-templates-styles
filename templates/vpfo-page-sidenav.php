@@ -55,12 +55,13 @@ if ( $show_sidenav ) {
 		<div class="ac">
 			<div class="ac-header d-flex align-items-center">
 				<span class="flex-grow-1">
-					<?php if ( ! $is_top_level ) {
+					<?php
+					if ( ! $is_top_level ) {
 						?>
 						<a href="<?php echo esc_url( $mobile_menu_toggle_link ); ?>" rel="bookmark" title="<?php echo esc_html( $mobile_menu_toggle_title ); ?>">
 						<?php
 					}
-					echo esc_html( $mobile_menu_toggle_title ); 
+					echo esc_html( $mobile_menu_toggle_title );
 					if ( ! $is_top_level ) {
 						?>
 						</a>

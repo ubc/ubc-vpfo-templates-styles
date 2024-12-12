@@ -264,6 +264,14 @@ a.btn-secondary, button.btn-secondary {
 		@include bold-600;
 		font-style: italic;
 	}
+
+	.post-date {
+		border-bottom: 1px solid $utility-light-grey;
+
+		.posted-on {
+			font-size: 85%;
+		}
+	}
 }
 
 // pattern slice pre-footer

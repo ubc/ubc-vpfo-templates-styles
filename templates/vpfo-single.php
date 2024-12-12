@@ -16,6 +16,16 @@ if ( have_posts() ) :
 			<h1 class="page-title mb-9">
 				<?php the_title(); ?>
 			</h1>
+			<?php
+			if ( 'post' === get_post_type() ) {
+				?>
+				<div class="post-date h5 pb-5 mb-9">
+					<span class="posted-on"><?php esc_html_e( 'Posted on:', 'ubc-vpfo-templates-styles' ); ?></span>
+					<?php echo esc_html( the_time( 'F j, Y' ) ); ?>
+				</div>
+				<?php
+			}
+			?>
 			<?php the_content(); ?>
 		</section>
 	

@@ -260,9 +260,7 @@ a.btn-secondary, button.btn-secondary {
 	.lede {
 		font-size: px2rem(27);
 		line-height: px2rem(32);
-		@include weight-400;
-		@include bold-600;
-		font-style: italic;
+		@include weight-600;
 	}
 
 	.post-date {

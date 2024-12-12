@@ -7,7 +7,9 @@ if ( '1' === $display_alert && $alert_message ) {
 	<section class="alert-banner p-5">
 		<div class="container-lg px-0">
 			<div class="alert-banner-inner d-flex flex-column flex-sm-row align-items-start">
-				<?php echo wp_kses_post( $alert_message ); ?>
+				<div class="alert-banner-message">
+					<?php echo wp_kses_post( $alert_message ); ?>
+				</div>
 			</div>
 		</div>
 	</section>

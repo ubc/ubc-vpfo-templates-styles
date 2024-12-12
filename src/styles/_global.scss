@@ -33,6 +33,17 @@ a {
 			@include weight-700;
 		}
 	}
+
+	.alert-banner-message {
+		a {
+			text-decoration: underline;
+
+			&:hover, &:focus {
+				outline: none;
+				text-decoration: double underline;
+			}
+		}
+	}
 }
 
 .hero-image-banner {

@@ -74,9 +74,9 @@ function vpfo_save_alert_meta( $post_id ) {
 	}
 
 	// Save the 'display alert' checkbox value
-	$display_alert = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
+	$display_alert           = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
 	$display_alert_sanitized = esc_html( $display_alert );
-	$post_id_sanitized = absint( $post_id );
+	$post_id_sanitized       = absint( $post_id );
 	update_post_meta( $post_id_sanitized, '_vpfo_display_alert', $display_alert_sanitized );
 
 	// Save the alert message textarea value

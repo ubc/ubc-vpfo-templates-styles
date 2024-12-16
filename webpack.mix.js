@@ -11,6 +11,8 @@ mix
 	.js( 'src/js/archive-ajax.js', 'js/archive-ajax.js' )
 	.js( 'src/js/survey-feedback.js', 'js/survey-feedback.js' )
 	.js( 'src/js/cross-post-listing.js', 'js/cross-post-listing.js' )
+	.js( 'src/js/image-cards.js', 'js/image-cards.js' )
+	.js( 'src/js/featured-resources.js', 'js/featured-resources.js' )
 	.sass(
 		'src/style.scss',
 		'style.css',

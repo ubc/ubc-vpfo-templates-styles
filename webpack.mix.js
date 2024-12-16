@@ -13,6 +13,7 @@ mix
 	.js( 'src/js/cross-post-listing.js', 'js/cross-post-listing.js' )
 	.js( 'src/js/image-cards.js', 'js/image-cards.js' )
 	.js( 'src/js/featured-resources.js', 'js/featured-resources.js' )
+	.js( 'src/js/quote-block-expiry.js', 'js/quote-block-expiry.js' )
 	.sass(
 		'src/style.scss',
 		'style.css',

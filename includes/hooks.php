@@ -42,6 +42,7 @@ function vpfo_render_alert_meta_box( $post ) {
 	// Get current values (if any)
 	$display_alert = get_post_meta( $post->ID, '_vpfo_display_alert', true );
 	$alert_message = get_post_meta( $post->ID, '_vpfo_alert_message', true );
+	$alert_expiry  = get_post_meta( $post->ID, '_vpfo_alert_expiry', true );
 
 	// Display the toggle checkbox
 	echo '<p>';
@@ -54,6 +55,12 @@ function vpfo_render_alert_meta_box( $post ) {
 	echo '<p>';
 	echo '<label for="vpfo_alert_message">Alert Message:</label>';
 	echo '<textarea id="vpfo_alert_message" name="vpfo_alert_message" rows="4" style="width: 100%;">' . esc_textarea( $alert_message ) . '</textarea>';
+	echo '</p>';
+
+	// Display the expiry date field
+	echo '<p>';
+	echo '<label for="vpfo_alert_expiry">Expiry Date:</label>';
+	echo '<input type="date" id="vpfo_alert_expiry" name="vpfo_alert_expiry" value="' . esc_attr( $alert_expiry ) . '" style="width: 100%;">';
 	echo '</p>';
 }
 
@@ -95,6 +102,12 @@ function vpfo_save_alert_meta( $post_id ) {
 		);
 		$alert_message = wp_kses( $_POST['vpfo_alert_message'], $allowed_html );
 		update_post_meta( $post_id, '_vpfo_alert_message', $alert_message );
+	}
+
+	// Save the alert expiry date
+	if ( isset( $_POST['vpfo_alert_expiry'] ) ) {
+		$alert_expiry = sanitize_text_field( $_POST['vpfo_alert_expiry'] );
+		update_post_meta( $post_id, '_vpfo_alert_expiry', $alert_expiry );
 	}
 }
 add_action( 'save_post', 'vpfo_save_alert_meta' );

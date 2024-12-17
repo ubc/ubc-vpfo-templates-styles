@@ -136,7 +136,7 @@ function vpfo_enqueue_block_editor_assets() {
 			'wp-element',
 			'wp-editor',
 			'wp-components',
-			'wp-date'
+			'wp-date',
 		),
 		'1.0',
 		true

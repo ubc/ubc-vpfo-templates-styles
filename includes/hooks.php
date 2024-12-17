@@ -983,36 +983,36 @@ function vpfo_archive_post_template( $template ) {
 add_filter( 'template_include', 'vpfo_archive_post_template' );
 
 // Filter quote block rendering to check expiry date and "Never Expire" setting.
-function vpfo_stop_quote_render_expiry_date($block_content, $block) {
+function vpfo_stop_quote_render_expiry_date( $block_content, $block ) {
 	// Target the core/quote block.
-	if ($block['blockName'] === 'core/quote' && isset($block['attrs'])) {
+	if ( 'core/quote' === $block['blockName'] && isset( $block['attrs'] ) ) {
 		$attrs = $block['attrs'];
 
 		// Sanitize the attributes.
-		$expiry_date = isset($attrs['expiryDate']) ? sanitize_text_field($attrs['expiryDate']) : null;
-		$never_expire = isset($attrs['neverExpire']) ? filter_var($attrs['neverExpire'], FILTER_VALIDATE_BOOLEAN) : true;
+		$expiry_date  = isset( $attrs['expiryDate'] ) ? sanitize_text_field( $attrs['expiryDate'] ) : null;
+		$never_expire = isset( $attrs['neverExpire'] ) ? filter_var( $attrs['neverExpire'], FILTER_VALIDATE_BOOLEAN ) : true;
 
 		// If "Never Expire" is checked, always render the block.
-		if ($never_expire) {
+		if ( $never_expire ) {
 			return $block_content;
 		}
 
 		// Check expiry date if set.
-		if (!empty($expiry_date)) {
+		if ( ! empty( $expiry_date ) ) {
 			// Convert expiry date to WordPress timezone.
 			$wp_timezone = wp_timezone(); // Get WordPress timezone as a DateTimeZone object.
 			try {
-				$expiry_datetime = new DateTime($expiry_date, new DateTimeZone('UTC'));
-				$expiry_datetime->setTimezone($wp_timezone);
+				$expiry_datetime = new DateTime( $expiry_date, new DateTimeZone( 'UTC' ) );
+				$expiry_datetime->setTimezone( $wp_timezone );
 
 				// Get the current time in WordPress timezone.
-				$current_datetime = new DateTime('now', $wp_timezone);
+				$current_datetime = new DateTime( 'now', $wp_timezone );
 
 				// Render the block if the expiry date is today or later.
-				if ($expiry_datetime->format('Y-m-d') >= $current_datetime->format('Y-m-d')) {
+				if ( $expiry_datetime->format( 'Y-m-d' ) >= $current_datetime->format( 'Y-m-d' ) ) {
 					return $block_content;
 				}
-			} catch (Exception $e) {
+			} catch ( Exception $e ) {
 				// If the expiry date is invalid, prevent rendering.
 				return '';
 			}
@@ -1024,4 +1024,4 @@ function vpfo_stop_quote_render_expiry_date($block_content, $block) {
 
 	return $block_content;
 }
-add_filter('render_block', 'vpfo_stop_quote_render_expiry_date', 10, 2);
+add_filter( 'render_block', 'vpfo_stop_quote_render_expiry_date', 10, 2 );

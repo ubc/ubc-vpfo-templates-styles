@@ -53,12 +53,12 @@ if ( $show_sidenav ) {
 	?>
 	<div class="accordion sticky-top sidenav sidenav-sticky-mobile d-lg-none">
 		<div class="ac">
-			<div class="ac-header d-flex align-items-center">
+			<div class="ac-header ac-header-top d-flex align-items-center">
 				<span class="flex-grow-1">
 					<?php
 					if ( ! $is_top_level ) {
 						?>
-						<a href="<?php echo esc_url( $mobile_menu_toggle_link ); ?>" rel="bookmark" title="<?php echo esc_html( $mobile_menu_toggle_title ); ?>">
+						<a href="<?php echo esc_url( $mobile_menu_toggle_link ); ?>" rel="bookmark" title="<?php echo esc_html( $mobile_menu_toggle_title ); ?>" class="top-level-link">
 						<?php
 					}
 					echo esc_html( $mobile_menu_toggle_title );

@@ -42,6 +42,7 @@ function vpfo_render_alert_meta_box( $post ) {
 	// Get current values (if any)
 	$display_alert = get_post_meta( $post->ID, '_vpfo_display_alert', true );
 	$alert_message = get_post_meta( $post->ID, '_vpfo_alert_message', true );
+	$alert_expiry  = get_post_meta( $post->ID, '_vpfo_alert_expiry', true );
 
 	// Display the toggle checkbox
 	echo '<p>';
@@ -54,6 +55,12 @@ function vpfo_render_alert_meta_box( $post ) {
 	echo '<p>';
 	echo '<label for="vpfo_alert_message">Alert Message:</label>';
 	echo '<textarea id="vpfo_alert_message" name="vpfo_alert_message" rows="4" style="width: 100%;">' . esc_textarea( $alert_message ) . '</textarea>';
+	echo '</p>';
+
+	// Display the expiry date field
+	echo '<p>';
+	echo '<label for="vpfo_alert_expiry">Expiry Date:</label>';
+	echo '<input type="date" id="vpfo_alert_expiry" name="vpfo_alert_expiry" value="' . esc_attr( $alert_expiry ) . '" style="width: 100%;">';
 	echo '</p>';
 }
 
@@ -74,8 +81,10 @@ function vpfo_save_alert_meta( $post_id ) {
 	}
 
 	// Save the 'display alert' checkbox value
-	$display_alert = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
-	update_post_meta( $post_id, '_vpfo_display_alert', $display_alert );
+	$display_alert           = isset( $_POST['vpfo_display_alert'] ) ? '1' : '0';
+	$display_alert_sanitized = esc_html( $display_alert );
+	$post_id_sanitized       = absint( $post_id );
+	update_post_meta( $post_id_sanitized, '_vpfo_display_alert', $display_alert_sanitized );
 
 	// Save the alert message textarea value
 	if ( isset( $_POST['vpfo_alert_message'] ) ) {
@@ -93,6 +102,12 @@ function vpfo_save_alert_meta( $post_id ) {
 		);
 		$alert_message = wp_kses( $_POST['vpfo_alert_message'], $allowed_html );
 		update_post_meta( $post_id, '_vpfo_alert_message', $alert_message );
+	}
+
+	// Save the alert expiry date
+	if ( isset( $_POST['vpfo_alert_expiry'] ) ) {
+		$alert_expiry = sanitize_text_field( $_POST['vpfo_alert_expiry'] );
+		update_post_meta( $post_id, '_vpfo_alert_expiry', $alert_expiry );
 	}
 }
 add_action( 'save_post', 'vpfo_save_alert_meta' );
@@ -250,6 +265,80 @@ function vpfo_save_survey_meta( $post_id ) {
 	update_post_meta( $post_id_sanitized, '_vpfo_display_survey', $display_survey_sanitized );
 }
 add_action( 'save_post', 'vpfo_save_survey_meta' );
+
+// Set up ability to append archive links to the sidenav on sidenav template pages
+function vpfo_add_archive_links_meta_box() {
+	// Check if the custom post types are activated
+	if ( ! get_option( 'vpfo_activate_finance_cpt', false ) ) {
+		return; // Exit if the post type are not activated
+	}
+
+	$screen = get_current_screen();
+	if ( $screen && 'page' === $screen->id ) {
+		global $post;
+		if ( $post && get_page_template_slug( $post->ID ) === 'vpfo-page-sidenav.php' ) {
+			add_meta_box(
+				'vpfo_archive_links_meta_box',
+				'Archive Links in Sidenav',
+				'vpfo_render_archive_links_meta_box',
+				'page',
+				'side',
+				'default'
+			);
+		}
+	}
+}
+add_action( 'add_meta_boxes', 'vpfo_add_archive_links_meta_box' );
+
+function vpfo_render_archive_links_meta_box( $post ) {
+	// Use nonce for verification
+	wp_nonce_field( 'vpfo_save_archive_links_meta', 'vpfo_archive_links_nonce' );
+
+	// Get current values (if any)
+	$archive_links = get_post_meta( $post->ID, '_vpfo_archive_links', true );
+	$archive_links = is_array( $archive_links ) ? $archive_links : array();
+
+	// Display checkboxes
+	echo '<p>';
+	echo '<label>';
+	echo '<input type="checkbox" name="vpfo_archive_links[]" value="resources"' . checked( in_array( 'resources', $archive_links, true ), true, false ) . '> Resources';
+	echo '</label>';
+	echo '</p>';
+
+	echo '<p>';
+	echo '<label>';
+	echo '<input type="checkbox" name="vpfo_archive_links[]" value="glossary-terms"' . checked( in_array( 'glossary-terms', $archive_links, true ), true, false ) . '> Glossary of Terms';
+	echo '</label>';
+	echo '</p>';
+}
+
+function vpfo_save_archive_links_meta( $post_id ) {
+	// Check if nonce is set and valid
+	if ( ! isset( $_POST['vpfo_archive_links_nonce'] ) || ! wp_verify_nonce( $_POST['vpfo_archive_links_nonce'], 'vpfo_save_archive_links_meta' ) ) {
+		return;
+	}
+
+	// Check autosave
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	// Check user permissions
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// Sanitize post ID for db insertion
+	$post_id_sanitized = absint( $post_id );
+
+	// Save the archive links as an array
+	$archive_links = isset( $_POST['vpfo_archive_links'] ) && is_array( $_POST['vpfo_archive_links'] )
+		? array_map( 'sanitize_text_field', $_POST['vpfo_archive_links'] )
+		: array();
+
+	update_post_meta( $post_id_sanitized, '_vpfo_archive_links', $archive_links );
+}
+add_action( 'save_post', 'vpfo_save_archive_links_meta' );
 
 // Set up the footer selection options on the VPFO templates
 function vpfo_add_footer_meta_box() {
@@ -892,3 +981,47 @@ function vpfo_archive_post_template( $template ) {
 	return $template; // Return the default template if conditions are not met
 }
 add_filter( 'template_include', 'vpfo_archive_post_template' );
+
+// Filter quote block rendering to check expiry date and "Never Expire" setting.
+function vpfo_stop_quote_render_expiry_date( $block_content, $block ) {
+	// Target the core/quote block.
+	if ( 'core/quote' === $block['blockName'] && isset( $block['attrs'] ) ) {
+		$attrs = $block['attrs'];
+
+		// Sanitize the attributes.
+		$expiry_date  = isset( $attrs['expiryDate'] ) ? sanitize_text_field( $attrs['expiryDate'] ) : null;
+		$never_expire = isset( $attrs['neverExpire'] ) ? filter_var( $attrs['neverExpire'], FILTER_VALIDATE_BOOLEAN ) : true;
+
+		// If "Never Expire" is checked, always render the block.
+		if ( $never_expire ) {
+			return $block_content;
+		}
+
+		// Check expiry date if set.
+		if ( ! empty( $expiry_date ) ) {
+			// Convert expiry date to WordPress timezone.
+			$wp_timezone = wp_timezone(); // Get WordPress timezone as a DateTimeZone object.
+			try {
+				$expiry_datetime = new DateTime( $expiry_date, new DateTimeZone( 'UTC' ) );
+				$expiry_datetime->setTimezone( $wp_timezone );
+
+				// Get the current time in WordPress timezone.
+				$current_datetime = new DateTime( 'now', $wp_timezone );
+
+				// Render the block if the expiry date is today or later.
+				if ( $expiry_datetime->format( 'Y-m-d' ) >= $current_datetime->format( 'Y-m-d' ) ) {
+					return $block_content;
+				}
+			} catch ( Exception $e ) {
+				// If the expiry date is invalid, prevent rendering.
+				return '';
+			}
+		}
+
+		// If no expiry date or expired, prevent rendering.
+		return '';
+	}
+
+	return $block_content;
+}
+add_filter( 'render_block', 'vpfo_stop_quote_render_expiry_date', 10, 2 );

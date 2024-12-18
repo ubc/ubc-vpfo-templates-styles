@@ -1,7 +1,4 @@
 <?php
-// Get this page's slug (used in archive links workaround)
-$page_slug = $post->post_name;
-
 // set up our child level menu pages
 foreach ( $children as $child ) {
 	$child_id    = $child->ID;
@@ -56,13 +53,5 @@ foreach ( $children as $child ) {
 	}
 }
 
-if ( 'doing-business-with-ubc' === $page_slug ) {
-	$glossary_archive_link = get_post_type_archive_link( 'glossary-terms' );
-	?>
-	<div class="no-accordion">
-		<a href="<?php echo esc_url( $glossary_archive_link ); ?>" rel="bookmark" title="<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>">
-			<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>
-		</a>
-	</div>
-	<?php
-}
+// append additional archive links if required, conditionals are in partial
+require plugin_dir_path( __DIR__ ) . 'templates/sidenav-add-archive-links.php';

@@ -256,6 +256,20 @@ a.btn-secondary, button.btn-secondary {
 	.p2 {
 		@include p2;
 	}
+
+	.lede {
+		font-size: px2rem(27);
+		line-height: px2rem(32);
+		@include weight-600;
+	}
+
+	.post-date {
+		border-bottom: 1px solid $utility-light-grey;
+
+		.posted-on {
+			font-size: 85%;
+		}
+	}
 }
 
 // pattern slice pre-footer

@@ -44,7 +44,6 @@ function observeDataWpContextChanges() {
 	const targetElement = document.querySelector('.vpfo .cross-post-listing .ctlt-rss-block');
 
 	if (!targetElement) {
-		console.error('Target element not found for observing changes.');
 		return;
 	}
 
@@ -52,7 +51,6 @@ function observeDataWpContextChanges() {
 	const observer = new MutationObserver((mutationsList) => {
 		mutationsList.forEach((mutation) => {
 			if (mutation.type === 'attributes' && mutation.attributeName === 'data-wp-context') {
-				console.log('data-wp-context attribute changed:', targetElement.getAttribute('data-wp-context'));
 				// Re-run the functions on attribute change
 				addReadMoreLinks(); // Ensure URLs are reevaluated
 				resetLinkText('.vpfo .cross-post-listing .ubc-api__pagination .prev', 'Previous');
@@ -66,8 +64,6 @@ function observeDataWpContextChanges() {
 		attributes: true, // Watch for attribute changes
 		attributeFilter: ['data-wp-context'], // Only observe this specific attribute
 	});
-
-	console.log('Observer started for data-wp-context changes.');
 }
 
 // Start observing

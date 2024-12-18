@@ -1,5 +1,4 @@
 <?php
-
 $parent_id    = get_post_field( 'post_parent', $post->ID );
 $parent_title = get_the_title( $parent_id );
 $parent_url   = get_permalink( $parent_id );
@@ -162,15 +161,8 @@ if ( $is_grandchild ) {
 				}
 			}
 
-			if ( 'doing-business-with-ubc' === $grandparent_slug ) {
-				?>
-				<div class="no-accordion">
-					<a href="<?php echo esc_url( $glossary_archive_link ); ?>" rel="bookmark" title="<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>">
-						<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>
-					</a>
-				</div>
-				<?php
-			}
+			// append additional archive links if required, conditionals are in partial
+			require plugin_dir_path( __DIR__ ) . 'templates/sidenav-add-archive-links.php';
 			?>
 		</div>
 		<?php
@@ -252,15 +244,8 @@ if ( $is_grandchild ) {
 			}
 		}
 
-		if ( 'doing-business-with-ubc' === $parent_slug ) {
-			?>
-			<div class="no-accordion">
-				<a href="<?php echo esc_url( $glossary_archive_link ); ?>" rel="bookmark" title="<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>">
-					<?php esc_html_e( 'Glossary of Terms', 'ubc-vpfo-templates-styles' ); ?>
-				</a>
-			</div>
-			<?php
-		}
+		// append additional archive links if required, conditionals are in partial
+		require plugin_dir_path( __DIR__ ) . 'templates/sidenav-add-archive-links.php';
 		?>
 	</div>
 	<?php

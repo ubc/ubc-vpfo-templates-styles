@@ -54,6 +54,22 @@ function ubc_vpfo_templates_styles_enqueue_styles_scripts() {
 			'1.0',
 			array( 'strategy' => 'defer' )
 		);
+
+		wp_enqueue_script(
+			'vpfo-image-cards-js',
+			plugin_dir_url( __DIR__ ) . 'js/image-cards.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
+
+		wp_enqueue_script(
+			'vpfo-featured-resources-js',
+			plugin_dir_url( __DIR__ ) . 'js/featured-resources.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
 	}
 
 	if ( is_home() || is_post_type_archive( 'resources' ) || is_post_type_archive( 'glossary-terms' ) ) {
@@ -109,3 +125,21 @@ function vpfo_enqueue_admin_scripts( $hook_suffix ) {
 	}
 }
 add_action( 'admin_enqueue_scripts', 'vpfo_enqueue_admin_scripts' );
+
+// Enqueue block editor assets
+function vpfo_enqueue_block_editor_assets() {
+	wp_enqueue_script(
+		'vpfo-quote-block-expiry-js',
+		plugin_dir_url( __DIR__ ) . '/js/quote-block-expiry.js',
+		array(
+			'wp-blocks',
+			'wp-element',
+			'wp-editor',
+			'wp-components',
+			'wp-date',
+		),
+		'1.0',
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'vpfo_enqueue_block_editor_assets' );

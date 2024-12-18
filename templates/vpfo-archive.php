@@ -4,7 +4,7 @@ $archive_post_type = $archive_object->name ?? null;
 $archive_post_type = is_home() ? 'post' : $archive_post_type;
 
 if ( 'post' === $archive_post_type ) {
-	$archive_title = __( 'Announcements', 'ubc-vpfo-templates-styles' );
+	$archive_title = get_the_title( get_option( 'page_for_posts' ) );
 	$intro         = get_option( 'vpfo_announcements_archive_intro', null );
 	$card          = 'archive-card-post';
 } elseif ( 'glossary-terms' === $archive_post_type ) {

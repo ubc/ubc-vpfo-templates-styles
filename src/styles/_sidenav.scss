@@ -23,20 +23,50 @@
 		margin: unset;
 		border: unset;
 
-		.ac-trigger {
-			width: auto;
-			padding: unset;
-			
+		.ac-header {
+			&:focus-within {
+				background-color: $utility-light-grey;
+			}
 
-			&::after {
-				font-family: $font-fontawesome;
-				content: '\f078';
-				color: $ubc-blue !important;
+			a:focus-visible {
+				text-decoration: underline;
+			}
+
+			.ac-trigger {
+				width: auto;
+				padding: unset;
+	
+				&::after {
+					font-family: $font-fontawesome;
+					content: '\f078';
+					color: $ubc-blue !important;
+				}
+
+				&:focus-visible {
+					outline: none;
+					background-color: $ubc-blue;
+
+					&::after {
+						color: $utility-white !important;
+					}
+				}
 			}
 		}
 
-		&.is-active > .ac-header .ac-trigger::after {
-			content: '\f077';
+		&.is-active > .ac-header {
+			.ac-trigger {
+				&::after {
+					content: '\f077';
+				}
+	
+				&:focus-visible {
+					background-color: $ubc-blue;
+	
+					&::after {
+						color: $utility-white !important;
+					}
+				}
+			}
 		}
 		
 		.ac-panel {
@@ -61,15 +91,20 @@
 				padding: 0 px2rem(8) 0 px2rem(16);
 				border-bottom: 1px solid $ubc-grey-medium-light;
 
-				.top-level-view-link {
-					@include weight-400;
-					color: $ubc-brand-blue;
+				.top-level-link {
+					&:hover, &:focus {
+						text-decoration: underline;
+					}
 				}
 			}
 
 			.ac-trigger {
 				width: px2rem(37);
 				height: px2rem(41);
+
+				&:focus-visible {
+					outline: 1px solid $ubc-blue;
+				}
 
 				&::after {
 					font-size: px2rem(14);
@@ -87,6 +122,10 @@
 				.ac-header, .no-accordion, ul li {
 					&:hover, &:focus-within {
 						background-color: $utility-light-grey;
+					}
+
+					a:focus-visible {
+						text-decoration: underline;
 					}
 				}
 			}
@@ -144,7 +183,7 @@
 
 	&.sidenav-sticky-desktop {
 		top: px2rem(16);
-		z-index: 1;
+		z-index: 1;	
 
 		.top-level-link {
 			font-size: px2rem(16);
@@ -157,6 +196,10 @@
 				text-transform: none;
 				@include weight-500;
 				font-size: px2rem(14);
+
+				&:hover, &:focus-visible {
+					text-decoration: underline;
+				}
 			}
 		}
 
@@ -170,9 +213,13 @@
 
 				a {
 					color: $ubc-blue;
+
+					&:focus-within {
+						text-decoration: underline;
+					}
 				}
 
-				&:hover {
+				&:hover, &:focus-within {
 					background-color: $utility-light-grey;
 				}
 
@@ -180,8 +227,15 @@
 					background-color: $ubc-brand-blue;
 					color: $utility-white;
 
-					.ac-trigger::after {
-						color: $utility-white !important;
+					.ac-trigger {
+						&::after {
+							color: $utility-white !important;
+						}
+
+						&:focus-visible {
+							background-color: transparent;
+							outline: 1px solid $utility-white;
+						}
 					}
 
 					a {
@@ -190,9 +244,23 @@
 				}
 			}
 
-			.ac-trigger::after {
-				font-size: px2rem(16);
-				right: px2rem(8);
+			.ac-trigger {
+				width: px2rem(32);
+				height: px2rem(22);
+
+				&::after {
+					font-size: px2rem(16);
+					right: px2rem(8);
+				}
+
+				&:focus-visible {
+					background-color: transparent;
+					outline: 1px solid $ubc-blue;
+
+					&::after {
+						color: $ubc-blue !important;
+					}
+				}
 			}
 
 			.ac-panel {
@@ -208,9 +276,13 @@
 
 						a {
 							color: $ubc-blue;
+
+							&:focus-visible {
+								text-decoration: underline;
+							}
 						}
 
-						&:hover {
+						&:hover, &:focus-within {
 							background-color: $utility-light-grey;
 						}
 
@@ -232,9 +304,13 @@
 
 			a {
 				color: $ubc-blue;
+
+				&:focus-within {
+					text-decoration: underline;
+				}
 			}
 
-			&:hover {
+			&:hover, &:focus-within {
 				background-color: $utility-light-grey;
 			}
 

@@ -32,12 +32,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	};
 
 	// Handle "Yes" button click
-	surveyYes.addEventListener('click', function () {
-		toggleClasses(surveyYes, surveyNo, surveyYesContent, surveyNoContent);
-	});
+	if (surveyYes) {
+		surveyYes.addEventListener('click', function () {
+			toggleClasses(surveyYes, surveyNo, surveyYesContent, surveyNoContent);
+		});
+	}
 
 	// Handle "No" button click
-	surveyNo.addEventListener('click', function () {
-		toggleClasses(surveyNo, surveyYes, surveyNoContent, surveyYesContent);
-	});
+	if (surveyNo) {
+		surveyNo.addEventListener('click', function () {
+			toggleClasses(surveyNo, surveyYes, surveyNoContent, surveyYesContent);
+		});
+	}
 });

@@ -113,11 +113,10 @@ body {
 					float: right;
 					
 					.btn-group {
-						background: $ubc-brand-blue;
-						color: $utility-white;
+						background: $ubc-blue;
 
 						.btn {
-							background: $ubc-brand-blue;
+							background: $ubc-blue;
 							color: $utility-white;
 							height: px2rem(40) !important;
 
@@ -133,10 +132,15 @@ body {
 						}
 
 						&:hover {
-							background: $ubc-blue;
+							background: $utility-white !important;
 
 							.btn {
-								background: $ubc-blue;
+								background: $utility-white !important;
+								color: $ubc-blue;
+							}
+
+							.ubc7-arrow {
+								background-position: -1178px -261px !important;
 							}
 						}
 					}

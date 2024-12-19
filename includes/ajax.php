@@ -93,6 +93,7 @@ function ubc_vpfo_get_archive_page_handler() {
 	}
 
 	$query_args = array(
+		'post_status'    => 'publish',
 		'post_type'      => $params['post_type'],
 		'posts_per_page' => 10,
 		'paged'          => $params['page'],

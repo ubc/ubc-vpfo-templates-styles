@@ -1,5 +1,34 @@
 <?php
 
+function ubc_vpfo_archive_order( $post_type ) {
+	return match ( $post_type ) {
+		'post'           => 'ASC',
+		'glossary-terms' => 'ASC',
+		'resources'      => 'ASC',
+		default          => '',
+	};
+}
+
+function ubc_vpfo_archive_order_by( $post_type ) {
+	return match ( $post_type ) {
+		'post'           => 'date',
+		'glossary-terms' => 'title',
+		'resources'      => 'title',
+		default          => '',
+	};
+}
+
+// Intercept initial page loads to have an accurate archive ordering.
+add_action(
+	'pre_get_posts',
+	function ( $query ) {
+		if ( is_archive() && $query->is_main_query() && in_array( $query->get( 'post_type' ), array( 'post', 'glossary-terms', 'resources' ), true ) ) {
+			$query->set( 'order', ubc_vpfo_archive_order( $query->get( 'post_type' ) ) ); //Set the order ASC or DESC
+			$query->set( 'orderby', ubc_vpfo_archive_order_by( $query->get( 'post_type' ) ) );
+		}
+	}
+);
+
 add_action( 'wp_ajax_nopriv_ubc_vpfo_get_archive_page', 'ubc_vpfo_get_archive_page_handler' );
 add_action( 'wp_ajax_ubc_vpfo_get_archive_page', 'ubc_vpfo_get_archive_page_handler' );
 
@@ -60,8 +89,8 @@ function ubc_vpfo_get_archive_page_handler() {
 		'post_type'      => $params['post_type'],
 		'posts_per_page' => 10,
 		'paged'          => $params['page'],
-		'order'          => 'ASC',
-		'orderby'        => 'title',
+		'order'          => ubc_vpfo_archive_order( $params['post_type'] ),
+		'orderby'        => ubc_vpfo_archive_order_by( $params['post_type'] ),
 	);
 
 	if ( ! empty( $params['categories'] ) ) {

@@ -2,7 +2,7 @@
 
 function ubc_vpfo_archive_order( $post_type ) {
 	return match ( $post_type ) {
-		'post'           => 'ASC',
+		'post'           => 'DESC',
 		'glossary-terms' => 'ASC',
 		'resources'      => 'ASC',
 		default          => '',
@@ -22,9 +22,16 @@ function ubc_vpfo_archive_order_by( $post_type ) {
 add_action(
 	'pre_get_posts',
 	function ( $query ) {
-		if ( is_archive() && $query->is_main_query() && in_array( $query->get( 'post_type' ), array( 'post', 'glossary-terms', 'resources' ), true ) ) {
-			$query->set( 'order', ubc_vpfo_archive_order( $query->get( 'post_type' ) ) ); //Set the order ASC or DESC
-			$query->set( 'orderby', ubc_vpfo_archive_order_by( $query->get( 'post_type' ) ) );
+		if ( ( is_home() || is_archive() ) && $query->is_main_query() ) {
+			$post_type = $query->get( 'post_type' );
+			if ( empty( $post_type ) ) {
+				$post_type = 'post';
+			}
+
+			if ( in_array( $post_type, array( 'post', 'glossary-terms', 'resources' ), true ) ) {
+				$query->set( 'order', ubc_vpfo_archive_order( $post_type ) );
+				$query->set( 'orderby', ubc_vpfo_archive_order_by( $post_type ) );
+			}
 		}
 	}
 );

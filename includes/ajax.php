@@ -60,6 +60,8 @@ function ubc_vpfo_get_archive_page_handler() {
 		'post_type'      => $params['post_type'],
 		'posts_per_page' => 10,
 		'paged'          => $params['page'],
+		'order'          => 'ASC',
+		'orderby'        => 'title',
 	);
 
 	if ( ! empty( $params['categories'] ) ) {
@@ -84,6 +86,8 @@ function ubc_vpfo_get_archive_page_handler() {
 
 	if ( ! empty( $params['search'] ) ) {
 		$query_args['s'] = $params['search'];
+		unset( $query_args['order'] );
+		unset( $query_args['orderby'] );
 	}
 
 	$query = new WP_Query( $query_args );

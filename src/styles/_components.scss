@@ -197,7 +197,8 @@ blockquote, .wp-block-quote {
 				transition: color 0.15s ease-in-out;
 			}
 
-			&:hover, &:focus, &:focus-within, &:active {
+			&:hover {
+				outline: none;
 				background-color: $ubc-brand-blue;
 				color: $utility-white;
 				transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
@@ -206,6 +207,11 @@ blockquote, .wp-block-quote {
 					color: $utility-white;
 					transition: color 0.15s ease-in-out;
 				}
+			}
+
+			&:focus-visible {
+				outline: 1px solid $ubc-blue;
+				text-decoration: underline;
 			}
 		}
 
@@ -257,7 +263,7 @@ blockquote, .wp-block-quote {
 		border: 1px solid $learning-spaces-blue-light;
 		border-left: px2rem(16) solid $learning-spaces-blue-light;
 		color: $ubc-blue;
-		transition: border-color 0.15s ease-in-out;
+		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 		position: relative;
 
 		@media (min-width: 782px) {
@@ -278,6 +284,11 @@ blockquote, .wp-block-quote {
 		&:hover, &:focus-within {
 			border-color: $learning-spaces-blue-medium-dark;
 			transition: border-color 0.15s ease-in-out;
+		}
+
+		&:focus-within {
+			box-shadow: 0 0 px2rem(24) 0 rgba($ubc-blue,0.75);
+			transition: box-shadow 0.15s ease-in-out;
 		}
 
 		.resource-card-inner {
@@ -499,12 +510,17 @@ blockquote, .wp-block-quote {
 	.image-card {
 		@include vpfo-box-shadow;
 		border-top: px2rem(16) solid $learning-spaces-blue-light;
-		transition: border-color 0.15s ease-in-out;
+		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 		position: relative;
 
 		&:hover, &:focus-within {
 			border-top: px2rem(16) solid $learning-spaces-blue-medium-dark;
 			transition: border-color 0.15s ease-in-out;
+		}
+
+		&:focus-within {
+			box-shadow: 0 0 px2rem(24) 0 rgba($ubc-blue,0.75);
+			transition: box-shadow 0.15s ease-in-out;
 		}
 
 		@media (min-width: 782px) {
@@ -942,7 +958,7 @@ blockquote, .wp-block-quote {
 				border: 1px solid $learning-spaces-blue-light;
 				margin: unset;
 				position: relative;
-				transition: border-color 0.15s ease-in-out;
+				transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 				
 				&:not(:last-child) {
 					margin-bottom: px2rem(16);
@@ -951,6 +967,11 @@ blockquote, .wp-block-quote {
 				&:hover, &:focus-within {
 					border-color: $learning-spaces-blue-medium-dark;
 					transition: border-color 0.15s ease-in-out;
+				}
+
+				&:focus-within {
+					box-shadow: 0 0 px2rem(24) 0 rgba($ubc-blue,0.75);
+					transition: box-shadow 0.15s ease-in-out;
 				}
 
 				.wp-block-columns {
@@ -1072,6 +1093,10 @@ blockquote, .wp-block-quote {
 				outline: none;
 				color: $ubc-brand-blue;
 			}
+
+			&:focus-within {
+				outline: 1px solid $ubc-blue;
+			}
 		}
 
 		.wp-block-query-pagination-previous {
@@ -1099,6 +1124,10 @@ blockquote, .wp-block-quote {
 			&:hover, &:focus {
 				outline: none;
 				color: $ubc-brand-blue;
+			}
+
+			&:focus-visible {
+				outline: 1px solid $ubc-blue;
 			}
 
 			&.current {
@@ -1159,7 +1188,7 @@ blockquote, .wp-block-quote {
 			padding: px2rem(16) px2rem(16) px2rem(40);
 			margin: unset;
 			position: relative;
-			transition: border-color 0.15s ease-in-out;
+			transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 				
 			&:not(:last-child) {
 				margin-bottom: px2rem(16);
@@ -1168,6 +1197,11 @@ blockquote, .wp-block-quote {
 			&:hover, &:focus-within {
 				border-color: $learning-spaces-blue-medium-dark;
 				transition: border-color 0.15s ease-in-out;
+			}
+
+			&:focus-within {
+				box-shadow: 0 0 px2rem(24) 0 rgba($ubc-blue,0.75);
+				transition: box-shadow 0.15s ease-in-out;
 			}
 
 			.wp-block-ubc-api-title {
@@ -1254,6 +1288,10 @@ blockquote, .wp-block-quote {
 				color: $ubc-brand-blue;
 			}
 
+			&:focus-visible {
+				outline: 1px solid $ubc-blue;
+			}
+
 			&.current {
 				@include weight-700;
 				background-color: $ubc-brand-blue;
@@ -1268,6 +1306,10 @@ blockquote, .wp-block-quote {
 				&:hover, &:focus {
 					outline: none;
 					color: $ubc-brand-blue;
+				}
+
+				&:focus-within {
+					outline: 1px solid $ubc-blue;
 				}
 			}
 	

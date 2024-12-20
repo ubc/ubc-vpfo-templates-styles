@@ -13,6 +13,7 @@
 	.archive-card {
 		border: 1px solid $learning-spaces-blue-light;
 		@include vpfo-box-shadow;
+		transition: border-color ease 0.15s, box-shadow ease 0.15s;
 
 		&:not(:last-child) {
 			margin-bottom: px2rem(16);
@@ -101,11 +102,17 @@
 
 		&:hover, &:focus-within {
 			border-color: $learning-spaces-blue-medium-dark;
+			transition: border-color ease 0.15s;
 
 			.read-more::after {
 				margin-left: px2rem(12);
 				transition: margin-left ease 0.15s;
 			}
+		}
+
+		&:focus-within {
+			box-shadow: 0 0 px2rem(24) 0 rgba($ubc-blue,0.75);
+			transition: box-shadow ease 0.15s;
 		}
 
 		&.archive-card-glossary-terms {
@@ -142,6 +149,10 @@
 				color: $ubc-brand-blue;
 			}
 
+			&:focus-within {
+				outline: 1px solid $ubc-blue;
+			}
+
 			&.current {
 				@include weight-700;
 				background-color: $ubc-brand-blue;
@@ -156,6 +167,10 @@
 				&:hover, &:focus {
 					outline: none;
 					color: $ubc-brand-blue;
+				}
+
+				&:focus-within {
+					outline: 1px solid $ubc-blue;
 				}
 			}
 	

@@ -1,0 +1,33 @@
+.search-template-widget {
+	h1.wp-block-heading {
+		font-weight: 700;
+        margin-bottom: px2rem(32) !important;
+	}
+
+	.widget_search {
+		margin-top: px2rem(24);
+
+		.wp-block-search__input {
+			height: unset;
+			line-height: px2rem(22);
+			padding: px2rem(8) px2rem(24) px2rem(8) px2rem(8);
+			width: 100%;
+			display: block;
+			box-sizing: border-box;
+			border: 1px solid $ubc-blue;
+			color: $utility-dark-grey;
+			font-family: $font-whitney;
+			font-size: px2rem(16);
+			margin: 0;
+
+			&:focus {
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+			}
+		}
+
+		.wp-block-search__button {
+			@include btn;
+			@include btn-primary;
+		}
+	}
+}

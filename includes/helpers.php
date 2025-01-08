@@ -50,10 +50,16 @@ function vpfo_numeric_pagination( $query = null ) {
 
 	$post_type = $query->get( 'post_type' ) ? $query->get( 'post_type' ) : 'post'; // Get the post type
 
+	if ( is_search() ) {
+		$base = get_bloginfo( 'url' ) . '/%_%';
+	} else {
+		$base = get_post_type_archive_link( $post_type ) . '%_%';
+	}
+
 	// Output the pagination
 	$paginate_links = paginate_links(
 		array(
-			'base'      => get_post_type_archive_link( $post_type ) . '%_%',
+			'base'      => $base,
 			'format'    => 'page/%#%/',
 			'current'   => $current_page,
 			'total'     => $total_pages,

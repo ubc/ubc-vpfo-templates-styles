@@ -22,7 +22,7 @@ function vpfo_load_custom_template( $template ) {
 		);
 
 		// If the selected template matches one of our custom templates, use its path
-		if ( array_key_exists( $page_template, $custom_templates ) && file_exists( $custom_templates[ $page_template ] ) ) {
+		if ( is_page() && array_key_exists( $page_template, $custom_templates ) && file_exists( $custom_templates[ $page_template ] ) ) {
 			return $custom_templates[ $page_template ];
 		}
 	}

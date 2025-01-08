@@ -272,6 +272,34 @@ a.btn-secondary, button.btn-secondary {
 	}
 }
 
+.vpfo-search {
+	.search-form {
+		div {
+			display: flex;
+			align-items: center;
+		}
+
+		input.search-text {
+			height: unset;
+			padding: px2rem(10) px2rem(24) px2rem(10) px2rem(8);
+			width: 100%;
+			display: block;
+			box-sizing: border-box;
+			border: 1px solid $ubc-blue;
+			color: $utility-dark-grey;
+			font-size: px2rem(16);
+		}
+
+		.btn {
+			@include btn;
+		}
+
+		.btn-primary {
+			@include btn-primary;
+		}
+	}
+}
+
 // pattern slice pre-footer
 .pattern-slice-bottom {
 	background-image: url('images/svg/vpfo-pattern-slice.svg');

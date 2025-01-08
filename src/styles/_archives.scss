@@ -128,6 +128,30 @@
 				}
 			}
 		}
+
+		&.archive-card-search {
+			&.has-featured-image {
+				.featured-image {
+					@include media-breakpoint-up(lg) {
+						width: 25%;
+					}
+
+					@include media-breakpoint-up(xl) {
+						width: 20%;
+					}
+				}
+	
+				.post-content {
+					@include media-breakpoint-up(lg) {
+						width: 75%;
+					}
+
+					@include media-breakpoint-up(xl) {
+						width: 80%;
+					}
+				}
+			}
+		}
 	}
 
 	.pagination {

@@ -675,6 +675,40 @@ function vpfo_register_settings() {
 
 	register_setting(
 		'vpfo_templates_styles',
+		'vpfo_use_vpfo_404',
+		array(
+			'type'              => 'boolean',
+			'description'       => 'Use the VPFO 404 template instead of the CLF default',
+			'sanitize_callback' => 'rest_sanitize_boolean',
+			'default'           => false,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_use_vpfo_search',
+		array(
+			'type'              => 'boolean',
+			'description'       => 'Use the VPFO Search Results template for internal site search instead of the CLF default',
+			'sanitize_callback' => 'rest_sanitize_boolean',
+			'default'           => false,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
+		'vpfo_search_no_results',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				return wp_kses_post( wpautop( $value ) );
+			},
+			'show_in_rest'      => true,
+		)
+	);
+
+	register_setting(
+		'vpfo_templates_styles',
 		'vpfo_announcements_archive_intro',
 		array(
 			'type'              => 'string',
@@ -793,6 +827,30 @@ function vpfo_add_settings_field() {
 	);
 
 	add_settings_field(
+		'vpfo_use_vpfo_404',
+		'Use VPFO 404 Template',
+		'vpfo_render_use_vpfo_404_checkbox',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_use_vpfo_search',
+		'Use VPFO Search Results Template',
+		'vpfo_render_use_vpfo_search_checkbox',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
+		'vpfo_search_no_results',
+		'Search No Results Message',
+		'vpfo_render_search_no_results',
+		'vpfo_templates_styles',
+		'vpfo_templates_styles_section',
+	);
+
+	add_settings_field(
 		'vpfo_announcements_archive_intro',
 		'Announcements Archive Intro',
 		'vpfo_render_announcements_archive_intro',
@@ -874,6 +932,39 @@ function vpfo_render_use_vpfo_archive_checkbox() {
 		Use the VPFO template for posts (announcements) archive instead of the default CLF template.
 	</label>
 	<?php
+}
+
+function vpfo_render_use_vpfo_404_checkbox() {
+	$option = get_option( 'vpfo_use_vpfo_404', false );
+	?>
+	<label>
+		<input type="checkbox" name="vpfo_use_vpfo_404" value="1" <?php checked( $option, true ); ?>>
+		Use the VPFO 404 template instead of the default CLF template.
+	</label>
+	<?php
+}
+
+function vpfo_render_use_vpfo_search_checkbox() {
+	$option = get_option( 'vpfo_use_vpfo_search', false );
+	?>
+	<label>
+		<input type="checkbox" name="vpfo_use_vpfo_search" value="1" <?php checked( $option, true ); ?>>
+		Use the VPFO Search Results template for on-site search results instead of the default CLF template.
+	</label>
+	<?php
+}
+
+function vpfo_render_search_no_results() {
+	$value = get_option( 'vpfo_search_no_results', '' );
+	wp_editor(
+		$value,
+		'vpfo_search_no_results',
+		array(
+			'textarea_name' => 'vpfo_search_no_results',
+			'textarea_rows' => 2,
+			'media_buttons' => false,
+		)
+	);
 }
 
 function vpfo_render_announcements_archive_intro() {
@@ -981,6 +1072,42 @@ function vpfo_archive_post_template( $template ) {
 	return $template; // Return the default template if conditions are not met
 }
 add_filter( 'template_include', 'vpfo_archive_post_template' );
+
+// use the VPFO 404 template if this option is activated
+function vpfo_404_template( $template ) {
+	if ( is_404() ) {
+		if ( get_option( 'vpfo_use_vpfo_404', false ) ) {
+			// Path to your custom template in the plugin
+			$plugin_template = plugin_dir_path( __DIR__ ) . 'templates/vpfo-404.php';
+
+			// Check if the plugin template exists
+			if ( file_exists( $plugin_template ) ) {
+				return $plugin_template;
+			}
+		}
+	}
+
+	return $template; // Return the default template if conditions are not met
+}
+add_filter( 'template_include', 'vpfo_404_template' );
+
+// use the VPFO Search Results template if this option is activated
+function vpfo_search_template( $template ) {
+	if ( is_search() ) {
+		if ( get_option( 'vpfo_use_vpfo_search', false ) ) {
+			// Path to your custom template in the plugin
+			$plugin_template = plugin_dir_path( __DIR__ ) . 'templates/vpfo-search.php';
+
+			// Check if the plugin template exists
+			if ( file_exists( $plugin_template ) ) {
+				return $plugin_template;
+			}
+		}
+	}
+
+	return $template; // Return the default template if conditions are not met
+}
+add_filter( 'template_include', 'vpfo_search_template' );
 
 // Filter quote block rendering to check expiry date and "Never Expire" setting.
 function vpfo_stop_quote_render_expiry_date( $block_content, $block ) {

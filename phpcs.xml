@@ -17,4 +17,10 @@
 	<!-- Ignore all JavaScript files -->
 	<exclude-pattern>**/*.js</exclude-pattern>
 
+	<!-- Ignore all SCSS files -->
+	<exclude-pattern>**/*.scss</exclude-pattern>
+
+	<!-- Ignore all CSS files -->
+	<exclude-pattern>**/*.css</exclude-pattern>
+
 </ruleset>

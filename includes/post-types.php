@@ -68,6 +68,7 @@ function resources_categories() {
 		'labels'            => $labels,
 		'rewrite'           => $rewrite,
 		'show_admin_column' => true,
+		'show_in_rest'      => true,
 		'hierarchical'      => true,
 	);
 

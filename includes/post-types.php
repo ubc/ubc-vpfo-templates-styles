@@ -68,6 +68,7 @@ function resources_categories() {
 		'labels'            => $labels,
 		'rewrite'           => $rewrite,
 		'show_admin_column' => true,
+		'show_in_rest'      => true,
 		'hierarchical'      => true,
 	);
 
@@ -197,6 +198,7 @@ function glossary_categories() {
 		'rewrite'           => $rewrite,
 		'show_admin_column' => true,
 		'hierarchical'      => true,
+		'show_in_rest'      => true,
 	);
 
 	register_taxonomy( 'glossary-categories', 'glossary-terms', $args );

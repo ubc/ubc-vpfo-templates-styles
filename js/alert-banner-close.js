@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".alert-banner .icon-close").forEach((function(e){e.addEventListener("click",(function(){var e=this.closest(".alert-banner");if(e){var n=window.location.pathname,t="alert_closed_".concat(n.replace(/\//g,"_"));document.cookie="".concat(t,"=true; max-age=86400; path=/"),e.remove()}}))}))}));

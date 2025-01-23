@@ -70,6 +70,22 @@ function ubc_vpfo_templates_styles_enqueue_styles_scripts() {
 			'1.0',
 			array( 'strategy' => 'defer' )
 		);
+
+		wp_enqueue_script(
+			'vpfo-alert-banner-close-js',
+			plugin_dir_url( __DIR__ ) . 'js/alert-banner-close.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
+
+		wp_enqueue_script(
+			'vpfo-aria-labels-js',
+			plugin_dir_url( __DIR__ ) . 'js/aria-labels.js',
+			array(),
+			'1.0',
+			array( 'strategy' => 'defer' )
+		);
 	}
 
 	if ( is_home() || is_post_type_archive( 'resources' ) || is_post_type_archive( 'glossary-terms' ) ) {

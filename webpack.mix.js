@@ -14,6 +14,8 @@ mix
 	.js( 'src/js/image-cards.js', 'js/image-cards.js' )
 	.js( 'src/js/featured-resources.js', 'js/featured-resources.js' )
 	.js( 'src/js/quote-block-expiry.js', 'js/quote-block-expiry.js' )
+	.js( 'src/js/alert-banner-close.js', 'js/alert-banner-close.js' )
+	.js( 'src/js/aria-labels.js', 'js/aria-labels.js' )
 	.sass(
 		'src/style.scss',
 		'style.css',

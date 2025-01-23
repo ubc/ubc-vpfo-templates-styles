@@ -32,6 +32,17 @@ a {
 			content: '\f05a';
 			@include weight-700;
 		}
+
+		.close {
+			top: px2rem(-4);
+			right: 0;
+
+			.icon-close {
+				all: unset;
+				padding: 7.5px;
+				color: $utility-white;
+			}
+		}
 	}
 
 	.alert-banner-message {

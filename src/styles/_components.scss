@@ -1179,7 +1179,7 @@ blockquote, .wp-block-quote {
 		}
 	}
 
-	.wp-block-ubc-api-template {
+	.wp-block-ctlt-api-rss-template {
 		padding: unset;
 
 		.wp-single-resource {
@@ -1204,7 +1204,7 @@ blockquote, .wp-block-quote {
 				transition: box-shadow 0.15s ease-in-out;
 			}
 
-			.wp-block-ubc-api-title {
+			.wp-block-ctlt-api-rss-title {
 				font-family: unset;
 				@include h4;
 				@include weight-600;
@@ -1212,7 +1212,7 @@ blockquote, .wp-block-quote {
 				margin: 0 0 px2rem(8);
 			}
 
-			.wp-block-ubc-api-excerpt {
+			.wp-block-ctlt-api-rss-excerpt {
 				margin: 0;
 
 				.wp-block-post-excerpt__excerpt {

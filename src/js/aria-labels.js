@@ -24,5 +24,5 @@ document.addEventListener('DOMContentLoaded', function () {
 	addAriaLabelsToLinks('.resource-card', '.wp-block-heading', '.view-resource a');
 	addAriaLabelsToLinks('.image-card', '.wp-block-heading', '.view-link a');
 	addAriaLabelsToLinks('.post-listing', '.wp-block-post-title', '.wp-block-read-more');
-	addAriaLabelsToLinks('.cross-post-listing', '.wp-block-ubc-api-title', '.wp-block-read-more');
+	addAriaLabelsToLinks('.cross-post-listing', '.wp-block-ctlt-api-rss-title', '.wp-block-read-more');
 });
